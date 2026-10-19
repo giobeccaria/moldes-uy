@@ -24,8 +24,8 @@ export function Logo() {
     <span className="logo">
       <LogoMark />
       <span className="logo-word" aria-label={SITE_NAME}>
-        <span className="logo-a">Compara</span>
         <span className="logo-b">moldes</span>
+        <span className="logo-a">.uy</span>
       </span>
     </span>
   )
