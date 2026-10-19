@@ -126,6 +126,24 @@ export function IconArrow({ size = 16 }: P) {
   )
 }
 
+export function IconInstagram({ size = 16 }: P) {
+  return (
+    <svg {...base(size)} strokeWidth={1.7}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
+export function IconFacebook({ size = 16 }: P) {
+  return (
+    <svg {...base(size)} strokeWidth={1.7}>
+      <path d="M14.5 21v-7.2h2.4l.4-3h-2.8V8.8c0-.87.24-1.46 1.5-1.46H17.5V4.7c-.26-.03-1.14-.1-2.17-.1-2.15 0-3.63 1.31-3.63 3.72v2.08H9.3v3h2.4V21z" />
+    </svg>
+  )
+}
+
 export function IconPin({ size = 20 }: P) {
   return (
     <svg {...base(size)}>

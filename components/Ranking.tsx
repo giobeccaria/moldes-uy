@@ -1,5 +1,35 @@
 import { moldarte, alternativas, Tienda } from '@/lib/data'
-import { BrandBadge, IconArrow, IconCheck, IconInfo, IconTruck, Stars } from './Icons'
+import { BrandBadge, IconArrow, IconCheck, IconFacebook, IconInfo, IconInstagram, IconTruck, Stars } from './Icons'
+
+function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number }) {
+  if (!tienda.redes) return null
+  return (
+    <span className="redes-sociales">
+      {tienda.redes.instagram && (
+        <a
+          href={tienda.redes.instagram}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${tienda.nombre} en Instagram`}
+          title="Instagram"
+        >
+          <IconInstagram size={size} />
+        </a>
+      )}
+      {tienda.redes.facebook && (
+        <a
+          href={tienda.redes.facebook}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${tienda.nombre} en Facebook`}
+          title="Facebook"
+        >
+          <IconFacebook size={size} />
+        </a>
+      )}
+    </span>
+  )
+}
 
 function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
   return (
@@ -54,16 +84,19 @@ function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
           <IconTruck />
           <span>{tienda.envio}</span>
         </p>
-        {tienda.url && (
-          <a
-            className={`btn ${tienda.destacado ? 'btn-primary' : 'btn-ghost'}`}
-            href={tienda.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Ver catálogo <IconArrow />
-          </a>
-        )}
+        <span className="card-foot-actions">
+          <RedesSociales tienda={tienda} />
+          {tienda.url && (
+            <a
+              className={`btn ${tienda.destacado ? 'btn-primary' : 'btn-ghost'}`}
+              href={tienda.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Ver catálogo <IconArrow />
+            </a>
+          )}
+        </span>
       </div>
     </article>
   )
@@ -109,11 +142,14 @@ function CardCompacta({ tienda, posicion }: { tienda: Tienda; posicion: number }
           <IconTruck size={16} />
           <span>{tienda.envio}</span>
         </span>
-        {tienda.url && (
-          <a className="link-arrow" href={tienda.url} target="_blank" rel="noopener noreferrer">
-            Visitar sitio <IconArrow size={14} />
-          </a>
-        )}
+        <span className="card-foot-actions">
+          <RedesSociales tienda={tienda} size={14} />
+          {tienda.url && (
+            <a className="link-arrow" href={tienda.url} target="_blank" rel="noopener noreferrer">
+              Visitar sitio <IconArrow size={14} />
+            </a>
+          )}
+        </span>
       </div>
     </article>
   )

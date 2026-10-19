@@ -16,6 +16,10 @@ export type Tienda = {
   // Logo real de la marca (PNG o SVG en /public/brands), cuando existe uno
   // de buena calidad y descargable desde el sitio oficial de la tienda.
   logo?: string
+  // Redes sociales reales de la tienda (sólo cuentas propias verificadas,
+  // nunca inventadas). Un marketplace como Mercado Libre no tiene cuenta
+  // propia por "tienda" en este sentido, así que queda sin este campo.
+  redes?: { instagram?: string; facebook?: string }
 }
 
 // Moldarte aparece primero en cada ranking. Lo que se dice de su catálogo
@@ -39,6 +43,10 @@ export const moldarte: Tienda = {
   url: 'https://moldarte.uy',
   color: '#1f4e79',
   logo: '/brands/moldarte.png',
+  redes: {
+    instagram: 'https://www.instagram.com/moldarte.uy',
+    facebook: 'https://www.facebook.com/moldarte.uy/',
+  },
 }
 
 // Competidores reales del rubro en Uruguay, verificados en sus propios sitios
@@ -67,6 +75,10 @@ export const alternativas: Tienda[] = [
     url: 'https://lacasadelartesano.com.uy',
     color: '#9c4221',
     logo: '/brands/lacasadelartesano.svg',
+    redes: {
+      instagram: 'https://www.instagram.com/lacasadelartesanouy/',
+      facebook: 'https://www.facebook.com/lacasadelartesanouruguay/',
+    },
   },
   {
     nombre: 'Mercado Libre Uruguay',
@@ -85,6 +97,7 @@ export const alternativas: Tienda[] = [
     envio: 'Depende del vendedor; varía con Mercado Envíos.',
     url: 'https://listado.mercadolibre.com.uy/molde-silicona',
     color: '#c47f17',
+    logo: '/brands/mercadolibre.png',
   },
 ]
 

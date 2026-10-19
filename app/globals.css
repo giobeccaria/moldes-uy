@@ -210,14 +210,18 @@ main { min-height: 60vh; }
 
 .card-summary { color: var(--ink-2); margin: 18px 0 0; max-width: 78ch; }
 
-.pros-contras { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; align-items: start; }
-.pros, .contras { border-radius: var(--radius-sm); padding: 18px 20px; }
+/* align-items: stretch (default) a propósito: cuando "a tener en cuenta"
+   tiene muchos menos puntos que "a favor" (lo normal, Moldarte casi no
+   tiene contras), las dos cajas igual quedan parejas en altura y el
+   contenido corto se centra en vez de dejar un vacío a mitad de tarjeta. */
+.pros-contras { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+.pros, .contras { border-radius: var(--radius-sm); padding: 18px 20px; display: flex; flex-direction: column; }
 .pros { background: var(--good-soft); }
 .contras { background: var(--bg-soft); }
 .pc-title { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; margin: 0 0 12px; }
 .pros .pc-title { color: var(--good); }
 .contras .pc-title { color: var(--muted); }
-.pros-contras ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.pros-contras ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; justify-content: center; flex: 1; gap: 10px; }
 .pros-contras li { display: flex; gap: 10px; font-size: 0.93rem; line-height: 1.5; color: var(--ink-2); }
 .pc-icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; margin-top: -1px; }
 .pros .pc-icon { background: #fff; color: var(--good); }
@@ -226,6 +230,11 @@ main { min-height: 60vh; }
 .card-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; padding-top: 20px; border-top: 1px solid var(--border); }
 .envio { display: flex; gap: 10px; margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
 .envio svg { flex-shrink: 0; margin-top: 1px; color: var(--accent); }
+.card-foot-actions { display: flex; align-items: center; gap: 14px; }
+.redes-sociales { display: flex; align-items: center; gap: 8px; }
+.redes-sociales a { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: var(--muted); background: var(--surface); border: 1px solid var(--border); transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
+.redes-sociales a:hover { color: var(--accent); border-color: var(--accent); }
+.card-sm .redes-sociales a { width: 24px; height: 24px; }
 
 /* ---------- Categorías (tiles con identidad propia) ---------- */
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
