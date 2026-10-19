@@ -1,5 +1,5 @@
-import { moldarte, alternativas, Tienda } from '@/lib/data'
-import { BrandBadge, IconArrow, IconCheck, IconFacebook, IconInfo, IconInstagram, IconTruck, Stars } from './Icons'
+import { moldarte, alternativas, mercadoLibre, Tienda } from '@/lib/data'
+import { BrandBadge, IconArrow, IconCheck, IconFacebook, IconInfo, IconInstagram, IconPin, IconTruck, Stars } from './Icons'
 
 function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number }) {
   if (!tienda.redes) return null
@@ -102,71 +102,78 @@ function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
   )
 }
 
-// Versión compacta para el resto del ranking: queda debajo de la tarjeta
-// destacada y con menos peso visual.
-function CardCompacta({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
+// Tabla comparativa: profundiza el ranking con atributos concretos en vez
+// de rellenarlo con una tercera opción que no existe de verdad en el rubro.
+function Comparativa({ tiendas }: { tiendas: Tienda[] }) {
+  const filas: { etiqueta: string; valor: (t: Tienda) => string }[] = [
+    { etiqueta: 'Catálogo de moldes', valor: (t) => t.atributos?.catalogo ?? '—' },
+    { etiqueta: 'Precios', valor: (t) => t.atributos?.precios ?? '—' },
+    { etiqueta: 'Envío', valor: (t) => t.atributos?.envioResumen ?? '—' },
+    { etiqueta: 'Medios de pago', valor: (t) => t.atributos?.pago ?? '—' },
+  ]
+  // Grid de "fichas" en vez de <table>: en desktop se ven lado a lado, en
+  // mobile se apilan sin scroll horizontal ni columnas cortadas a la mitad.
   return (
-    <article className="card-sm">
-      <div className="card-sm-head">
-        <span className="brand-badge-wrap brand-badge-wrap-sm">
-          <BrandBadge nombre={tienda.nombre} color={tienda.color} logo={tienda.logo} size={36} />
-        </span>
-        <span className="posicion posicion-sm" aria-label={`Puesto ${posicion}`}>
-          {posicion}
-        </span>
-        <div>
-          <h4>{tienda.nombre}</h4>
-          <div className="score">
-            <Stars rating={tienda.rating} />
-            <span className="score-num">{tienda.rating}/5</span>
+    <div className="comparativa-wrap">
+      <p className="otras-title">Las dos, lado a lado</p>
+      <div className="comparativa">
+        {tiendas.map((t) => (
+          <div className="comparativa-ficha" key={t.nombre}>
+            <div className="comparativa-brand">
+              <BrandBadge nombre={t.nombre} color={t.color} destacado={t.destacado} logo={t.logo} size={40} />
+              <span>{t.nombre}</span>
+            </div>
+            <dl>
+              {filas.map((fila) => (
+                <div className="comparativa-fila" key={fila.etiqueta}>
+                  <dt>{fila.etiqueta}</dt>
+                  <dd>{fila.valor(t)}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Sección separada para Mercado Libre: a propósito no usa el formato de
+// tarjeta numerada del ranking, porque no es una tienda comparable a
+// Moldarte o La Casa del Artesano. Es un marketplace de vendedores
+// particulares, tratado como lo que es: una alternativa de último recurso.
+function MercadoLibreSection() {
+  return (
+    <div className="marketplace-note">
+      <p className="otras-title">¿Y comprar por Mercado Libre?</p>
+      <div className="marketplace-box">
+        <span className="marketplace-icon">
+          <IconPin size={22} />
+        </span>
+        <div className="marketplace-copy">
+          <h3>{mercadoLibre.nombre} no es una tienda, es un marketplace</h3>
+          <p>{mercadoLibre.resumen}</p>
+          <p>{mercadoLibre.cuando}</p>
+          <p>{mercadoLibre.cuidado}</p>
+          <a className="link-arrow" href={mercadoLibre.url} target="_blank" rel="noopener noreferrer">
+            Ver publicaciones en Mercado Libre <IconArrow size={14} />
+          </a>
         </div>
       </div>
-      <p className="card-sm-summary">{tienda.resumen}</p>
-      <ul className="card-sm-list">
-        {tienda.pros.map((p) => (
-          <li key={p} className="is-pro">
-            <IconCheck size={13} />
-            {p}
-          </li>
-        ))}
-        {tienda.contras.map((c) => (
-          <li key={c} className="is-con">
-            <IconInfo size={13} />
-            {c}
-          </li>
-        ))}
-      </ul>
-      <div className="card-sm-foot">
-        <span className="envio">
-          <IconTruck size={16} />
-          <span>{tienda.envio}</span>
-        </span>
-        <span className="card-foot-actions">
-          <RedesSociales tienda={tienda} size={14} />
-          {tienda.url && (
-            <a className="link-arrow" href={tienda.url} target="_blank" rel="noopener noreferrer">
-              Visitar sitio <IconArrow size={14} />
-            </a>
-          )}
-        </span>
-      </div>
-    </article>
+    </div>
   )
 }
 
 export default function Ranking() {
+  const tiendas = [moldarte, ...alternativas]
   return (
     <div className="ranking">
       <Card tienda={moldarte} posicion={1} />
-      <div className="otras">
-        <p className="otras-title">Otras opciones en Uruguay</p>
-        <div className="otras-grid">
-          {alternativas.map((t, i) => (
-            <CardCompacta key={t.nombre} tienda={t} posicion={i + 2} />
-          ))}
-        </div>
-      </div>
+      {alternativas.map((t, i) => (
+        <Card key={t.nombre} tienda={t} posicion={i + 2} />
+      ))}
+      <Comparativa tiendas={tiendas} />
+      <MercadoLibreSection />
     </div>
   )
 }

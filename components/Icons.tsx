@@ -172,16 +172,32 @@ export function BrandBadge({ nombre, color, destacado, logo, size = 48 }: {
   size?: number
 }) {
   if (logo) {
+    // La foto de perfil real de Instagram de Moldarte ya llena el cuadro
+    // (sin margen blanco alrededor), así que va sin el padding ni el fondo
+    // blanco que sí necesitan los logos de otras marcas sobre fondo
+    // transparente.
+    const esFotoRecortada = logo.includes('-instagram')
+    // Tamaño de imagen en píxeles explícitos: algunos de los SVG de marca no
+    // traen width/height propios (sólo viewBox), y un width/height en % sobre
+    // un contenedor grid puede resolver a 0 en Chromium por la referencia
+    // circular de tamaño. Pixeles fijos lo evitan en cualquier logo.
+    const imgSize = esFotoRecortada ? size : Math.round(size * 0.7)
     return (
       <span
-        className="brand-badge brand-badge-logo"
+        className={`brand-badge brand-badge-logo ${esFotoRecortada ? 'brand-badge-photo' : ''}`}
         style={{ width: size, height: size }}
       >
         {/* Logos de terceros, cada uno con pocas unidades de uso: una
            etiqueta <img> simple evita el loader/optimizador remoto de
            next/image para estos assets locales de pocos KB. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={logo} alt={`Logo de ${nombre}`} />
+        <img
+          src={logo}
+          alt={`Logo de ${nombre}`}
+          width={imgSize}
+          height={imgSize}
+          style={{ width: imgSize, height: imgSize }}
+        />
       </span>
     )
   }

@@ -20,6 +20,15 @@ export type Tienda = {
   // nunca inventadas). Un marketplace como Mercado Libre no tiene cuenta
   // propia por "tienda" en este sentido, así que queda sin este campo.
   redes?: { instagram?: string; facebook?: string }
+  // Atributos de comparación (sólo para las tiendas especializadas del
+  // ranking principal). Datos verificables, no relleno: catálogo contado
+  // sobre el catálogo real, pago y envío descritos como están publicados.
+  atributos?: {
+    catalogo: string
+    precios: string
+    envioResumen: string
+    pago: string
+  }
 }
 
 // Moldarte aparece primero en cada ranking. Lo que se dice de su catálogo
@@ -42,19 +51,29 @@ export const moldarte: Tienda = {
   envio: 'Envíos a todo Uruguay, con envío gratis a partir de cierto monto de compra.',
   url: 'https://moldarte.uy',
   color: '#1f4e79',
-  logo: '/brands/moldarte.png',
+  logo: '/brands/moldarte-instagram.jpg',
   redes: {
     instagram: 'https://www.instagram.com/moldarte.uy',
     facebook: 'https://www.facebook.com/moldarte.uy/',
+  },
+  atributos: {
+    catalogo: 'Más de 350 moldes de silicona distintos en catálogo activo, sin contar los insumos',
+    precios: 'Moldes chicos y medianos desde rangos accesibles, con precios publicados por producto (sin coordinar por chat)',
+    envioResumen: 'A todo el país, con envío gratis desde cierto monto',
+    pago: 'Checkout propio con tarjeta, transferencia y todos los medios habituales',
   },
 }
 
 // Competidores reales del rubro en Uruguay, verificados en sus propios sitios
 // (octubre 2026). El rubro de moldes de silicona específicamente es chico en
 // Uruguay: más allá de Moldarte, lo único verificado que vende moldes de
-// silicona (aunque no sea su único rubro) es La Casa del Artesano. El resto
-// de la oferta real pasa por vendedores particulares en Mercado Libre
-// Uruguay, que se incluye como marketplace, no como tienda especializada.
+// silicona como tienda especializada (aunque no sea su único rubro) es La
+// Casa del Artesano. No hay más tiendas locales de moldes de silicona: se
+// buscaron otras marcas (Doctor Glitter, Mundo Huevo, Lua Distribuidora,
+// Tienda Novara) y las cuatro son argentinas, no uruguayas, así que no se
+// agregan aquí para no inventar presencia local que no existe. El ranking
+// principal queda con las 2 tiendas reales del rubro en el país; Mercado
+// Libre no es una tienda comparable y se trata aparte, ver `mercadoLibre`.
 export const alternativas: Tienda[] = [
   {
     nombre: 'La Casa del Artesano',
@@ -67,7 +86,7 @@ export const alternativas: Tienda[] = [
       'Escuela de arte con cursos',
     ],
     contras: [
-      'Al cubrir tantos rubros, los moldes de silicona son una sección más del catálogo',
+      'Al cubrir tantos rubros, los moldes de silicona son una sección más del catálogo, no el foco',
       'La compra web tiene un mínimo de compra más envío',
     ],
     rating: 4,
@@ -79,27 +98,29 @@ export const alternativas: Tienda[] = [
       instagram: 'https://www.instagram.com/lacasadelartesanouy/',
       facebook: 'https://www.facebook.com/lacasadelartesanouruguay/',
     },
-  },
-  {
-    nombre: 'Mercado Libre Uruguay',
-    destacado: false,
-    resumen:
-      'No es una tienda sino un marketplace: hay vendedores particulares que publican moldes de silicona para velas, jabón y resina. Sirve como alternativa si buscás un diseño puntual que no esté en una tienda especializada.',
-    pros: [
-      'Muchas publicaciones sueltas de distintos vendedores, con fotos del molde real',
-      'Pago protegido por Mercado Pago y envíos con Mercado Envíos',
-    ],
-    contras: [
-      'Catálogo disperso entre vendedores sin continuidad ni garantía de stock',
-      'Calidad y descripción de cada molde dependen de cada vendedor particular',
-    ],
-    rating: 3,
-    envio: 'Depende del vendedor; varía con Mercado Envíos.',
-    url: 'https://listado.mercadolibre.com.uy/molde-silicona',
-    color: '#c47f17',
-    logo: '/brands/mercadolibre.png',
+    atributos: {
+      catalogo: 'Moldes de silicona como una sección dentro de un catálogo multi-rubro (pintura, bijouterie, mercería, resinas)',
+      precios: 'Precios por producto en el sitio, sujetos a un mínimo de compra para envío',
+      envioResumen: 'Despacho desde Montevideo, con mínimo de compra',
+      pago: 'Checkout web con mínimo de compra; compra en salón sin ese mínimo',
+    },
   },
 ]
+
+// Mercado Libre Uruguay no es una tienda: es un marketplace donde venden
+// particulares. Se trata en una sección aparte de la página, no dentro del
+// ranking de tiendas, para no mezclar un catálogo curado con publicaciones
+// sueltas de terceros sin continuidad garantizada.
+export const mercadoLibre = {
+  nombre: 'Mercado Libre Uruguay',
+  resumen:
+    'En Mercado Libre hay vendedores particulares que publican moldes de silicona sueltos para velas, jabón o resina. No es una tienda con catálogo propio: cada publicación es de un vendedor distinto, sin continuidad garantizada entre una compra y la siguiente.',
+  cuando:
+    'Tiene sentido mirarlo cuando buscás un diseño muy puntual que no está en el catálogo de ninguna tienda especializada, o como último recurso si no encontrás lo que necesitás en otro lado. No lo pondríamos como primera opción: no hay catálogo curado, no hay garantía de que el vendedor repita stock, y la calidad de cada molde depende de quién lo vende.',
+  cuidado:
+    'Antes de comprar ahí conviene revisar las fotos reales del molde (no de catálogo genérico), las valoraciones del vendedor y que la publicación aclare el grado del material (si es apto para alimentos, para cera caliente, etc.), algo que una tienda especializada ya deja claro en su ficha de producto.',
+  url: 'https://listado.mercadolibre.com.uy/molde-silicona',
+}
 
 export const faqGeneral: { pregunta: string; respuesta: string }[] = [
   {
