@@ -5,6 +5,16 @@ import Faq from '@/components/Faq'
 import { IconArrow, IconCategoria, IconPin } from '@/components/Icons'
 import { categorias, criterios, departamentos, faqGeneral } from '@/lib/data'
 
+// Agrupación regional de los 19 departamentos, para romper la nube de
+// chips idénticos y dar algo de estructura geográfica real.
+const regiones: { nombre: string; deps: string[] }[] = [
+  { nombre: 'Área metropolitana', deps: ['montevideo', 'canelones', 'san-jose'] },
+  { nombre: 'Este', deps: ['maldonado', 'rocha', 'lavalleja', 'treinta-y-tres'] },
+  { nombre: 'Litoral oeste', deps: ['colonia', 'soriano', 'rio-negro', 'paysandu', 'salto'] },
+  { nombre: 'Centro', deps: ['florida', 'durazno', 'flores', 'tacuarembo'] },
+  { nombre: 'Norte', deps: ['rivera', 'artigas', 'cerro-largo'] },
+]
+
 export const metadata: Metadata = {
   title: 'Dónde comprar moldes de silicona en Uruguay (2026)',
   description:
@@ -63,9 +73,9 @@ export default function Home() {
           </div>
           <div className="tiles">
             {categorias.map((c) => (
-              <Link key={c.slug} href={`/categorias/${c.slug}`} className="tile">
+              <Link key={c.slug} href={`/categorias/${c.slug}`} className={`tile tile-${c.icono}`}>
                 <span className="tile-icon">
-                  <IconCategoria icono={c.icono} size={26} />
+                  <IconCategoria icono={c.icono} size={34} />
                 </span>
                 <span className="tile-title">{c.nombre}</span>
                 <span className="tile-text">{c.usos[0]}</span>
@@ -83,12 +93,25 @@ export default function Home() {
             <h2>Buscá por departamento</h2>
             <p>Cada zona del país tiene su propia dinámica de compra y de emprendimiento con moldes.</p>
           </div>
-          <div className="chips">
-            {departamentos.map((d) => (
-              <Link key={d.slug} href={`/comprar-moldes/${d.slug}`} className="chip">
-                <IconPin size={16} />
-                {d.nombre}
-              </Link>
+          <div className="regiones">
+            {regiones.map((r) => (
+              <div className="region" key={r.nombre}>
+                <h3 className="region-title">{r.nombre}</h3>
+                <ul className="region-list">
+                  {r.deps.map((slug) => {
+                    const d = departamentos.find((dep) => dep.slug === slug)
+                    if (!d) return null
+                    return (
+                      <li key={d.slug}>
+                        <Link href={`/comprar-moldes/${d.slug}`}>
+                          <IconPin size={13} />
+                          {d.nombre}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
             ))}
           </div>
         </section>
@@ -103,10 +126,13 @@ export default function Home() {
             </p>
           </div>
           <ol className="criterios">
-            {criterios.map((c) => (
+            {criterios.map((c, i) => (
               <li key={c.nombre}>
-                <h3>{c.nombre}</h3>
-                <p>{c.detalle}</p>
+                <span className="criterio-num">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3>{c.nombre}</h3>
+                  <p>{c.detalle}</p>
+                </div>
               </li>
             ))}
           </ol>

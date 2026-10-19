@@ -1,24 +1,18 @@
 import { SITE_NAME } from '@/lib/data'
 
-// Símbolo: un molde visto de perfil (el recipiente trapezoidal donde se
-// vierte cera, jabón o resina) con la gota del material ya volcado dentro.
+// Símbolo: una bandeja de molde vista desde arriba, con sus cuatro
+// cavidades en negativo — el objeto real que se usa para verter cera,
+// jabón, resina o chocolate. Legible incluso a 16px (favicon/header).
 // Se usa igual en el header, el footer, el favicon (app/icon.svg) y la
 // imagen para redes.
 export function LogoMark({ size = 32 }: { size?: number }) {
   return (
     <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="logo-mark">
-      <rect x="1" y="1" width="30" height="30" rx="9" fill="var(--logo-bg, #b5603c)" />
-      <path
-        d="M9.5 10.5h13l-2.4 13.6a1.5 1.5 0 0 1-1.48 1.24h-5.24a1.5 1.5 0 0 1-1.48-1.24L9.5 10.5z"
-        fill="none"
-        stroke="var(--logo-fg, #fff8ef)"
-        strokeWidth="1.8"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M16 14.4c1.7 2.3 2.9 4.1 2.9 5.6a2.9 2.9 0 1 1-5.8 0c0-1.5 1.2-3.3 2.9-5.6z"
-        fill="var(--logo-fg, #fff8ef)"
-      />
+      <rect x="1" y="1" width="30" height="30" rx="8" fill="var(--logo-bg, #b5603c)" />
+      <circle cx="11" cy="11" r="4.3" fill="var(--logo-fg, #fff8ef)" />
+      <circle cx="21" cy="11" r="4.3" fill="var(--logo-fg, #fff8ef)" />
+      <circle cx="11" cy="21" r="4.3" fill="var(--logo-fg, #fff8ef)" />
+      <circle cx="21" cy="21" r="4.3" fill="var(--logo-fg, #fff8ef)" />
     </svg>
   )
 }

@@ -227,24 +227,33 @@ main { min-height: 60vh; }
 .envio { display: flex; gap: 10px; margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
 .envio svg { flex-shrink: 0; margin-top: 1px; color: var(--accent); }
 
-/* ---------- Categorías (tiles) ---------- */
+/* ---------- Categorías (tiles con identidad propia) ---------- */
 .tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 16px; }
 .tile {
-  position: relative; display: flex; flex-direction: column; gap: 8px;
-  padding: 24px; border-radius: var(--radius);
-  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  position: relative; display: flex; flex-direction: column; gap: 10px;
+  padding: 26px 24px 24px; border-radius: var(--radius);
+  background: var(--tile-bg, var(--surface)); border: 1px solid var(--tile-border, var(--border));
+  box-shadow: var(--shadow-sm);
   color: var(--ink);
-  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease);
 }
-.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--border-strong); color: var(--ink); }
-.tile-icon { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); margin-bottom: 8px; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
-.tile:hover .tile-icon { background: var(--accent); color: #fff; }
-.tile-title { font-family: var(--font-display), Georgia, serif; font-size: 1.15rem; font-weight: 600; }
+.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--tile-accent, var(--border-strong)); color: var(--ink); }
+.tile-icon { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; background: #fff; color: var(--tile-accent, var(--accent)); margin-bottom: 4px; box-shadow: var(--shadow-sm); transition: background 0.3s var(--ease), color 0.3s var(--ease); }
+.tile:hover .tile-icon { background: var(--tile-accent, var(--accent)); color: #fff; }
+.tile-title { font-family: var(--font-display), Georgia, serif; font-size: 1.22rem; font-weight: 600; }
 .tile-text { font-size: 0.88rem; color: var(--muted); line-height: 1.5; padding-right: 20px; }
-.tile-arrow { position: absolute; top: 24px; right: 22px; color: var(--border-strong); transition: transform 0.3s var(--ease), color 0.3s var(--ease); }
-.tile:hover .tile-arrow { transform: translateX(3px); color: var(--accent); }
+.tile-arrow { position: absolute; top: 26px; right: 22px; color: var(--border-strong); transition: transform 0.3s var(--ease), color 0.3s var(--ease); }
+.tile:hover .tile-arrow { transform: translateX(3px); color: var(--tile-accent, var(--accent)); }
 
-/* ---------- Departamentos (chips) ---------- */
+/* Cada categoría tiene un tono propio, no la misma tarjeta repetida seis veces */
+.tile-vela { --tile-bg: #fdf3e6; --tile-border: #f1dcb8; --tile-accent: #b5742a; }
+.tile-jabon { --tile-bg: #f0f3ec; --tile-border: #d7e2cb; --tile-accent: #5f7247; }
+.tile-resina { --tile-bg: #eef2f6; --tile-border: #d3dee8; --tile-accent: #43607a; }
+.tile-chocolate { --tile-bg: #f3e9e2; --tile-border: #e0c9b8; --tile-accent: #7a4a2e; }
+.tile-frasco { --tile-bg: #f7eee9; --tile-border: #ead7cb; --tile-accent: #b5603c; }
+.tile-gota { --tile-bg: #eef1f6; --tile-border: #d6dfec; --tile-accent: #5a6a8a; }
+
+/* ---------- Chip genérico (links "otros departamentos" en subpáginas) ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip {
   display: inline-flex; align-items: center; gap: 8px;
@@ -256,22 +265,46 @@ main { min-height: 60vh; }
 .chip svg { color: var(--accent); }
 .chip:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); box-shadow: var(--shadow); }
 
-/* ---------- Metodología ---------- */
-.criterios { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; counter-reset: c; }
+/* ---------- Departamentos (agrupados por región) ---------- */
+.regiones {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: clamp(28px, 4vw, 44px);
+  padding: clamp(28px, 4vw, 40px) 0 0; border-top: 1px solid var(--border);
+}
+.region-title {
+  font-family: var(--font-display), Georgia, serif; font-weight: 600; font-size: 1.02rem; color: var(--accent);
+  margin: 0 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+.region-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.region-list a {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 2px; color: var(--ink-2); font-size: 0.96rem; font-weight: 500;
+  border-radius: 6px; transition: color 0.2s var(--ease), padding-left 0.2s var(--ease), gap 0.2s var(--ease);
+}
+.region-list a svg { color: var(--border-strong); transition: color 0.2s var(--ease); flex-shrink: 0; }
+.region-list a:hover { color: var(--accent); gap: 12px; }
+.region-list a:hover svg { color: var(--accent); }
+
+/* ---------- Metodología (lista editorial, no tarjetas) ---------- */
+.criterios {
+  list-style: none; padding: clamp(24px, 3vw, 36px) 0 0; margin: 0;
+  border-top: 1px solid var(--border);
+  display: flex; flex-direction: column;
+}
 .criterios li {
-  counter-increment: c;
-  padding: 24px; border-radius: var(--radius);
-  background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+  display: grid; grid-template-columns: clamp(64px, 9vw, 110px) 1fr; gap: clamp(16px, 3vw, 32px);
+  padding: clamp(20px, 3vw, 30px) 0;
+  border-bottom: 1px solid var(--border);
+  align-items: baseline;
 }
-.criterios li::before {
-  content: '0' counter(c);
-  display: block; margin-bottom: 14px;
-  font-family: var(--font-display), Georgia, serif; font-size: 1.6rem; font-weight: 500; color: var(--accent);
-  line-height: 1;
+.criterios li:first-child { padding-top: 0; }
+.criterio-num {
+  font-family: var(--font-display), Georgia, serif; font-weight: 500; font-style: italic;
+  font-size: clamp(2.2rem, 2rem + 1vw, 3.2rem); line-height: 1; color: var(--accent-soft);
+  -webkit-text-stroke: 1.5px var(--accent);
 }
-.criterios h3 { font-size: 1.1rem; margin: 0 0 8px; }
-.criterios p { margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
-.note { margin: 24px 0 0; font-size: 0.92rem; color: var(--muted); max-width: 760px; }
+.criterios h3 { font-size: 1.2rem; margin: 0 0 8px; }
+.criterios p { margin: 0; font-size: 0.95rem; color: var(--muted); line-height: 1.6; max-width: 60ch; }
+.note { margin: 28px 0 0; font-size: 0.92rem; color: var(--muted); max-width: 760px; }
 
 /* ---------- Paneles (departamento / categoría) ---------- */
 .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }

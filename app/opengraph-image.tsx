@@ -22,18 +22,11 @@ export default function OgImage() {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
           <svg width="88" height="88" viewBox="0 0 32 32">
-            <rect x="1" y="1" width="30" height="30" rx="9" fill="#b5603c" />
-            <path
-              d="M9.5 10.5h13l-2.4 13.6a1.5 1.5 0 0 1-1.48 1.24h-5.24a1.5 1.5 0 0 1-1.48-1.24L9.5 10.5z"
-              fill="none"
-              stroke="#fff8ef"
-              strokeWidth="1.8"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M16 14.4c1.7 2.3 2.9 4.1 2.9 5.6a2.9 2.9 0 1 1-5.8 0c0-1.5 1.2-3.3 2.9-5.6z"
-              fill="#fff8ef"
-            />
+            <rect x="1" y="1" width="30" height="30" rx="8" fill="#b5603c" />
+            <circle cx="11" cy="11" r="4.3" fill="#fff8ef" />
+            <circle cx="21" cy="11" r="4.3" fill="#fff8ef" />
+            <circle cx="11" cy="21" r="4.3" fill="#fff8ef" />
+            <circle cx="21" cy="21" r="4.3" fill="#fff8ef" />
           </svg>
           <div style={{ display: 'flex', fontSize: 56, letterSpacing: -1 }}>
             <span style={{ fontWeight: 700 }}>moldes</span>

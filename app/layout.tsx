@@ -4,7 +4,13 @@ import './globals.css'
 import { Nav, Footer } from '@/components/NavFooter'
 import { SITE_URL, SITE_NAME } from '@/lib/data'
 
-const display = Fraunces({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
+const display = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700'],
+})
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
 
 export const metadata: Metadata = {
