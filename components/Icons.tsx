@@ -143,15 +143,30 @@ export function IconMenu({ size = 22 }: P) {
   )
 }
 
-// Badge visual por tienda del ranking: Moldarte usa su propio símbolo
-// (la gota del logo), cada competidor un badge con sus iniciales sobre su
-// color de marca, para que cada entrada se distinga de un vistazo.
-export function BrandBadge({ nombre, color, destacado, size = 48 }: {
+// Badge visual por tienda del ranking: si hay un logo real disponible (ver
+// lib/data.ts) se muestra ese logo sobre blanco; si no, un badge con las
+// iniciales de la marca sobre su color, como respaldo.
+export function BrandBadge({ nombre, color, destacado, logo, size = 48 }: {
   nombre: string
   color: string
   destacado?: boolean
+  logo?: string
   size?: number
 }) {
+  if (logo) {
+    return (
+      <span
+        className="brand-badge brand-badge-logo"
+        style={{ width: size, height: size }}
+      >
+        {/* Logos de terceros, cada uno con pocas unidades de uso: una
+           etiqueta <img> simple evita el loader/optimizador remoto de
+           next/image para estos assets locales de pocos KB. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logo} alt={`Logo de ${nombre}`} />
+      </span>
+    )
+  }
   if (destacado) {
     return (
       <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="brand-badge">

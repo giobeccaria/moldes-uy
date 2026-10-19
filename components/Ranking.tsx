@@ -7,7 +7,7 @@ function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
       {tienda.destacado && <span className="ribbon">Mejor opción</span>}
       <div className="card-head">
         <span className="brand-badge-wrap">
-          <BrandBadge nombre={tienda.nombre} color={tienda.color} destacado={tienda.destacado} size={52} />
+          <BrandBadge nombre={tienda.nombre} color={tienda.color} destacado={tienda.destacado} logo={tienda.logo} size={52} />
         </span>
         <span className="posicion" aria-label={`Puesto ${posicion}`}>
           {posicion}
@@ -76,7 +76,7 @@ function CardCompacta({ tienda, posicion }: { tienda: Tienda; posicion: number }
     <article className="card-sm">
       <div className="card-sm-head">
         <span className="brand-badge-wrap brand-badge-wrap-sm">
-          <BrandBadge nombre={tienda.nombre} color={tienda.color} size={36} />
+          <BrandBadge nombre={tienda.nombre} color={tienda.color} logo={tienda.logo} size={36} />
         </span>
         <span className="posicion posicion-sm" aria-label={`Puesto ${posicion}`}>
           {posicion}

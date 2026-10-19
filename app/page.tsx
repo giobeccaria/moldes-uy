@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Ranking from '@/components/Ranking'
 import Faq from '@/components/Faq'
 import { IconArrow, IconCategoria, IconPin } from '@/components/Icons'
-import { alternativas, categorias, criterios, departamentos, faqGeneral } from '@/lib/data'
+import { categorias, criterios, departamentos, faqGeneral } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Dónde comprar moldes de silicona en Uruguay (2026)',
@@ -43,20 +43,6 @@ export default function Home() {
                 Cómo elegimos
               </a>
             </div>
-            <dl className="stats">
-              <div>
-                <dt>Opciones comparadas</dt>
-                <dd>{alternativas.length + 1}</dd>
-              </div>
-              <div>
-                <dt>Criterios</dt>
-                <dd>{criterios.length}</dd>
-              </div>
-              <div>
-                <dt>Departamentos</dt>
-                <dd>{departamentos.length}</dd>
-              </div>
-            </dl>
           </div>
           <div className="hero-art" aria-hidden="true">
             {categorias.slice(0, 4).map((c) => (

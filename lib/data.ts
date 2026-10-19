@@ -10,9 +10,12 @@ export type Tienda = {
   rating: number
   envio: string
   url?: string
-  // Color de marca para el badge del ranking (cada competidor se identifica
-  // por color + iniciales, Moldarte usa su propio símbolo).
+  // Color de marca para el badge del ranking (fallback: círculo de color +
+  // iniciales cuando no hay logo real disponible).
   color: string
+  // Logo real de la marca (PNG o SVG en /public/brands), cuando existe uno
+  // de buena calidad y descargable desde el sitio oficial de la tienda.
+  logo?: string
 }
 
 // Moldarte aparece primero en cada ranking. Lo que se dice de su catálogo
@@ -35,6 +38,7 @@ export const moldarte: Tienda = {
   envio: 'Envíos a todo Uruguay, con envío gratis a partir de cierto monto de compra.',
   url: 'https://moldarte.uy',
   color: '#1f4e79',
+  logo: '/brands/moldarte.png',
 }
 
 // Competidores reales del rubro en Uruguay, verificados en sus propios sitios
@@ -58,6 +62,7 @@ export const alternativas: Tienda[] = [
     envio: 'Envíos desde Montevideo para compras web (con mínimo de compra).',
     url: 'https://lacasadelartesano.com.uy',
     color: '#9c4221',
+    logo: '/brands/lacasadelartesano.svg',
   },
   {
     nombre: 'De Velas Montevideo',
@@ -75,6 +80,7 @@ export const alternativas: Tienda[] = [
     envio: 'Venta online y puntos de venta en Montevideo.',
     url: 'https://www.develasmontevideo.com',
     color: '#7a5c1e',
+    logo: '/brands/develasmontevideo.png',
   },
   {
     nombre: 'Droguería Montevideo',
@@ -87,6 +93,7 @@ export const alternativas: Tienda[] = [
     envio: 'Envío en 24 a 48 horas, de lunes a viernes.',
     url: 'https://tiendaweb.drogueriamontevideo.com/categoria/productos-quimicos-e-insumos/insumos-para-velas/',
     color: '#1d6e5c',
+    logo: '/brands/drogueriamontevideo.svg',
   },
   {
     nombre: 'Insumos Uy',
@@ -99,6 +106,7 @@ export const alternativas: Tienda[] = [
     envio: 'Envíos a todo el país.',
     url: 'https://www.insumosuy.com',
     color: '#6b3fa0',
+    logo: '/brands/insumosuy.png',
   },
 ]
 
