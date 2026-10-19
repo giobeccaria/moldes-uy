@@ -71,10 +71,10 @@ a:hover { color: var(--accent-2); }
 /* ---------- Header ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(246, 248, 251, 0.82);
+  background: rgba(255, 252, 247, 0.82);
   backdrop-filter: saturate(160%) blur(14px);
   -webkit-backdrop-filter: saturate(160%) blur(14px);
-  border-bottom: 1px solid rgba(225, 231, 239, 0.8);
+  border-bottom: 1px solid rgba(234, 217, 195, 0.8);
 }
 .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
 .nav-desktop { display: flex; gap: 4px; }

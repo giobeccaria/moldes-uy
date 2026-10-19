@@ -42,7 +42,7 @@ export const moldarte: Tienda = {
     'Tienda online uruguaya de moldes de silicona e insumos para velas, jabones, yeso y resina. Además de cientos de moldes, tiene ceras de soja, glicerina, esencias aromáticas, colorantes, pabilos, frascos de vidrio y herramientas: todo lo que lleva un proyecto, en un mismo pedido.',
   pros: [
     'Una de las colecciones de moldes de silicona más grandes del país, con altas frecuentes',
-    'Insumos completos en el mismo lugar: cera de soja de alto y bajo punto, glicerina, más de 15 esencias concentradas, colorantes, pabilos y frascos para velas',
+    'Insumos completos en el mismo lugar: cera de soja de alto y bajo punto, glicerina, 18 esencias concentradas distintas, 12 colorantes, 13 pabilos y frascos para velas',
     'Yeso París, kits DIY y herramientas (pistola de calor, minitorno, batidor, manteles de silicona)',
     'Checkout seguro en Shopify, todos los medios de pago y también presencia en Mercado Libre',
   ],
@@ -50,14 +50,14 @@ export const moldarte: Tienda = {
   rating: 5,
   envio: 'Envíos a todo Uruguay, con envío gratis a partir de cierto monto de compra.',
   url: 'https://moldarte.uy',
-  color: '#1f4e79',
+  color: '#b5603c',
   logo: '/brands/moldarte-instagram.jpg',
   redes: {
     instagram: 'https://www.instagram.com/moldarte.uy',
     facebook: 'https://www.facebook.com/moldarte.uy/',
   },
   atributos: {
-    catalogo: 'Más de 350 moldes de silicona distintos en catálogo activo, sin contar los insumos',
+    catalogo: 'Más de 375 moldes de silicona distintos en catálogo activo (de un total de 488 productos), sin contar los insumos',
     precios: 'Moldes chicos y medianos desde rangos accesibles, con precios publicados por producto (sin coordinar por chat)',
     envioResumen: 'A todo el país, con envío gratis desde cierto monto',
     pago: 'Checkout propio con tarjeta, transferencia y todos los medios habituales',
