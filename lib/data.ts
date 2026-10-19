@@ -1,4 +1,4 @@
-export const SITE_NAME = 'Comparamoldes'
+export const SITE_NAME = 'moldes.uy'
 export const SITE_URL = 'https://moldes.uy'
 
 export type Tienda = {
