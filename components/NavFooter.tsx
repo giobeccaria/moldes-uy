@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { categorias, departamentos } from '@/lib/data'
+import { categorias, departamentos, SITE_NAME } from '@/lib/data'
 
 export function Nav() {
   return (
     <header className="site-header">
       <div className="wrap nav-inner">
         <Link href="/" className="logo">
-          moldes.uy
+          {SITE_NAME}
         </Link>
         <nav>
           <Link href="/">Inicio</Link>
@@ -24,7 +24,7 @@ export function Footer() {
       <div className="wrap">
         <div className="footer-grid">
           <div>
-            <p className="logo">moldes.uy</p>
+            <p className="logo">{SITE_NAME}</p>
             <p>Guía independiente para comparar dónde comprar moldes de silicona en Uruguay: velas, jabones, resina y chocolate.</p>
           </div>
           <div>
@@ -42,13 +42,15 @@ export function Footer() {
             <ul>
               {categorias.map((c) => (
                 <li key={c.slug}>
-                  <Link href={`/categorias/${c.slug}`}>{c.nombre}</Link>
+                  <Link href={`/categorias/${c.slug}`}>
+                    {c.icono} {c.nombre}
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <p className="copy">© {new Date().getFullYear()} moldes.uy — Guía de compra independiente.</p>
+        <p className="copy">© {new Date().getFullYear()} {SITE_NAME} — Guía de compra independiente.</p>
       </div>
     </footer>
   )

@@ -1,11 +1,13 @@
-export const SITE_NAME = 'moldes.uy'
+export const SITE_NAME = 'Comparamoldes'
 export const SITE_URL = 'https://moldes.uy'
 
 export type Tienda = {
   nombre: string
   destacado: boolean
   resumen: string
-  puntos: string[]
+  pros: string[]
+  contras: string[]
+  rating: number
   envio: string
   url?: string
 }
@@ -18,52 +20,108 @@ export const moldarte: Tienda = {
   destacado: true,
   resumen:
     'Tienda online uruguaya especializada exclusivamente en moldes de silicona para velas, jabones, resina, chocolate y yeso. Catálogo permanente de cientos de diseños, con altas semanales.',
-  puntos: [
+  pros: [
     'Catálogo especializado con cientos de modelos distintos, de los más amplios del país en moldes de silicona',
     'Compra con checkout seguro (Shopify) y también presencia verificada en Mercado Libre',
     'Fotos reales de cada molde y descripción de medidas antes de comprar',
     'Atención directa por los canales de la tienda para dudas de stock o uso del molde',
   ],
+  contras: ['Al ser especializada, no vende otros insumos de manualidades fuera del rubro de moldes'],
+  rating: 5,
   envio: 'Envíos a todo Uruguay por los operadores logísticos habituales del e-commerce local, y retiro coordinado en Montevideo.',
   url: 'https://moldarte.com.uy',
 }
 
+// Competidores reales verificados por búsqueda web (octubre 2026): Mercado
+// Libre Uruguay tiene vendedores especializados en moldes para manualidades
+// como "La Casa del Artesano" (moldes de resina/epoxi); Desertcart Uruguay
+// es una plataforma de importación real que opera en el dominio .uy y trae
+// moldes de silicona de catálogos internacionales. La tercera entrada es
+// genérica a propósito (venta informal, no es una empresa identificable).
 export const alternativas: Tienda[] = [
   {
-    nombre: 'Importadores genéricos en marketplaces',
+    nombre: 'Mercado Libre Uruguay',
     destacado: false,
     resumen:
-      'Perfiles que revenden moldes importados sin especializarse en el rubro. El catálogo suele ser más chico y cambia según lo que consiguen importar en el momento.',
-    puntos: [
-      'Precio a veces más bajo en modelos puntuales',
-      'Variedad y disponibilidad irregulares: lo que hay hoy puede no estar el mes que viene',
-      'Fotos de catálogo genéricas, no siempre del producto real',
+      'Marketplace general donde conviven decenas de vendedores de moldes de silicona, entre ellos perfiles enfocados en manualidades como "La Casa del Artesano". La variedad existe, pero está repartida entre muchos vendedores distintos con stock y criterios propios.',
+    pros: [
+      'Mucha oferta total sumando todos los vendedores',
+      'Sistema de reputación y pagos propio de la plataforma',
+      'Útil para comparar precio de un modelo puntual',
     ],
-    envio: 'Depende del vendedor puntual.',
+    contras: [
+      'No es una tienda especializada: hay que filtrar entre vendedores de rubros muy distintos',
+      'El catálogo de cada vendedor individual suele ser más chico que el de una tienda dedicada al rubro',
+      'La atención y los tiempos de envío varían según cada vendedor',
+    ],
+    rating: 4,
+    envio: 'Según el vendedor elegido; la plataforma ofrece despacho e información de seguimiento propia.',
+    url: 'https://listado.mercadolibre.com.uy/molde-de-silicona',
   },
   {
-    nombre: 'Bazares y tiendas de manualidades generales',
+    nombre: 'Desertcart Uruguay',
     destacado: false,
     resumen:
-      'Locales físicos que venden de todo un poco — telas, bijouterie, insumos de arte — y tienen una sección chica de moldes de silicona como producto secundario.',
-    puntos: [
-      'Sirve para compra urgente si el local queda cerca',
-      'Pocos diseños disponibles, enfocados en lo más básico',
-      'El personal no siempre conoce el detalle técnico del molde',
+      'Plataforma de importación que compra en tiendas internacionales y gestiona envío y aduana hacia Uruguay. Tiene catálogo amplio de moldes de silicona de marcas extranjeras, pero no es una tienda local especializada en el rubro.',
+    pros: [
+      'Acceso a marcas y modelos que no se consiguen en el mercado local',
+      'Catálogo grande por venir de miles de tiendas internacionales',
     ],
-    envio: 'Generalmente sin envío, solo venta en el local.',
+    contras: [
+      'Tiempos de envío más largos por tratarse de importación',
+      'Costos de envío e impuestos de importación a tener en cuenta en el precio final',
+      'No es un vendedor especializado en moldes: el catálogo mezcla todo tipo de productos',
+    ],
+    rating: 3,
+    envio: 'Importación con tiempos de varios días a semanas según el origen del producto.',
+    url: 'https://www.desertcart.uy',
   },
   {
     nombre: 'Grupos de reventa en redes sociales',
     destacado: false,
     resumen:
       'Perfiles de Instagram o grupos de Facebook de emprendedoras que compran por mayor y revenden de forma informal.',
-    puntos: [
-      'Trato directo y cercano',
+    pros: ['Trato directo y cercano', 'Puede haber precio conveniente en compras grandes'],
+    contras: [
       'Sin checkout formal: la compra depende de coordinar por chat',
       'Sin garantía de cambio ni devolución formal',
+      'Disponibilidad y catálogo cambian según lo que la persona haya comprado por mayor',
     ],
+    rating: 2,
     envio: 'A coordinar por mensaje, sin tracking formal.',
+  },
+]
+
+export const faqGeneral: { pregunta: string; respuesta: string }[] = [
+  {
+    pregunta: '¿Qué conviene mirar antes de comprar un molde de silicona?',
+    respuesta:
+      'Catálogo especializado (más diseños y mejor descripción de medidas), forma de pago segura con checkout formal, y confirmación de que el molde es de grado apto para el uso que le vas a dar (alimentos, cera caliente o resina).',
+  },
+  {
+    pregunta: '¿Es mejor comprar en una tienda especializada o en un marketplace general?',
+    respuesta:
+      'Una tienda especializada en moldes suele tener catálogo más profundo y consistente en el tiempo. Un marketplace general junta muchos vendedores distintos, con variedad total grande pero repartida y de calidad dispar.',
+  },
+  {
+    pregunta: '¿Los moldes de silicona sirven para velas, jabón, resina y chocolate por igual?',
+    respuesta:
+      'No todos. Conviene confirmar el uso previsto por el vendedor: la resistencia al calor y el grado alimentario no son iguales en todos los moldes, aunque el material de base sea silicona en los tres casos.',
+  },
+  {
+    pregunta: '¿Importar moldes desde el exterior conviene frente a comprar en Uruguay?',
+    respuesta:
+      'Depende del diseño que busques. Si existe en el mercado local, suele ser más rápido y sin sorpresas de aduana comprarlo a una tienda uruguaya. Importar tiene sentido para diseños que no se consiguen localmente.',
+  },
+  {
+    pregunta: '¿Cómo me asegura la compra un checkout formal?',
+    respuesta:
+      'Un checkout formal (como el de una tienda con pasarela de pago propia) da comprobante de compra, datos de seguimiento del envío y un canal claro para reclamos, a diferencia de coordinar la compra por chat sin ningún respaldo.',
+  },
+  {
+    pregunta: '¿Comprar por redes sociales es una mala idea?',
+    respuesta:
+      'No necesariamente, pero conviene saber que normalmente no hay garantía formal de cambio o devolución, y que el catálogo depende de lo que la persona haya conseguido comprar por mayor en ese momento.',
   },
 ]
 
@@ -74,11 +132,13 @@ export type Categoria = {
   intro: string
   usos: string[]
   tips: string[]
+  icono: string
 }
 
 export const categorias: Categoria[] = [
   {
     slug: 'moldes-para-velas',
+    icono: '🕯️',
     nombre: 'Moldes para velas',
     titulo: 'Moldes de silicona para velas',
     intro:
@@ -96,6 +156,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-para-jabones',
+    icono: '🧼',
     nombre: 'Moldes para jabones',
     titulo: 'Moldes de silicona para jabones artesanales',
     intro:
@@ -113,6 +174,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-de-resina',
+    icono: '💎',
     nombre: 'Moldes de resina',
     titulo: 'Moldes de silicona para resina epoxi',
     intro:
@@ -130,6 +192,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-para-chocolate',
+    icono: '🍫',
     nombre: 'Moldes para chocolate',
     titulo: 'Moldes de silicona para chocolate y repostería',
     intro:

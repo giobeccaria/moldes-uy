@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Ranking from '@/components/Ranking'
-import { categorias, departamentos } from '@/lib/data'
+import { categorias, departamentos, faqGeneral } from '@/lib/data'
 
 export const metadata: Metadata = {
   title: 'Dónde comprar moldes de silicona en Uruguay (2026)',
@@ -11,6 +11,16 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqGeneral.map((f) => ({
+      '@type': 'Question',
+      name: f.pregunta,
+      acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+    })),
+  }
+
   return (
     <div className="wrap">
       <section className="hero">
@@ -41,6 +51,9 @@ export default function Home() {
         <div className="grid-links">
           {categorias.map((c) => (
             <Link key={c.slug} href={`/categorias/${c.slug}`}>
+              <span className="cat-icon" aria-hidden="true">
+                {c.icono}
+              </span>{' '}
               {c.nombre}
             </Link>
           ))}
@@ -48,14 +61,59 @@ export default function Home() {
       </section>
 
       <section className="block">
-        <h2>¿Cómo armamos esta comparación?</h2>
+        <h2>Cómo elegimos: nuestra metodología</h2>
         <p>
-          Miramos tres cosas en cada opción: cuánta variedad de diseños tiene el catálogo, qué tan
-          segura es la forma de pagar (checkout formal versus coordinar por chat) y qué tan
-          confiable es el envío a todo el país. No incluimos reseñas inventadas ni calificaciones
-          de clientes falsas: la comparación se basa en lo que cada opción ofrece públicamente.
+          Esta es una guía independiente, no una tienda. Para ordenar el ranking evaluamos cada
+          opción con los mismos cinco criterios, sin usar reseñas inventadas ni calificaciones de
+          clientes falsas:
+        </p>
+        <ul>
+          <li>
+            <strong>Catálogo:</strong> cuántos diseños distintos tiene disponibles de forma
+            permanente, y qué tan especializado está en moldes de silicona frente a vender de todo
+            un poco.
+          </li>
+          <li>
+            <strong>Seguridad de compra:</strong> si la compra se hace con un checkout formal
+            (pasarela de pago, comprobante, seguimiento) o si depende de coordinar por chat sin
+            ningún respaldo.
+          </li>
+          <li>
+            <strong>Envío:</strong> cobertura real a todo el país, tiempos esperables y claridad
+            sobre quién gestiona la logística.
+          </li>
+          <li>
+            <strong>Atención:</strong> si hay un canal directo de la tienda para resolver dudas de
+            stock, medidas o uso del molde antes y después de comprar.
+          </li>
+          <li>
+            <strong>Variedad real:</strong> si el catálogo cubre los distintos usos del rubro
+            (velas, jabones, resina, chocolate) o se limita a un nicho chico.
+          </li>
+        </ul>
+        <p>
+          Con esos cinco criterios armamos el orden del ranking y el detalle de puntos a favor y a
+          tener en cuenta de cada opción. No recibimos reseñas de usuarios ni encuestas: la
+          comparación se basa en lo que cada opción ofrece públicamente.
         </p>
       </section>
+
+      <section className="block">
+        <h2>Preguntas frecuentes</h2>
+        <div className="faq-accordion">
+          {faqGeneral.map((f) => (
+            <details className="faq-item" key={f.pregunta}>
+              <summary>{f.pregunta}</summary>
+              <p>{f.respuesta}</p>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </div>
   )
 }
