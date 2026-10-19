@@ -65,15 +65,16 @@ export const moldarte: Tienda = {
 }
 
 // Competidores reales del rubro en Uruguay, verificados en sus propios sitios
-// (octubre 2026). El rubro de moldes de silicona específicamente es chico en
-// Uruguay: más allá de Moldarte, lo único verificado que vende moldes de
-// silicona como tienda especializada (aunque no sea su único rubro) es La
-// Casa del Artesano. No hay más tiendas locales de moldes de silicona: se
-// buscaron otras marcas (Doctor Glitter, Mundo Huevo, Lua Distribuidora,
-// Tienda Novara) y las cuatro son argentinas, no uruguayas, así que no se
-// agregan aquí para no inventar presencia local que no existe. El ranking
-// principal queda con las 2 tiendas reales del rubro en el país; Mercado
-// Libre no es una tienda comparable y se trata aparte, ver `mercadoLibre`.
+// (octubre 2026). La Casa del Artesano sigue siendo la única tienda local
+// especializada en manualidades que también vende moldes de silicona. Las
+// otras cuatro (Liderplast, Zanetti, Casa Jorge, Sodimac) son bazares o
+// cadenas de artículos para el hogar que tienen moldes de silicona en su
+// catálogo de cocina, verificados visitando cada categoría y viendo
+// productos concretos listados (no sólo el título de la sección). No son
+// especialistas en manualidades: su fuerte es repostería, chocolate o
+// hielo, no necesariamente velas, jabón o resina con la profundidad de
+// Moldarte o La Casa del Artesano, y así se los describe. Mercado Libre no
+// es una tienda comparable y se trata aparte, ver `mercadoLibre`.
 export const alternativas: Tienda[] = [
   {
     nombre: 'La Casa del Artesano',
@@ -103,6 +104,106 @@ export const alternativas: Tienda[] = [
       precios: 'Precios por producto en el sitio, sujetos a un mínimo de compra para envío',
       envioResumen: 'Despacho desde Montevideo, con mínimo de compra',
       pago: 'Checkout web con mínimo de compra; compra en salón sin ese mínimo',
+    },
+  },
+  {
+    nombre: 'Zanetti',
+    destacado: false,
+    resumen:
+      'Tienda de decoración y bazar de Montevideo, con local en Colonia 917 y venta online con checkout propio. Tiene una docena de moldes de silicona con formas decorativas (flores, mariposas, corazones, lazos, rosas, pétalos) dentro de su sección de decoración.',
+    pros: [
+      'Catálogo online con checkout propio y varios medios de pago (tarjetas, Redpagos, Pago Despues)',
+      'Formas decorativas (flores, mariposas, rosas, lazos) que sirven para jabón, resina o repostería por igual',
+      'Local físico en Montevideo además de la venta online',
+    ],
+    contras: [
+      'Es un bazar de decoración, no una tienda de manualidades: los moldes de silicona son una sección chica (una docena de modelos) dentro de un catálogo mucho más amplio de artículos de decoración',
+      'No vende insumos de manualidades (ceras, glicerina, resina): sólo el molde',
+    ],
+    rating: 3,
+    envio: 'Venta online con checkout propio; también atiende en su local de Montevideo.',
+    url: 'https://www.zanetti.com.uy/decoracion/moldes-de-silicona',
+    color: '#2f6b4f',
+    atributos: {
+      catalogo: 'Alrededor de una docena de moldes de silicona decorativos (flores, mariposas, corazones, lazos), sin insumos de manualidades',
+      precios: 'Precios por producto publicados en el sitio, entre $270 y $390 aproximadamente',
+      envioResumen: 'Venta online con checkout propio; retiro o compra también en el local de Colonia 917',
+      pago: 'Tarjetas de crédito y débito, Redpagos y Pago Despues',
+    },
+  },
+  {
+    nombre: 'Liderplast',
+    destacado: false,
+    resumen:
+      'Bazar uruguayo con cuatro locales en Montevideo (Centro, Cordón, Goes y Paso Molino). Dentro de un catálogo grande de moldes de cocina (más de 100 entre aluminio y silicona), tiene algunos moldes de silicona para repostería, como bombones con forma de corazón o almeja.',
+    pros: [
+      'Cuatro locales físicos en Montevideo para comprar o retirar en persona',
+      'Catálogo de bazar grande, con checkout propio y carrito de compra online',
+      'Precios accesibles en los moldes de silicona que tiene',
+    ],
+    contras: [
+      'Los moldes de silicona que vimos en catálogo son pocos (un puñado de diseños de bombón) frente a un catálogo de más de 100 moldes mayormente de aluminio para repostería',
+      'Es un bazar de cocina y hogar, no una tienda de manualidades: no vende insumos para velas, jabón ni resina',
+    ],
+    rating: 3,
+    envio: 'Venta online con checkout propio y retiro o compra en cualquiera de sus cuatro locales de Montevideo.',
+    url: 'https://www.liderplast.com.uy/productos/productos.php?path=0.2882.2915&secc=productos',
+    color: '#1f5fa8',
+    atributos: {
+      catalogo: 'Un puñado de moldes de silicona para repostería (bombones con forma de corazón, almeja) dentro de un catálogo de más de 100 moldes de cocina',
+      precios: 'Precios publicados por producto, desde $27 hasta rangos similares a otras tiendas de bazar',
+      envioResumen: 'Venta online con despacho, o retiro/compra en los locales de Centro, Cordón, Goes y Paso Molino',
+      pago: 'Checkout propio con carrito de compra; también venta directa en los locales',
+    },
+  },
+  {
+    nombre: 'Casa Jorge',
+    destacado: false,
+    resumen:
+      'Tienda de artículos de cocina y bazar con venta online y atención por WhatsApp. En su categoría de moldes (84 productos en total) tiene varios modelos de silicona: molde genérico, mini torta, esfera, corazones y una placa de silicona para repostería; el resto del catálogo son moldes de aluminio para torta, budín y empanada.',
+    pros: [
+      'Varios modelos de silicona distintos (mini torta, esfera, corazones, placa) dentro de su categoría de moldes',
+      'Checkout online con carrito de compra propio',
+      'Atención directa por WhatsApp para consultas antes de comprar',
+    ],
+    contras: [
+      'Es una tienda de cocina y bazar, no de manualidades: los moldes de silicona están pensados para repostería, no para velas, jabón o resina',
+      'El sitio no publica una dirección física de local; el único contacto visible es WhatsApp',
+    ],
+    rating: 3,
+    envio: 'Venta online con checkout propio; consultas y seguimiento por WhatsApp.',
+    url: 'https://www.casajorge.com.uy/hogar/cocina/moldes/1',
+    color: '#c0392b',
+    atributos: {
+      catalogo: 'Cinco modelos de molde de silicona para repostería dentro de una categoría de 84 moldes, mayormente de aluminio',
+      precios: 'Precios publicados por producto, entre $45,90 y $239,90 en los modelos de silicona',
+      envioResumen: 'Venta online con carrito y checkout; no publica retiro en local',
+      pago: 'Checkout propio online; consultas por WhatsApp',
+    },
+  },
+  {
+    nombre: 'Sodimac',
+    destacado: false,
+    resumen:
+      'Cadena grande de mejoras para el hogar con locales en Uruguay y venta online con despacho a domicilio o retiro en tienda. En su sección de moldes tiene sobre todo piezas de cocina (muffins, budín, pan, helado), con algunos modelos de silicona entre ellas.',
+    pros: [
+      'Cadena grande con locales físicos y logística propia de despacho y retiro',
+      'Checkout online con carrito, igual que el resto de su catálogo de hogar',
+      'Precios accesibles en los pocos moldes de silicona que tiene',
+    ],
+    contras: [
+      'Los moldes de silicona que vimos son muy pocos (muffins, helado) y están mezclados con moldes de aluminio para hornear: no hay una sección de manualidades',
+      'No vende moldes decorativos para jabón, vela o resina, sólo moldes de cocina',
+    ],
+    rating: 2,
+    envio: 'Despacho a domicilio o retiro en tienda, según el producto.',
+    url: 'https://www.sodimac.com.uy/sodimac-uy/category/cat990006/moldes/',
+    color: '#f39200',
+    atributos: {
+      catalogo: 'Catálogo de moldes de cocina (muffins, budín, pan, helado), con pocos modelos de silicona entre moldes de aluminio',
+      precios: 'Precios publicados por producto, entre $49 y $959 según el artículo',
+      envioResumen: 'Despacho a domicilio o retiro en tienda, según disponibilidad del producto',
+      pago: 'Checkout propio online, igual que el resto del catálogo de la cadena',
     },
   },
 ]

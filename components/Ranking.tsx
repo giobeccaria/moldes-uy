@@ -115,7 +115,7 @@ function Comparativa({ tiendas }: { tiendas: Tienda[] }) {
   // mobile se apilan sin scroll horizontal ni columnas cortadas a la mitad.
   return (
     <div className="comparativa-wrap">
-      <p className="otras-title">Las dos, lado a lado</p>
+      <p className="otras-title">Todas, lado a lado</p>
       <div className="comparativa">
         {tiendas.map((t) => (
           <div className="comparativa-ficha" key={t.nombre}>
