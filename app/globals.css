@@ -317,6 +317,16 @@ main { min-height: 60vh; }
 .list-dot { flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); margin: 9px 7px 0 7px; }
 .list-check { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--good-soft); color: var(--good); margin-top: 1px; }
 
+/* ---------- Del oficio (contenido editorial de expertise) ---------- */
+.oficio-list { display: flex; flex-direction: column; gap: clamp(20px, 3vw, 28px); }
+.oficio-item {
+  padding: clamp(20px, 3vw, 28px) clamp(20px, 3vw, 28px) clamp(20px, 3vw, 28px) clamp(22px, 3vw, 30px);
+  border-radius: var(--radius); background: var(--surface); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+}
+.oficio-item h3 { font-size: 1.08rem; margin: 0 0 10px; font-family: var(--font-display), Georgia, serif; font-weight: 500; }
+.oficio-item p { margin: 0; color: var(--ink-2); line-height: 1.65; font-size: 0.97rem; max-width: 72ch; }
+
 /* ---------- FAQ ---------- */
 .faq { border-top: 1px solid var(--border); }
 .faq-item { border-bottom: 1px solid var(--border); }

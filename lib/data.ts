@@ -119,6 +119,26 @@ export const faqGeneral: { pregunta: string; respuesta: string }[] = [
     respuesta:
       'Si podés, sí: en un mismo pedido resolvés el molde, la cera o la glicerina, la esencia y el colorante, pagás un solo envío y te asegurás de que los insumos sean compatibles con el molde que elegiste.',
   },
+  {
+    pregunta: '¿Por qué mi molde de silicona quedó pegajoso después de un tiempo?',
+    respuesta:
+      'Es un residuo que deja el material trabajado (sobre todo jabón en frío o cera con fragancia) sobre la silicona, no una falla del molde. Se lava con agua caliente y un desengrasante suave, secando bien antes de guardarlo. Si vuelve a quedar pegajoso apenas seco, ahí sí es la silicona perdiendo su acabado por uso prolongado.',
+  },
+  {
+    pregunta: '¿Se puede reutilizar el mismo molde para velas y para jabones?',
+    respuesta:
+      'Entra el mismo material en los dos usos, pero conviene no alternarlo si el molde absorbió fragancia concentrada: ese olor puede pasar al siguiente producto. Lo más prolijo es destinar un molde a cada uso cuando se trabaja con esencias fuertes.',
+  },
+  {
+    pregunta: '¿Cuánto dura un molde de silicona con buen uso?',
+    respuesta:
+      'Depende del uso, pero con buen cuidado (lavado sin abrasivos, secado completo y sin forzar el desmolde) un molde de silicona rinde para decenas de piezas. Las señales de que ya cumplió su vida útil son pérdida de flexibilidad, grietas finas en los bordes y que cueste cada vez más desmoldar aunque esté limpio.',
+  },
+  {
+    pregunta: '¿Qué diferencia real tiene la silicona de grado alimentario?',
+    respuesta:
+      'No transfiere olor, sabor ni residuo al producto y tolera bien el rango de temperatura de uso en cocina. Importa cuando el molde se usa para algo que se come (chocolate, repostería) o para jabón que va a estar en contacto con la piel; para resina o yeso decorativo no es un requisito excluyente.',
+  },
 ]
 
 export type IconoCategoria = 'vela' | 'jabon' | 'resina' | 'chocolate' | 'frasco' | 'gota'
@@ -159,6 +179,10 @@ export type Categoria = {
   usos: string[]
   tips: string[]
   icono: IconoCategoria
+  // Contenido de oficio: lo que sabe alguien que de verdad trabaja con el
+  // material, no una lista más de tips genéricos. Se muestra sólo en la
+  // página de la categoría (no se repite en el home).
+  oficio: { titulo: string; texto: string }[]
 }
 
 export const categorias: Categoria[] = [
@@ -179,6 +203,18 @@ export const categorias: Categoria[] = [
       'Los moldes con mecha pre-guiada ahorran tiempo si vas a producir en volumen',
       'Guardá el molde limpio y seco entre usos para que no se deforme',
     ],
+    oficio: [
+      {
+        titulo: 'A qué temperatura verter la cera sin arruinar el molde',
+        texto:
+          'La silicona aguanta mucho más calor que el que necesita cualquier cera, así que el molde no es lo que te limita la temperatura: lo es el resultado final de la vela. Verter la cera de soja demasiado caliente no derrite el molde, pero sí puede generar más contracción al enfriar y piezas que salen con rajaduras finas o una superficie opaca ("frosting") en vez de lisa. Lo habitual es fundir y verter a una temperatura moderada, bastante por debajo del punto de ebullición, y dejar enfriar la pieza a temperatura ambiente, sin apurar el proceso metiéndola en la heladera: un enfriado brusco es lo que más deforma el relieve fino de un molde nuevo.',
+      },
+      {
+        titulo: 'Por qué un molde empieza a costar para desmoldar',
+        texto:
+          'Si al principio la vela salía sola y con el uso empieza a trabarse, no es necesariamente que el molde esté roto: puede ser residuo de cera acumulado en los detalles finos, que se limpia con agua tibia y un jabón neutro, sin usar nada abrasivo que raye la superficie interna. Si después de limpiarlo bien sigue sin soltar la pieza, ahí sí es señal de que la silicona perdió elasticidad por el uso y conviene pensar en reemplazarlo.',
+      },
+    ],
   },
   {
     slug: 'moldes-para-jabones',
@@ -196,6 +232,18 @@ export const categorias: Categoria[] = [
       'La silicona de grado alimentario no retiene olores entre jabones de distinto perfume',
       'Los moldes con cavidades múltiples aceleran mucho la producción si vendés por volumen',
       'Dejá enfriar completamente antes de desmoldar para que no se deforme el relieve',
+    ],
+    oficio: [
+      {
+        titulo: 'Cómo desmoldar sin romper el detalle fino',
+        texto:
+          'El jabón más lindo se arruina en el último paso si se desmolda antes de tiempo. Dejalo enfriar del todo a temperatura ambiente (apurarlo en el freezer puede generar condensación que opaca la superficie) y, para sacarlo, estirá apenas los bordes de la silicona hacia afuera en vez de tirar del jabón hacia arriba: eso despega el aire entre la pieza y el molde sin forzar los relieves finos, que son los que primero se rompen.',
+      },
+      {
+        titulo: 'Por qué un molde queda pegajoso después de un tiempo',
+        texto:
+          'Es algo que pasa sobre todo con jabón en frío: la soda cáustica y algunos aceites esenciales con el tiempo dejan un residuo graso en la superficie de la silicona que se siente pegajoso al tacto. No es que el molde esté fallado; se saca lavando con agua caliente y un poco de alcohol o detergente desengrasante, secando bien antes de guardarlo. Si queda pegajoso apenas lavado y seco, probablemente la silicona ya perdió su acabado original por uso prolongado.',
+      },
     ],
   },
   {
@@ -215,6 +263,18 @@ export const categorias: Categoria[] = [
       'Para resina conviene que el molde no tenga ángulos muy cerrados, ahí es donde más se traba la pieza',
       'Sellá bien la base de trabajo, la resina líquida se filtra por cualquier hueco',
     ],
+    oficio: [
+      {
+        titulo: 'Cómo evitar burbujas de aire al verter',
+        texto:
+          'Las burbujas se generan al mezclar los dos componentes y se agrandan si la resina se vierte de golpe. Mezclá despacio y durante más tiempo del que parece necesario, raspando bien los bordes y el fondo del vaso, y después volcá el líquido despacio y desde baja altura, dejando que corra por la pared del molde en vez de caer directo al centro. Si después de eso quedan burbujas chicas en la superficie, pasar el calor leve de un encendedor o una pistola de calor a unos centímetros (sin tocar la resina) las hace subir y reventar en segundos.',
+      },
+      {
+        titulo: 'Ángulos cerrados: el punto donde más se traba la pieza',
+        texto:
+          'Un molde con rincones muy marcados o paredes rectas y profundas genera vacío al desmoldar, y ahí es donde más piezas finas se rompen o quedan con marcas blancas de tensión. Ayuda desmoldar recién cuando la resina curó del todo (no sólo cuando ya no está pegajosa al tacto, sino pasadas las horas de curado completo que indique el fabricante) y despegar por secciones, aflojando primero un borde y dejando que entre aire, en vez de tirar de un extremo mientras el resto sigue pegado.',
+      },
+    ],
   },
   {
     slug: 'moldes-para-chocolate',
@@ -232,6 +292,18 @@ export const categorias: Categoria[] = [
       'Confirmá que el molde sea apto para alimentos, no todos los moldes de silicona lo son',
       'Enfriar en heladera antes de desmoldar ayuda a que el chocolate contraiga y salga entero',
       'Los moldes con relieve fino requieren temperado correcto para que el chocolate marque bien el detalle',
+    ],
+    oficio: [
+      {
+        titulo: 'Silicona de grado alimentario: cuándo importa de verdad',
+        texto:
+          'No toda silicona es igual aunque se vea y se sienta parecida. La de grado alimentario está hecha para no transferir nada al producto ni retener olores ni sabores de un uso a otro, y tolera bien el rango de temperatura con el que se trabaja chocolate y repostería. Para chocolate y cualquier cosa que se coma, importa de verdad: no es un detalle menor, es lo que define si el molde es apto o no para ese uso. Un mismo molde de grado alimentario que ya usaste para jabón perfumado no es buena idea reutilizarlo para chocolate, por más que esté limpio: el aroma concentrado del jabón queda en la silicona y pasa al producto.',
+      },
+      {
+        titulo: 'Por qué el chocolate sale sin brillo o con marcas blancas',
+        texto:
+          'Si el bombón sale opaco o con vetas blancas, generalmente no es un problema del molde sino del temperado: el chocolate necesita pasar por una curva de temperatura específica para que la manteca de cacao cristalice de forma pareja. Un molde de silicona de buena calidad ayuda porque desmolda limpio y no retiene grasa en la superficie, pero no corrige un temperado mal hecho. Enfriar en heladera apenas unos minutos antes de desmoldar sí ayuda a que la pieza contraiga levemente y salga entera.',
+      },
     ],
   },
   {
@@ -253,6 +325,13 @@ export const categorias: Categoria[] = [
       'Para velas en frasco usá cera de bajo punto; para velas de molde, de alto punto',
       'Comprar molde, cera, pabilo y esencia en el mismo lugar ahorra envíos y evita combinaciones que no funcionan',
     ],
+    oficio: [
+      {
+        titulo: '¿Se puede reutilizar un molde de velas para jabones?',
+        texto:
+          'Técnicamente sí entran los dos en el mismo molde de silicona, pero conviene no mezclarlos si el molde no es de grado alimentario o si ya absorbió olor a cera perfumada: la fragancia concentrada de una vela queda en la silicona y puede pasar a un jabón melt and pour hecho después. Si vas a alternar usos, lo más prolijo es tener un molde dedicado a cada cosa, sobre todo cuando las esencias son fuertes.',
+      },
+    ],
   },
   {
     slug: 'insumos-para-jabones',
@@ -272,6 +351,13 @@ export const categorias: Categoria[] = [
       'Con unas pocas gotas de colorante alcanza: es fácil pasarse',
       'Rociar alcohol sobre la superficie recién volcada elimina las burbujas',
       'Dejá que el jabón enfríe del todo antes de desmoldarlo para que el relieve salga entero',
+    ],
+    oficio: [
+      {
+        titulo: 'Por qué un jabón de glicerina te queda con burbujas',
+        texto:
+          'La glicerina derretida atrapa aire fácilmente al mezclarla con esencia y color. Rociar un poco de alcohol en aerosol sobre la superficie recién volcada en el molde revienta esas burbujas chicas antes de que se sellen al enfriar, y es más efectivo que intentar revolver más despacio.',
+      },
     ],
   },
 ]

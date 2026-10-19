@@ -41,9 +41,10 @@ export default function Home() {
             <p className="eyebrow">Guía de compra · 2026</p>
             <h1>Dónde comprar moldes de silicona en Uruguay</h1>
             <p className="lead">
-              Comparamos dónde comprar moldes de silicona e insumos para velas, jabones, resina y
-              chocolate en Uruguay, mirando catálogo disponible, seguridad de compra y tiempos de
-              envío. Esta es nuestra selección actualizada.
+              Un molde de silicona bueno desmolda limpio, aguanta decenas de piezas y no te arruina
+              un trabajo por una temperatura mal calculada. Comparamos dónde comprarlos en Uruguay
+              para velas, jabones, resina y chocolate, y sumamos lo que hace falta saber del oficio
+              para que el molde rinda lo que tiene que rendir.
             </p>
             <div className="hero-actions">
               <a href="#ranking" className="btn btn-primary">
@@ -87,6 +88,34 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="block block-narrow" id="oficio">
+          <div className="section-head">
+            <p className="eyebrow">Del oficio</p>
+            <h2>Comprar el molde es la mitad del trabajo</h2>
+            <p>
+              La otra mitad es usarlo bien: temperatura de vertido, desmolde sin romper el detalle
+              y saber cuándo un molde ya cumplió su vida útil. En cada categoría sumamos lo que hace
+              falta saber del oficio, no sólo dónde comprar.
+            </p>
+          </div>
+          <div className="tiles">
+            {categorias
+              .filter((c) => c.oficio.length > 0)
+              .map((c) => (
+                <Link key={c.slug} href={`/categorias/${c.slug}#oficio`} className={`tile tile-${c.icono}`}>
+                  <span className="tile-icon">
+                    <IconCategoria icono={c.icono} size={34} />
+                  </span>
+                  <span className="tile-title">{c.oficio[0].titulo}</span>
+                  <span className="tile-text">{c.nombre}</span>
+                  <span className="tile-arrow">
+                    <IconArrow />
+                  </span>
+                </Link>
+              ))}
+          </div>
+        </section>
+
         <section className="block" id="departamentos">
           <div className="section-head">
             <p className="eyebrow">Departamentos</p>
@@ -121,8 +150,10 @@ export default function Home() {
             <p className="eyebrow">Metodología</p>
             <h2>Cómo elegimos</h2>
             <p>
-              Para ordenar el ranking evaluamos cada opción con los mismos cinco criterios, sin
-              usar reseñas inventadas ni calificaciones de clientes falsas.
+              Ordenamos el ranking mirando lo que de verdad cambia el resultado de un proyecto con
+              moldes: catálogo real disponible, forma de pago, y si la tienda responde cuando hay
+              una duda de medida o de uso. Nada de reseñas inventadas ni calificaciones de clientes
+              falsas.
             </p>
           </div>
           <ol className="criterios">

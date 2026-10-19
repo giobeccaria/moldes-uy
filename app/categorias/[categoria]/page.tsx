@@ -91,6 +91,23 @@ export default async function CategoriaPage({
           </div>
         </section>
 
+        {c.oficio.length > 0 && (
+          <section className="block block-narrow" id="oficio">
+            <div className="section-head">
+              <p className="eyebrow">Del oficio</p>
+              <h2>Lo que conviene saber antes de empezar</h2>
+            </div>
+            <div className="oficio-list">
+              {c.oficio.map((o) => (
+                <article className="oficio-item" key={o.titulo}>
+                  <h3>{o.titulo}</h3>
+                  <p>{o.texto}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
+
         <section className="block">
           <div className="section-head">
             <p className="eyebrow">Ranking</p>
