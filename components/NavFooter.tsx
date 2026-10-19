@@ -49,8 +49,8 @@ export function Footer() {
               <Logo />
             </Link>
             <p>
-              Guía para comparar dónde comprar moldes de silicona en Uruguay: velas, jabones,
-              resina y chocolate.
+              Guía para comparar dónde comprar moldes de silicona e insumos en Uruguay: velas,
+              jabones, resina y chocolate.
             </p>
           </div>
           <div>

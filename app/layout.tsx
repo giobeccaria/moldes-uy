@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     template: `%s | ${SITE_NAME}`,
   },
   description:
-    'Comparamos dónde comprar moldes de silicona para velas, jabones, resina y chocolate en Uruguay, por departamento y por categoría.',
+    'Comparamos dónde comprar moldes de silicona e insumos para velas, jabones, resina y chocolate en Uruguay, por departamento y por categoría.',
   openGraph: {
     type: 'website',
     locale: 'es_UY',

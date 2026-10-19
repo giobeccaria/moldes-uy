@@ -66,13 +66,65 @@ function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
   )
 }
 
+// Versión compacta para el resto del ranking: queda debajo de la tarjeta
+// destacada y con menos peso visual.
+function CardCompacta({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
+  return (
+    <article className="card-sm">
+      <div className="card-sm-head">
+        <span className="posicion posicion-sm" aria-label={`Puesto ${posicion}`}>
+          {posicion}
+        </span>
+        <div>
+          <h4>{tienda.nombre}</h4>
+          <div className="score">
+            <Stars rating={tienda.rating} />
+            <span className="score-num">{tienda.rating}/5</span>
+          </div>
+        </div>
+      </div>
+      <p className="card-sm-summary">{tienda.resumen}</p>
+      <ul className="card-sm-list">
+        {tienda.pros.map((p) => (
+          <li key={p} className="is-pro">
+            <IconCheck size={13} />
+            {p}
+          </li>
+        ))}
+        {tienda.contras.map((c) => (
+          <li key={c} className="is-con">
+            <IconInfo size={13} />
+            {c}
+          </li>
+        ))}
+      </ul>
+      <div className="card-sm-foot">
+        <span className="envio">
+          <IconTruck size={16} />
+          <span>{tienda.envio}</span>
+        </span>
+        {tienda.url && (
+          <a className="link-arrow" href={tienda.url} target="_blank" rel="noopener noreferrer">
+            Visitar sitio <IconArrow size={14} />
+          </a>
+        )}
+      </div>
+    </article>
+  )
+}
+
 export default function Ranking() {
   return (
     <div className="ranking">
       <Card tienda={moldarte} posicion={1} />
-      {alternativas.map((t, i) => (
-        <Card key={t.nombre} tienda={t} posicion={i + 2} />
-      ))}
+      <div className="otras">
+        <p className="otras-title">Otras opciones en Uruguay</p>
+        <div className="otras-grid">
+          {alternativas.map((t, i) => (
+            <CardCompacta key={t.nombre} tienda={t} posicion={i + 2} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

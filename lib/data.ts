@@ -12,83 +12,85 @@ export type Tienda = {
   url?: string
 }
 
-// Moldarte aparece primero en cada ranking. Las afirmaciones son generales
-// y defendibles (colección amplia, pago seguro en Shopify, envíos a todo el
-// país) — no se citan cifras inventadas ni se nombra a competidores reales.
+// Moldarte aparece primero en cada ranking. Lo que se dice de su catálogo
+// sale del catálogo real (octubre 2026): moldes de silicona más ceras,
+// glicerina, esencias, colorantes, pabilos, frascos, yeso, kits y
+// herramientas. No vende resina epoxi en sí, sólo moldes y accesorios.
 export const moldarte: Tienda = {
   nombre: 'Moldarte',
   destacado: true,
   resumen:
-    'Tienda online uruguaya especializada exclusivamente en moldes de silicona para velas, jabones, resina, chocolate y yeso. Catálogo permanente de cientos de diseños, con altas semanales.',
+    'Tienda online uruguaya de moldes de silicona e insumos para velas, jabones, yeso y resina. Además de cientos de moldes, tiene ceras de soja, glicerina, esencias aromáticas, colorantes, pabilos, frascos de vidrio y herramientas: todo lo que lleva un proyecto, en un mismo pedido.',
   pros: [
-    'Catálogo especializado con cientos de modelos distintos, de los más amplios del país en moldes de silicona',
-    'Compra con checkout seguro (Shopify) y también presencia verificada en Mercado Libre',
-    'Fotos reales de cada molde y descripción de medidas antes de comprar',
-    'Atención directa por los canales de la tienda para dudas de stock o uso del molde',
+    'Una de las colecciones de moldes de silicona más grandes del país, con altas frecuentes',
+    'Insumos completos en el mismo lugar: cera de soja de alto y bajo punto, glicerina, más de 15 esencias concentradas, colorantes, pabilos y frascos para velas',
+    'Yeso París, kits DIY y herramientas (pistola de calor, minitorno, batidor, manteles de silicona)',
+    'Checkout seguro en Shopify, todos los medios de pago y también presencia en Mercado Libre',
   ],
-  contras: ['Al ser especializada, no vende otros insumos de manualidades fuera del rubro de moldes'],
+  contras: ['No vende resina epoxi en sí: tiene los moldes y accesorios para trabajarla'],
   rating: 5,
-  envio: 'Envíos a todo Uruguay por los operadores logísticos habituales del e-commerce local, y retiro coordinado en Montevideo.',
-  url: 'https://moldarte.com.uy',
+  envio: 'Envíos a todo Uruguay, con envío gratis a partir de cierto monto de compra.',
+  url: 'https://moldarte.uy',
 }
 
-// Competidores reales verificados por búsqueda web (octubre 2026): Mercado
-// Libre Uruguay tiene vendedores especializados en moldes para manualidades
-// como "La Casa del Artesano" (moldes de resina/epoxi); Desertcart Uruguay
-// es una plataforma de importación real que opera en el dominio .uy y trae
-// moldes de silicona de catálogos internacionales. La tercera entrada es
-// genérica a propósito (venta informal, no es una empresa identificable).
+// Competidores reales del rubro en Uruguay, verificados en sus propios sitios
+// (octubre 2026). Las descripciones se limitan a lo que cada uno publica.
 export const alternativas: Tienda[] = [
   {
-    nombre: 'Mercado Libre Uruguay',
+    nombre: 'La Casa del Artesano',
     destacado: false,
     resumen:
-      'Marketplace general donde conviven decenas de vendedores de moldes de silicona, entre ellos perfiles enfocados en manualidades como "La Casa del Artesano". La variedad existe, pero está repartida entre muchos vendedores distintos con stock y criterios propios.',
+      'Casa de insumos para artistas y artesanos de Montevideo, con escuela de arte propia. Cubre muchas técnicas a la vez: pintura, bijouterie, modelado, mercería, resinas y moldes, e insumos para velas.',
     pros: [
-      'Mucha oferta total sumando todos los vendedores',
-      'Sistema de reputación y pagos propio de la plataforma',
-      'Útil para comparar precio de un modelo puntual',
+      'Muy amplio en técnicas distintas, útil si también hacés pintura o bijouterie',
+      'Vende resina epoxi y UV, pigmentos y herramientas para resina',
+      'Escuela de arte con cursos',
     ],
     contras: [
-      'No es una tienda especializada: hay que filtrar entre vendedores de rubros muy distintos',
-      'El catálogo de cada vendedor individual suele ser más chico que el de una tienda dedicada al rubro',
-      'La atención y los tiempos de envío varían según cada vendedor',
+      'Al cubrir tantos rubros, los moldes de silicona son una sección más del catálogo',
+      'La compra web tiene un mínimo de compra más envío',
     ],
     rating: 4,
-    envio: 'Según el vendedor elegido; la plataforma ofrece despacho e información de seguimiento propia.',
-    url: 'https://listado.mercadolibre.com.uy/molde-de-silicona',
+    envio: 'Envíos desde Montevideo para compras web (con mínimo de compra).',
+    url: 'https://lacasadelartesano.com.uy',
   },
   {
-    nombre: 'Desertcart Uruguay',
+    nombre: 'De Velas Montevideo',
     destacado: false,
     resumen:
-      'Plataforma de importación que compra en tiendas internacionales y gestiona envío y aduana hacia Uruguay. Tiene catálogo amplio de moldes de silicona de marcas extranjeras, pero no es una tienda local especializada en el rubro.',
+      'Marca montevideana de velas de soja que además vende insumos para hacerlas (esencias, frascos, varillas) y da cursos y talleres de velería.',
     pros: [
-      'Acceso a marcas y modelos que no se consiguen en el mercado local',
-      'Catálogo grande por venir de miles de tiendas internacionales',
+      'Muy enfocada en velas de soja, con cursos para aprender',
+      'Esencias y frascos pensados para velas aromáticas',
     ],
     contras: [
-      'Tiempos de envío más largos por tratarse de importación',
-      'Costos de envío e impuestos de importación a tener en cuenta en el precio final',
-      'No es un vendedor especializado en moldes: el catálogo mezcla todo tipo de productos',
+      'Su foco son las velas: en su sitio no aparecen moldes de silicona ni insumos para jabón o yeso',
     ],
-    rating: 3,
-    envio: 'Importación con tiempos de varios días a semanas según el origen del producto.',
-    url: 'https://www.desertcart.uy',
+    rating: 4,
+    envio: 'Venta online y puntos de venta en Montevideo.',
+    url: 'https://www.develasmontevideo.com',
   },
   {
-    nombre: 'Grupos de reventa en redes sociales',
+    nombre: 'Droguería Montevideo',
     destacado: false,
     resumen:
-      'Perfiles de Instagram o grupos de Facebook de emprendedoras que compran por mayor y revenden de forma informal.',
-    pros: ['Trato directo y cercano', 'Puede haber precio conveniente en compras grandes'],
-    contras: [
-      'Sin checkout formal: la compra depende de coordinar por chat',
-      'Sin garantía de cambio ni devolución formal',
-      'Disponibilidad y catálogo cambian según lo que la persona haya comprado por mayor',
-    ],
-    rating: 2,
-    envio: 'A coordinar por mensaje, sin tracking formal.',
+      'Droguería de productos químicos con una sección de insumos para velas: cera de soja en perlas, cera virgen, esencias aromáticas y pabilos.',
+    pros: ['Buena opción para comprar cera y materias primas por cantidad', 'Envío en 24 a 48 horas hábiles'],
+    contras: ['Es una droguería, no una tienda de manualidades: en su sección de velas no hay moldes'],
+    rating: 3,
+    envio: 'Envío en 24 a 48 horas, de lunes a viernes.',
+    url: 'https://tiendaweb.drogueriamontevideo.com/categoria/productos-quimicos-e-insumos/insumos-para-velas/',
+  },
+  {
+    nombre: 'Insumos Uy',
+    destacado: false,
+    resumen:
+      'Tienda mayorista y minorista de materias primas para cosmética natural en Montevideo: aceites esenciales, cera de abeja, mantecas, tensioactivos y envases.',
+    pros: ['Materias primas para jabonería y cosmética natural', 'Vende por mayor y por menor'],
+    contras: ['Orientada a cosmética natural: no es una tienda de moldes ni de insumos para yeso'],
+    rating: 3,
+    envio: 'Envíos a todo el país.',
+    url: 'https://www.insumosuy.com',
   },
 ]
 
@@ -119,13 +121,13 @@ export const faqGeneral: { pregunta: string; respuesta: string }[] = [
       'Un checkout formal (como el de una tienda con pasarela de pago propia) da comprobante de compra, datos de seguimiento del envío y un canal claro para reclamos, a diferencia de coordinar la compra por chat sin ningún respaldo.',
   },
   {
-    pregunta: '¿Comprar por redes sociales es una mala idea?',
+    pregunta: '¿Conviene comprar moldes e insumos en la misma tienda?',
     respuesta:
-      'No necesariamente, pero conviene saber que normalmente no hay garantía formal de cambio o devolución, y que el catálogo depende de lo que la persona haya conseguido comprar por mayor en ese momento.',
+      'Si podés, sí: en un mismo pedido resolvés el molde, la cera o la glicerina, la esencia y el colorante, pagás un solo envío y te asegurás de que los insumos sean compatibles con el molde que elegiste.',
   },
 ]
 
-export type IconoCategoria = 'vela' | 'jabon' | 'resina' | 'chocolate'
+export type IconoCategoria = 'vela' | 'jabon' | 'resina' | 'chocolate' | 'frasco' | 'gota'
 
 // Los cinco criterios con los que se ordena el ranking (sección "Cómo elegimos").
 export const criterios: { nombre: string; detalle: string }[] = [
@@ -236,6 +238,46 @@ export const categorias: Categoria[] = [
       'Confirmá que el molde sea apto para alimentos, no todos los moldes de silicona lo son',
       'Enfriar en heladera antes de desmoldar ayuda a que el chocolate contraiga y salga entero',
       'Los moldes con relieve fino requieren temperado correcto para que el chocolate marque bien el detalle',
+    ],
+  },
+  {
+    slug: 'insumos-para-velas',
+    icono: 'frasco',
+    nombre: 'Insumos para velas',
+    titulo: 'Insumos para hacer velas: cera, pabilos, frascos y esencias',
+    intro:
+      'Una vela artesanal es la suma de cuatro cosas: la cera, el pabilo, el recipiente o molde, y el aroma y color. Elegir bien cada insumo es lo que hace que la vela queme parejo, no haga humo y mantenga el aroma hasta el final.',
+    usos: [
+      'Cera de soja de bajo punto de fusión para velas en frasco o vaso, que se adhiere al vidrio y quema lento',
+      'Cera de soja de alto punto (o parafina) para velas de molde que tienen que desmoldar firmes y sostenerse solas',
+      'Pabilos de algodón en distintas medidas según el diámetro de la vela, con soportes y adhesivos para centrarlos',
+      'Esencias aromáticas y colorantes concentrados para velas, que se agregan a la cera derretida',
+    ],
+    tips: [
+      'El pabilo se elige por el diámetro de la vela: uno chico deja un pozo en el centro y uno grande hace humo',
+      'Agregá la esencia con la cera a la temperatura que indica el fabricante; si está demasiado caliente se evapora parte del aroma',
+      'Para velas en frasco usá cera de bajo punto; para velas de molde, de alto punto',
+      'Comprar molde, cera, pabilo y esencia en el mismo lugar ahorra envíos y evita combinaciones que no funcionan',
+    ],
+  },
+  {
+    slug: 'insumos-para-jabones',
+    icono: 'gota',
+    nombre: 'Insumos para jabones',
+    titulo: 'Insumos para jabones artesanales: glicerina, esencias y colorantes',
+    intro:
+      'La forma más simple de empezar en jabonería es el método melt and pour: se derrite una base de glicerina, se le agrega aroma y color, y se vuelca en un molde de silicona. Sin soda cáustica ni tiempos de curado.',
+    usos: [
+      'Glicerina transparente para jabones con inclusiones o colores vivos',
+      'Glicerina blanca para jabones opacos de tonos suaves',
+      'Esencias aromáticas concentradas para perfumar la base',
+      'Colorantes concentrados que se dosifican por gotas',
+    ],
+    tips: [
+      'Derretí la glicerina a baño maría o en tandas cortas de microondas, sin que llegue a hervir',
+      'Con unas pocas gotas de colorante alcanza: es fácil pasarse',
+      'Rociar alcohol sobre la superficie recién volcada elimina las burbujas',
+      'Dejá que el jabón enfríe del todo antes de desmoldarlo para que el relieve salga entero',
     ],
   },
 ]

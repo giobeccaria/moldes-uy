@@ -219,7 +219,7 @@ main { min-height: 60vh; }
 
 .card-summary { color: var(--ink-2); margin: 18px 0 0; max-width: 78ch; }
 
-.pros-contras { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+.pros-contras { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; align-items: start; }
 .pros, .contras { border-radius: var(--radius-sm); padding: 18px 20px; }
 .pros { background: var(--good-soft); }
 .contras { background: var(--bg-soft); }
@@ -371,4 +371,36 @@ main { min-height: 60vh; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }
+}
+
+/* ---------- Resto del ranking (compacto, debajo del destacado) ---------- */
+.otras { margin-top: 20px; }
+.otras-title { font-size: 0.74rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+.otras-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.card-sm {
+  display: flex; flex-direction: column;
+  padding: 22px; border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.6); border: 1px solid var(--border);
+  transition: background 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.card-sm:hover { background: var(--surface); border-color: var(--border-strong); }
+.card-sm-head { display: flex; align-items: center; gap: 14px; }
+.posicion-sm { width: 36px; height: 36px; border-radius: 10px; font-size: 1.05rem; }
+.card-sm h4 { margin: 0 0 2px; font-family: var(--font-display), Georgia, serif; font-size: 1.08rem; font-weight: 600; color: var(--ink-2); letter-spacing: -0.01em; }
+.card-sm .stars svg { width: 13px; height: 13px; }
+.card-sm .score-num { font-size: 0.78rem; }
+.card-sm-summary { margin: 14px 0 12px; font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
+.card-sm-list { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.card-sm-list li { display: flex; gap: 8px; font-size: 0.85rem; line-height: 1.45; color: var(--ink-2); }
+.card-sm-list svg { flex-shrink: 0; margin-top: 2px; }
+.card-sm-list .is-pro svg { color: var(--good); }
+.card-sm-list .is-con svg { color: var(--muted); }
+.card-sm-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 14px; border-top: 1px solid var(--border); }
+.card-sm-foot .envio { font-size: 0.8rem; }
+.link-arrow { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+.link-arrow svg { transition: transform 0.2s var(--ease); }
+.link-arrow:hover svg { transform: translateX(3px); }
+@media (max-width: 720px) {
+  .otras-grid { grid-template-columns: 1fr; }
+  .card-sm-foot { flex-direction: column; align-items: flex-start; }
 }

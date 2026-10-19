@@ -55,6 +55,25 @@ export function IconChocolate({ size = 24 }: P) {
   )
 }
 
+export function IconFrasco({ size = 24 }: P) {
+  return (
+    <svg {...base(size)}>
+      <path d="M8 3.5h8v2.5H8z" />
+      <path d="M7 6h10l.5 2.5v11a1.5 1.5 0 0 1-1.5 1.5H8a1.5 1.5 0 0 1-1.5-1.5v-11z" />
+      <path d="M6.6 12.5h10.8M12 12.5V10" />
+    </svg>
+  )
+}
+
+export function IconGota({ size = 24 }: P) {
+  return (
+    <svg {...base(size)}>
+      <path d="M12 3s-6 6.7-6 11a6 6 0 0 0 12 0c0-4.3-6-11-6-11z" />
+      <path d="M9.2 14.6a2.9 2.9 0 0 0 2.4 2.7" />
+    </svg>
+  )
+}
+
 export function IconCategoria({ icono, size }: { icono: IconoCategoria } & P) {
   switch (icono) {
     case 'vela':
@@ -65,6 +84,10 @@ export function IconCategoria({ icono, size }: { icono: IconoCategoria } & P) {
       return <IconResina size={size} />
     case 'chocolate':
       return <IconChocolate size={size} />
+    case 'frasco':
+      return <IconFrasco size={size} />
+    case 'gota':
+      return <IconGota size={size} />
   }
 }
 

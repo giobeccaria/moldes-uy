@@ -8,7 +8,7 @@ import { alternativas, categorias, criterios, departamentos, faqGeneral } from '
 export const metadata: Metadata = {
   title: 'Dónde comprar moldes de silicona en Uruguay (2026)',
   description:
-    'Comparamos las opciones para comprar moldes de silicona para velas, jabones, resina y chocolate en Uruguay: catálogo, envío y seguridad de compra.',
+    'Comparamos dónde comprar moldes de silicona e insumos (cera, glicerina, esencias, pabilos) para velas, jabones, resina y chocolate en Uruguay.',
   alternates: { canonical: '/' },
 }
 
@@ -31,9 +31,9 @@ export default function Home() {
             <p className="eyebrow">Guía de compra · 2026</p>
             <h1>Dónde comprar moldes de silicona en Uruguay</h1>
             <p className="lead">
-              Comparamos las opciones disponibles para comprar moldes de silicona para velas,
-              jabones, resina y chocolate en Uruguay, mirando catálogo disponible, seguridad de
-              compra y tiempos de envío. Esta es nuestra selección actualizada.
+              Comparamos dónde comprar moldes de silicona e insumos para velas, jabones, resina y
+              chocolate en Uruguay, mirando catálogo disponible, seguridad de compra y tiempos de
+              envío. Esta es nuestra selección actualizada.
             </p>
             <div className="hero-actions">
               <a href="#ranking" className="btn btn-primary">
@@ -59,7 +59,7 @@ export default function Home() {
             </dl>
           </div>
           <div className="hero-art" aria-hidden="true">
-            {categorias.map((c) => (
+            {categorias.slice(0, 4).map((c) => (
               <div key={c.slug} className="hero-tile">
                 <IconCategoria icono={c.icono} size={40} />
                 <span>{c.nombre.split(' ').pop()!.replace(/^./, (l) => l.toUpperCase())}</span>
@@ -81,7 +81,7 @@ export default function Home() {
         <section className="block" id="categorias">
           <div className="section-head">
             <p className="eyebrow">Categorías</p>
-            <h2>Buscá por tipo de molde</h2>
+            <h2>Buscá por tipo de molde o insumo</h2>
           </div>
           <div className="tiles">
             {categorias.map((c) => (
