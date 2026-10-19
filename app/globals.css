@@ -181,9 +181,9 @@ main { min-height: 60vh; }
   padding: 5px 12px; border-radius: 999px; box-shadow: 0 6px 14px -6px rgba(181, 96, 60, 0.55);
 }
 .card-head { display: flex; align-items: center; gap: 18px; }
-.brand-badge-wrap { flex-shrink: 0; display: grid; place-items: center; border-radius: 12px; box-shadow: var(--shadow-sm); }
+.brand-badge-wrap { flex-shrink: 0; display: grid; place-items: center; border-radius: 12px; box-shadow: var(--shadow-sm); overflow: hidden; }
 .brand-badge-wrap-sm { border-radius: 9px; }
-.brand-badge { display: block; border-radius: 9px; }
+.brand-badge { display: block; border-radius: 9px; overflow: hidden; }
 .brand-badge-logo {
   display: grid;
   place-items: center;

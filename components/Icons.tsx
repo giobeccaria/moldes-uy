@@ -139,7 +139,10 @@ export function IconInstagram({ size = 16 }: P) {
 export function IconFacebook({ size = 16 }: P) {
   return (
     <svg {...base(size)} strokeWidth={1.7}>
-      <path d="M14.5 21v-7.2h2.4l.4-3h-2.8V8.8c0-.87.24-1.46 1.5-1.46H17.5V4.7c-.26-.03-1.14-.1-2.17-.1-2.15 0-3.63 1.31-3.63 3.72v2.08H9.3v3h2.4V21z" />
+      <path
+        transform="translate(-1.4 -0.85)"
+        d="M14.5 21v-7.2h2.4l.4-3h-2.8V8.8c0-.87.24-1.46 1.5-1.46H17.5V4.7c-.26-.03-1.14-.1-2.17-.1-2.15 0-3.63 1.31-3.63 3.72v2.08H9.3v3h2.4V21z"
+      />
     </svg>
   )
 }
