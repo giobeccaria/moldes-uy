@@ -42,7 +42,11 @@ export const moldarte: Tienda = {
 }
 
 // Competidores reales del rubro en Uruguay, verificados en sus propios sitios
-// (octubre 2026). Las descripciones se limitan a lo que cada uno publica.
+// (octubre 2026). El rubro de moldes de silicona específicamente es chico en
+// Uruguay: más allá de Moldarte, lo único verificado que vende moldes de
+// silicona (aunque no sea su único rubro) es La Casa del Artesano. El resto
+// de la oferta real pasa por vendedores particulares en Mercado Libre
+// Uruguay, que se incluye como marketplace, no como tienda especializada.
 export const alternativas: Tienda[] = [
   {
     nombre: 'La Casa del Artesano',
@@ -65,48 +69,22 @@ export const alternativas: Tienda[] = [
     logo: '/brands/lacasadelartesano.svg',
   },
   {
-    nombre: 'De Velas Montevideo',
+    nombre: 'Mercado Libre Uruguay',
     destacado: false,
     resumen:
-      'Marca montevideana de velas de soja que además vende insumos para hacerlas (esencias, frascos, varillas) y da cursos y talleres de velería.',
+      'No es una tienda sino un marketplace: hay vendedores particulares que publican moldes de silicona para velas, jabón y resina. Sirve como alternativa si buscás un diseño puntual que no esté en una tienda especializada.',
     pros: [
-      'Muy enfocada en velas de soja, con cursos para aprender',
-      'Esencias y frascos pensados para velas aromáticas',
+      'Muchas publicaciones sueltas de distintos vendedores, con fotos del molde real',
+      'Pago protegido por Mercado Pago y envíos con Mercado Envíos',
     ],
     contras: [
-      'Su foco son las velas: en su sitio no aparecen moldes de silicona ni insumos para jabón o yeso',
+      'Catálogo disperso entre vendedores sin continuidad ni garantía de stock',
+      'Calidad y descripción de cada molde dependen de cada vendedor particular',
     ],
-    rating: 4,
-    envio: 'Venta online y puntos de venta en Montevideo.',
-    url: 'https://www.develasmontevideo.com',
-    color: '#7a5c1e',
-    logo: '/brands/develasmontevideo.png',
-  },
-  {
-    nombre: 'Droguería Montevideo',
-    destacado: false,
-    resumen:
-      'Droguería de productos químicos con una sección de insumos para velas: cera de soja en perlas, cera virgen, esencias aromáticas y pabilos.',
-    pros: ['Buena opción para comprar cera y materias primas por cantidad', 'Envío en 24 a 48 horas hábiles'],
-    contras: ['Es una droguería, no una tienda de manualidades: en su sección de velas no hay moldes'],
     rating: 3,
-    envio: 'Envío en 24 a 48 horas, de lunes a viernes.',
-    url: 'https://tiendaweb.drogueriamontevideo.com/categoria/productos-quimicos-e-insumos/insumos-para-velas/',
-    color: '#1d6e5c',
-    logo: '/brands/drogueriamontevideo.svg',
-  },
-  {
-    nombre: 'Insumos Uy',
-    destacado: false,
-    resumen:
-      'Tienda mayorista y minorista de materias primas para cosmética natural en Montevideo: aceites esenciales, cera de abeja, mantecas, tensioactivos y envases.',
-    pros: ['Materias primas para jabonería y cosmética natural', 'Vende por mayor y por menor'],
-    contras: ['Orientada a cosmética natural: no es una tienda de moldes ni de insumos para yeso'],
-    rating: 3,
-    envio: 'Envíos a todo el país.',
-    url: 'https://www.insumosuy.com',
-    color: '#6b3fa0',
-    logo: '/brands/insumosuy.png',
+    envio: 'Depende del vendedor; varía con Mercado Envíos.',
+    url: 'https://listado.mercadolibre.com.uy/molde-silicona',
+    color: '#c47f17',
   },
 ]
 

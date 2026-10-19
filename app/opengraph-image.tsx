@@ -16,25 +16,35 @@ export default function OgImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: 80,
-          background: 'linear-gradient(135deg, #f4f7fb 0%, #e3ebf4 100%)',
-          color: '#0f1b2d',
+          background: 'linear-gradient(135deg, #fbf6ef 0%, #f3e2d3 100%)',
+          color: '#3a2a1e',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 24 }}>
           <svg width="88" height="88" viewBox="0 0 32 32">
-            <rect x="1" y="1" width="30" height="30" rx="9" fill="#1f4e79" />
-            <path d="M16 6.5c0 0-7 7.6-7 12.3a7 7 0 0 0 14 0c0-4.7-7-12.3-7-12.3z" fill="#fff" />
+            <rect x="1" y="1" width="30" height="30" rx="9" fill="#b5603c" />
+            <path
+              d="M9.5 10.5h13l-2.4 13.6a1.5 1.5 0 0 1-1.48 1.24h-5.24a1.5 1.5 0 0 1-1.48-1.24L9.5 10.5z"
+              fill="none"
+              stroke="#fff8ef"
+              strokeWidth="1.8"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M16 14.4c1.7 2.3 2.9 4.1 2.9 5.6a2.9 2.9 0 1 1-5.8 0c0-1.5 1.2-3.3 2.9-5.6z"
+              fill="#fff8ef"
+            />
           </svg>
           <div style={{ display: 'flex', fontSize: 56, letterSpacing: -1 }}>
-            <span style={{ fontWeight: 400 }}>Compara</span>
-            <span style={{ fontWeight: 800, color: '#1f4e79', marginLeft: -12 }}>moldes</span>
+            <span style={{ fontWeight: 700 }}>moldes</span>
+            <span style={{ fontWeight: 400, color: '#b5603c' }}>.uy</span>
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2, maxWidth: 950 }}>
             Dónde comprar moldes de silicona en Uruguay
           </div>
-          <div style={{ fontSize: 32, color: '#4a5b70' }}>Velas · Jabones · Resina · Chocolate</div>
+          <div style={{ fontSize: 32, color: '#5a4432' }}>Velas · Jabones · Resina · Chocolate</div>
         </div>
       </div>
     ),

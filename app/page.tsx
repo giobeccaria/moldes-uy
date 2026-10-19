@@ -44,14 +44,6 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="hero-art" aria-hidden="true">
-            {categorias.slice(0, 4).map((c) => (
-              <div key={c.slug} className="hero-tile">
-                <IconCategoria icono={c.icono} size={40} />
-                <span>{c.nombre.split(' ').pop()!.replace(/^./, (l) => l.toUpperCase())}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
