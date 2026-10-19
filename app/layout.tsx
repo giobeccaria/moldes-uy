@@ -1,7 +1,11 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+import { Fraunces, Inter } from 'next/font/google'
 import './globals.css'
 import { Nav, Footer } from '@/components/NavFooter'
 import { SITE_URL, SITE_NAME } from '@/lib/data'
+
+const display = Fraunces({ subsets: ['latin'], variable: '--font-display', display: 'swap' })
+const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -16,11 +20,16 @@ export const metadata: Metadata = {
     locale: 'es_UY',
     siteName: SITE_NAME,
   },
+  twitter: { card: 'summary_large_image' },
+}
+
+export const viewport: Viewport = {
+  themeColor: '#1f4e79',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es-UY">
+    <html lang="es-UY" className={`${display.variable} ${sans.variable}`}>
       <body>
         <Nav />
         <main>{children}</main>

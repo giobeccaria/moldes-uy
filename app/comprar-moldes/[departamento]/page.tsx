@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Ranking from '@/components/Ranking'
+import Faq from '@/components/Faq'
+import { IconPin, IconTruck } from '@/components/Icons'
 import { departamentos, findDepartamento } from '@/lib/data'
 
 export function generateStaticParams() {
@@ -43,54 +45,74 @@ export default async function DepartamentoPage({
   }
 
   return (
-    <div className="wrap">
-      <p className="breadcrumb">
-        <Link href="/">Inicio</Link> / Comprar moldes / {d.nombre}
-      </p>
-      <section className="hero">
-        <h1>Dónde comprar moldes de silicona en {d.nombre}</h1>
-        <p>{d.contexto}</p>
-      </section>
-
-      <section className="block">
-        <h2>El rubro en {d.nombre}</h2>
-        <p>{d.comercio}</p>
-      </section>
-
-      <section className="block">
-        <h2>Envío y logística hacia {d.nombre}</h2>
-        <p>{d.logistica}</p>
-      </section>
-
-      <Ranking />
-
-      <section className="block">
-        <h2>Preguntas frecuentes sobre {d.nombre}</h2>
-        {d.faq.map((f) => (
-          <div className="faq-item" key={f.pregunta}>
-            <h3>{f.pregunta}</h3>
-            <p>{f.respuesta}</p>
-          </div>
-        ))}
-      </section>
-
-      <section className="block">
-        <h2>Otros departamentos</h2>
-        <div className="grid-links">
-          {departamentos
-            .filter((o) => o.slug !== d.slug)
-            .map((o) => (
-              <Link key={o.slug} href={`/comprar-moldes/${o.slug}`}>
-                Moldes en {o.nombre}
-              </Link>
-            ))}
+    <>
+      <section className="hero hero-page">
+        <div className="wrap">
+          <nav className="breadcrumb" aria-label="Migas de pan">
+            <Link href="/">Inicio</Link>
+            <span aria-hidden="true">/</span>
+            <Link href="/#departamentos">Departamentos</Link>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{d.nombre}</span>
+          </nav>
+          <p className="eyebrow">Departamento</p>
+          <h1>Dónde comprar moldes de silicona en {d.nombre}</h1>
+          <p className="lead">{d.contexto}</p>
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-    </div>
+      <div className="wrap">
+        <section className="block duo">
+          <div className="panel">
+            <span className="panel-icon">
+              <IconPin />
+            </span>
+            <h2>El rubro en {d.nombre}</h2>
+            <p>{d.comercio}</p>
+          </div>
+          <div className="panel">
+            <span className="panel-icon">
+              <IconTruck size={20} />
+            </span>
+            <h2>Envío y logística hacia {d.nombre}</h2>
+            <p>{d.logistica}</p>
+          </div>
+        </section>
+
+        <section className="block">
+          <div className="section-head">
+            <p className="eyebrow">Ranking</p>
+            <h2>Las opciones para comprar desde {d.nombre}</h2>
+          </div>
+          <Ranking />
+        </section>
+
+        <section className="block block-narrow">
+          <div className="section-head">
+            <p className="eyebrow">Preguntas frecuentes</p>
+            <h2>Preguntas frecuentes sobre {d.nombre}</h2>
+          </div>
+          <Faq items={d.faq} />
+        </section>
+
+        <section className="block">
+          <div className="section-head">
+            <h2>Otros departamentos</h2>
+          </div>
+          <div className="chips">
+            {departamentos
+              .filter((o) => o.slug !== d.slug)
+              .map((o) => (
+                <Link key={o.slug} href={`/comprar-moldes/${o.slug}`} className="chip">
+                  <IconPin size={16} />
+                  {o.nombre}
+                </Link>
+              ))}
+          </div>
+        </section>
+      </div>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    </>
   )
 }

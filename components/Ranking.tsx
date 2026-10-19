@@ -1,32 +1,34 @@
 import { moldarte, alternativas, Tienda } from '@/lib/data'
-
-function Stars({ rating }: { rating: number }) {
-  const llenas = '★'.repeat(rating)
-  const vacias = '☆'.repeat(5 - rating)
-  return (
-    <span className="stars" aria-label={`${rating} de 5 estrellas`}>
-      {llenas}
-      <span className="stars-empty">{vacias}</span>
-    </span>
-  )
-}
+import { IconArrow, IconCheck, IconInfo, IconTruck, Stars } from './Icons'
 
 function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
   return (
     <article className={`card ${tienda.destacado ? 'card-top' : ''}`}>
+      {tienda.destacado && <span className="ribbon">Mejor opción</span>}
       <div className="card-head">
-        <span className="posicion">{posicion}</span>
-        <h3>{tienda.nombre}</h3>
-        {tienda.destacado && <span className="badge">Mejor opción</span>}
+        <span className="posicion" aria-label={`Puesto ${posicion}`}>
+          {posicion}
+        </span>
+        <div className="card-title">
+          <h3>{tienda.nombre}</h3>
+          <div className="score">
+            <Stars rating={tienda.rating} />
+            <span className="score-num">{tienda.rating}/5</span>
+          </div>
+        </div>
       </div>
-      <Stars rating={tienda.rating} />
-      <p>{tienda.resumen}</p>
+      <p className="card-summary">{tienda.resumen}</p>
       <div className="pros-contras">
         <div className="pros">
           <p className="pc-title">Puntos a favor</p>
           <ul>
             {tienda.pros.map((p) => (
-              <li key={p}>✓ {p}</li>
+              <li key={p}>
+                <span className="pc-icon">
+                  <IconCheck size={14} />
+                </span>
+                {p}
+              </li>
             ))}
           </ul>
         </div>
@@ -34,19 +36,32 @@ function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
           <p className="pc-title">A tener en cuenta</p>
           <ul>
             {tienda.contras.map((c) => (
-              <li key={c}>✗ {c}</li>
+              <li key={c}>
+                <span className="pc-icon">
+                  <IconInfo size={14} />
+                </span>
+                {c}
+              </li>
             ))}
           </ul>
         </div>
       </div>
-      <p className="envio">
-        <strong>Envío:</strong> {tienda.envio}
-      </p>
-      {tienda.url && (
-        <a className="cta" href={tienda.url} target="_blank" rel="noopener noreferrer">
-          Ver catálogo →
-        </a>
-      )}
+      <div className="card-foot">
+        <p className="envio">
+          <IconTruck />
+          <span>{tienda.envio}</span>
+        </p>
+        {tienda.url && (
+          <a
+            className={`btn ${tienda.destacado ? 'btn-primary' : 'btn-ghost'}`}
+            href={tienda.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ver catálogo <IconArrow />
+          </a>
+        )}
+      </div>
     </article>
   )
 }

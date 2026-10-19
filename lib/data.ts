@@ -125,6 +125,36 @@ export const faqGeneral: { pregunta: string; respuesta: string }[] = [
   },
 ]
 
+export type IconoCategoria = 'vela' | 'jabon' | 'resina' | 'chocolate'
+
+// Los cinco criterios con los que se ordena el ranking (sección "Cómo elegimos").
+export const criterios: { nombre: string; detalle: string }[] = [
+  {
+    nombre: 'Catálogo',
+    detalle:
+      'Cuántos diseños distintos tiene disponibles de forma permanente, y qué tan especializado está en moldes de silicona frente a vender de todo un poco.',
+  },
+  {
+    nombre: 'Seguridad de compra',
+    detalle:
+      'Si la compra se hace con un checkout formal (pasarela de pago, comprobante, seguimiento) o si depende de coordinar por chat sin ningún respaldo.',
+  },
+  {
+    nombre: 'Envío',
+    detalle: 'Cobertura real a todo el país, tiempos esperables y claridad sobre quién gestiona la logística.',
+  },
+  {
+    nombre: 'Atención',
+    detalle:
+      'Si hay un canal directo de la tienda para resolver dudas de stock, medidas o uso del molde antes y después de comprar.',
+  },
+  {
+    nombre: 'Variedad real',
+    detalle:
+      'Si el catálogo cubre los distintos usos del rubro (velas, jabones, resina, chocolate) o se limita a un nicho chico.',
+  },
+]
+
 export type Categoria = {
   slug: string
   nombre: string
@@ -132,13 +162,13 @@ export type Categoria = {
   intro: string
   usos: string[]
   tips: string[]
-  icono: string
+  icono: IconoCategoria
 }
 
 export const categorias: Categoria[] = [
   {
     slug: 'moldes-para-velas',
-    icono: '🕯️',
+    icono: 'vela',
     nombre: 'Moldes para velas',
     titulo: 'Moldes de silicona para velas',
     intro:
@@ -156,7 +186,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-para-jabones',
-    icono: '🧼',
+    icono: 'jabon',
     nombre: 'Moldes para jabones',
     titulo: 'Moldes de silicona para jabones artesanales',
     intro:
@@ -174,7 +204,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-de-resina',
-    icono: '💎',
+    icono: 'resina',
     nombre: 'Moldes de resina',
     titulo: 'Moldes de silicona para resina epoxi',
     intro:
@@ -192,7 +222,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-para-chocolate',
-    icono: '🍫',
+    icono: 'chocolate',
     nombre: 'Moldes para chocolate',
     titulo: 'Moldes de silicona para chocolate y repostería',
     intro:

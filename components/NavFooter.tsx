@@ -1,18 +1,39 @@
 import Link from 'next/link'
 import { categorias, departamentos, SITE_NAME } from '@/lib/data'
+import { Logo } from './Logo'
+import { IconCategoria } from './Icons'
+import MobileMenu from './MobileMenu'
+
+const links = [
+  { href: '/#ranking', label: 'Ranking' },
+  { href: '/#departamentos', label: 'Por departamento' },
+  { href: '/#categorias', label: 'Por categoría' },
+  { href: '/#como-elegimos', label: 'Cómo elegimos' },
+]
 
 export function Nav() {
   return (
     <header className="site-header">
       <div className="wrap nav-inner">
-        <Link href="/" className="logo">
-          {SITE_NAME}
+        <Link href="/" className="logo-link" aria-label={`${SITE_NAME}, inicio`}>
+          <Logo />
         </Link>
-        <nav>
-          <Link href="/">Inicio</Link>
-          <Link href="/comprar-moldes/montevideo">Por departamento</Link>
-          <Link href="/categorias/moldes-para-velas">Por categoría</Link>
+        <nav className="nav-desktop" aria-label="Principal">
+          {links.map((l) => (
+            <Link key={l.href} href={l.href}>
+              {l.label}
+            </Link>
+          ))}
         </nav>
+        <MobileMenu>
+          <nav aria-label="Principal">
+            {links.map((l) => (
+              <Link key={l.href} href={l.href}>
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+        </MobileMenu>
       </div>
     </header>
   )
@@ -23,9 +44,14 @@ export function Footer() {
     <footer className="site-footer">
       <div className="wrap">
         <div className="footer-grid">
-          <div>
-            <p className="logo">{SITE_NAME}</p>
-            <p>Guía independiente para comparar dónde comprar moldes de silicona en Uruguay: velas, jabones, resina y chocolate.</p>
+          <div className="footer-brand">
+            <Link href="/" className="logo-link" aria-label={`${SITE_NAME}, inicio`}>
+              <Logo />
+            </Link>
+            <p>
+              Guía para comparar dónde comprar moldes de silicona en Uruguay: velas, jabones,
+              resina y chocolate.
+            </p>
           </div>
           <div>
             <p className="footer-title">Departamentos</p>
@@ -42,15 +68,18 @@ export function Footer() {
             <ul>
               {categorias.map((c) => (
                 <li key={c.slug}>
-                  <Link href={`/categorias/${c.slug}`}>
-                    {c.icono} {c.nombre}
+                  <Link href={`/categorias/${c.slug}`} className="footer-cat">
+                    <IconCategoria icono={c.icono} size={16} />
+                    {c.nombre}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
-        <p className="copy">© {new Date().getFullYear()} {SITE_NAME} — Guía de compra independiente.</p>
+        <p className="copy">
+          © {new Date().getFullYear()} {SITE_NAME}
+        </p>
       </div>
     </footer>
   )
