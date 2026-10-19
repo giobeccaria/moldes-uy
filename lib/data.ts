@@ -10,6 +10,9 @@ export type Tienda = {
   rating: number
   envio: string
   url?: string
+  // Color de marca para el badge del ranking (cada competidor se identifica
+  // por color + iniciales, Moldarte usa su propio símbolo).
+  color: string
 }
 
 // Moldarte aparece primero en cada ranking. Lo que se dice de su catálogo
@@ -31,6 +34,7 @@ export const moldarte: Tienda = {
   rating: 5,
   envio: 'Envíos a todo Uruguay, con envío gratis a partir de cierto monto de compra.',
   url: 'https://moldarte.uy',
+  color: '#1f4e79',
 }
 
 // Competidores reales del rubro en Uruguay, verificados en sus propios sitios
@@ -53,6 +57,7 @@ export const alternativas: Tienda[] = [
     rating: 4,
     envio: 'Envíos desde Montevideo para compras web (con mínimo de compra).',
     url: 'https://lacasadelartesano.com.uy',
+    color: '#9c4221',
   },
   {
     nombre: 'De Velas Montevideo',
@@ -69,6 +74,7 @@ export const alternativas: Tienda[] = [
     rating: 4,
     envio: 'Venta online y puntos de venta en Montevideo.',
     url: 'https://www.develasmontevideo.com',
+    color: '#7a5c1e',
   },
   {
     nombre: 'Droguería Montevideo',
@@ -80,6 +86,7 @@ export const alternativas: Tienda[] = [
     rating: 3,
     envio: 'Envío en 24 a 48 horas, de lunes a viernes.',
     url: 'https://tiendaweb.drogueriamontevideo.com/categoria/productos-quimicos-e-insumos/insumos-para-velas/',
+    color: '#1d6e5c',
   },
   {
     nombre: 'Insumos Uy',
@@ -91,6 +98,7 @@ export const alternativas: Tienda[] = [
     rating: 3,
     envio: 'Envíos a todo el país.',
     url: 'https://www.insumosuy.com',
+    color: '#6b3fa0',
   },
 ]
 
@@ -446,6 +454,270 @@ export const departamentos: Departamento[] = [
         pregunta: '¿Hay tiendas especializadas en moldes en Rivera?',
         respuesta:
           'La oferta local de manualidades generales existe, pero para catálogo amplio y específico de moldes de silicona la compra online a una tienda especializada da más variedad.',
+      },
+    ],
+  },
+  {
+    slug: 'artigas',
+    nombre: 'Artigas',
+    contexto:
+      'Artigas es el departamento más al norte del país, con una economía ligada a la agricultura, la minería y el comercio fronterizo con Brasil en Bella Unión y la propia capital departamental. Los emprendimientos de manualidades conviven ahí con una oferta comercial muy orientada a lo agropecuario.',
+    comercio:
+      'En la ciudad de Artigas el circuito de ferias y emprendimientos es más chico que en el litoral o el sur, así que quien arranca con velas o jabones artesanales suele depender más de la venta directa por redes que de una feria fija semanal.',
+    logistica:
+      'Por ser el punto más alejado de Montevideo, los envíos con operadores logísticos nacionales tardan algo más que al resto del interior; conviene agrupar compras de insumos para no fraccionar varios envíos chicos.',
+    faq: [
+      {
+        pregunta: '¿Cuánto tarda en llegar un pedido de moldes a Artigas?',
+        respuesta:
+          'Al ser el departamento más alejado de la capital, el envío nacional puede sumar uno o dos días más que a Montevideo o el litoral; conviene planificarlo con margen si es para una fecha puntual.',
+      },
+      {
+        pregunta: '¿Conviene comprar varios insumos juntos si estoy en Artigas?',
+        respuesta:
+          'Sí: agrupar cera, moldes, esencias y colorantes en un mismo pedido evita pagar varios envíos separados hacia el extremo norte del país.',
+      },
+    ],
+  },
+  {
+    slug: 'cerro-largo',
+    nombre: 'Cerro Largo',
+    contexto:
+      'Cerro Largo, con Melo como capital, es otro departamento de frontera con Brasil, con una economía de base agropecuaria y una comunidad de emprendedoras de manualidades que suele moverse por recomendación y grupos de vecinos más que por locales especializados.',
+    comercio:
+      'En Melo las ferias vecinales y los bazares de barrio son el canal habitual para vender velas y jabones artesanales a pequeña escala; la variedad de moldes en el comercio físico local es limitada frente a lo que ofrece una tienda online nacional.',
+    logistica:
+      'El envío nacional a Cerro Largo llega por los mismos circuitos que cubren el este del interior, con plazos algo mayores que en el área metropolitana pero sin mayor complicación logística.',
+    faq: [
+      {
+        pregunta: '¿Dónde conseguir variedad de moldes en Melo?',
+        respuesta:
+          'La oferta local de manualidades es acotada en diseños de moldes de silicona; comprar online a una tienda especializada da acceso a un catálogo más amplio sin depender del bazar de la zona.',
+      },
+      {
+        pregunta: '¿Se puede pagar con los medios habituales desde Cerro Largo?',
+        respuesta:
+          'Sí, un checkout formal online acepta los mismos medios de pago que en cualquier otro departamento; no depende de la ubicación del comprador.',
+      },
+    ],
+  },
+  {
+    slug: 'durazno',
+    nombre: 'Durazno',
+    contexto:
+      'Durazno, en el centro geográfico del país, tiene una economía agropecuaria fuerte y una ciudad capital con un comercio local activo donde conviven bazares tradicionales con emprendimientos más nuevos de jabonería y velería artesanal.',
+    comercio:
+      'La ciudad de Durazno tiene ferias de emprendedores en distintas fechas del año, además de una demanda estable de productos de regalo (velas, jabones) para fechas como el Día de la Madre o fin de año.',
+    logistica:
+      'Por su ubicación central, Durazno recibe envíos nacionales en plazos intermedios, generalmente sin la demora adicional que sí afecta a los departamentos más alejados de las rutas principales.',
+    faq: [
+      {
+        pregunta: '¿Conviene comprar moldes con anticipación a fechas como el Día de la Madre en Durazno?',
+        respuesta:
+          'Sí, para tener tiempo de producir las piezas y no depender de un envío de último momento, conviene pedir los moldes e insumos con varias semanas de anticipación a la fecha de venta.',
+      },
+      {
+        pregunta: '¿Hay buena oferta de insumos para jabonería en Durazno?',
+        respuesta:
+          'La oferta física local es limitada; la mayoría de quienes hacen jabonería artesanal en el departamento compran glicerina, esencias y colorantes a tiendas online con despacho nacional.',
+      },
+    ],
+  },
+  {
+    slug: 'flores',
+    nombre: 'Flores',
+    contexto:
+      'Flores es el departamento menos poblado del país, con Trinidad como capital. El comercio de manualidades ahí es chico pero existe, apoyado sobre todo en la venta directa entre vecinos y en alguna feria puntual.',
+    comercio:
+      'Al ser un departamento chico, en Trinidad no suele haber un local dedicado específicamente a moldes de silicona: quien emprende con velas o jabones generalmente combina compra online con algún insumo que consigue en una mercería general.',
+    logistica:
+      'Los envíos nacionales llegan a Flores por los mismos operadores logísticos que cubren el centro del país, sin mayor demora pese a ser un departamento de baja densidad de reparto.',
+    faq: [
+      {
+        pregunta: '¿Hay tiendas de moldes de silicona en Trinidad?',
+        respuesta:
+          'La oferta local específica de moldes es prácticamente inexistente al ser un departamento chico; comprar online a una tienda especializada con envío nacional es la opción más práctica.',
+      },
+      {
+        pregunta: '¿Los envíos a Flores tardan más por ser un departamento chico?',
+        respuesta:
+          'No necesariamente: al estar sobre el corredor central del país, los plazos de envío suelen ser similares a los de otros departamentos del interior sur.',
+      },
+    ],
+  },
+  {
+    slug: 'florida',
+    nombre: 'Florida',
+    contexto:
+      'Florida combina una ciudad capital con comercio consolidado y una zona rural extensa. Los emprendimientos de velas y jabones artesanales conviven con ferias tradicionales y con la demanda de regalería ligada a eventos religiosos y turismo local.',
+    comercio:
+      'La ciudad de Florida tiene ferias de artesanos con presencia constante de productos de regalo con forma trabajada, y una demanda puntual más alta alrededor de fechas con afluencia de visitantes a la ciudad.',
+    logistica:
+      'Por su cercanía relativa con Montevideo sobre la ruta 5, los envíos nacionales a Florida llegan en plazos parecidos a los del área metropolitana.',
+    faq: [
+      {
+        pregunta: '¿Qué tipo de moldes funcionan bien para vender en ferias de Florida?',
+        respuesta:
+          'Piezas de buena presentación y tamaño chico a mediano (velas decorativas, jabones con forma) suelen funcionar bien como producto de regalo en ferias de artesanos.',
+      },
+      {
+        pregunta: '¿Cuánto tardan los envíos de moldes a Florida?',
+        respuesta:
+          'Por la cercanía con Montevideo sobre la ruta 5, los plazos de entrega suelen ser de los más cortos del interior.',
+      },
+    ],
+  },
+  {
+    slug: 'lavalleja',
+    nombre: 'Lavalleja',
+    contexto:
+      'Lavalleja, con Minas como capital, tiene una identidad fuerte ligada a la artesanía y el turismo de sierras, lo que hace que la regalería artesanal (incluidos velas y jabones con diseño) tenga una demanda más sostenida que en otros departamentos de tamaño similar.',
+    comercio:
+      'Minas es conocida por su tradición de dulces y artesanías, y esa cultura de producto local con identidad propia se traslada también a quienes hacen velas y jabones artesanales para vender a turistas que visitan la zona de las sierras.',
+    logistica:
+      'Los envíos nacionales a Lavalleja llegan en plazos similares a los del área metropolitana por su cercanía con Montevideo y Canelones.',
+    faq: [
+      {
+        pregunta: '¿Conviene apostar a diseños con identidad local para vender en Minas?',
+        respuesta:
+          'Sí, dado el perfil turístico de la ciudad, los productos con un toque distintivo (forma, aroma, presentación) suelen diferenciarse mejor que una pieza genérica.',
+      },
+      {
+        pregunta: '¿Hay tiendas de insumos para manualidades en Lavalleja?',
+        respuesta:
+          'La oferta física es limitada en variedad de moldes de silicona específicos; comprar online a una tienda especializada da acceso a un catálogo más amplio y actualizado.',
+      },
+    ],
+  },
+  {
+    slug: 'rocha',
+    nombre: 'Rocha',
+    contexto:
+      'Rocha tiene el perfil turístico más marcado de la costa este, con balnearios como La Paloma y Punta del Diablo, lo que genera una demanda de temporada alta muy parecida a la de Maldonado pero en una escala más chica y con un perfil de comprador más bohemio.',
+    comercio:
+      'En temporada de verano, las ferias artesanales de los balnearios rochenses tienen fuerte presencia de velas aromáticas, jabones artesanales y bijouterie en resina, pensados para un público turístico que busca producto local y con identidad.',
+    logistica:
+      'Fuera de temporada alta el movimiento comercial baja mucho, así que conviene anticipar la compra de moldes e insumos antes de que arranque el verano, cuando la demanda logística se concentra en pocos meses.',
+    faq: [
+      {
+        pregunta: '¿Qué moldes conviene tener para vender en los balnearios de Rocha en temporada?',
+        respuesta:
+          'Diseños con estética natural o artesanal (formas orgánicas, texturas) suelen conectar bien con el perfil de comprador de balnearios como La Paloma o Punta del Diablo.',
+      },
+      {
+        pregunta: '¿Cuándo conviene comprar los insumos si vendo en la costa rochense?',
+        respuesta:
+          'Lo ideal es tener el stock de moldes e insumos listo antes de diciembre, porque en plena temporada alta el tiempo para producir se achica mucho.',
+      },
+    ],
+  },
+  {
+    slug: 'rio-negro',
+    nombre: 'Río Negro',
+    contexto:
+      'Río Negro, con Fray Bentos como capital, tiene una economía ligada al puerto y a la industria forestal y agroindustrial, con un comercio local donde la manualidad artesanal convive con una oferta general de bazar y mercería.',
+    comercio:
+      'En Fray Bentos y Young la venta de velas y jabones artesanales suele darse más por encargo y redes sociales que por local fijo, con una demanda que crece en fechas de regalo como fin de año.',
+    logistica:
+      'Los envíos nacionales a Río Negro llegan por los mismos circuitos logísticos que cubren el litoral oeste, en plazos comparables a los de Paysandú o Colonia.',
+    faq: [
+      {
+        pregunta: '¿Hay mucha variedad de moldes en comercios de Fray Bentos o Young?',
+        respuesta:
+          'La variedad local es acotada; comprar a una tienda online especializada con despacho nacional da acceso a un catálogo mucho más amplio.',
+      },
+      {
+        pregunta: '¿Los envíos a Río Negro demoran mucho más que a Montevideo?',
+        respuesta:
+          'Suman algún día más según el operador logístico, pero llegan sin mayor complicación tanto a domicilio como a agencia.',
+      },
+    ],
+  },
+  {
+    slug: 'san-jose',
+    nombre: 'San José',
+    contexto:
+      'San José, por su cercanía con Montevideo y su fuerte tradición agroindustrial (lechería, producción láctea), tiene un tejido de emprendimientos familiares donde las manualidades con velas y jabones suelen empezar como actividad complementaria.',
+    comercio:
+      'En la ciudad de San José de Mayo y en localidades como Libertad y Ciudad del Plata hay ferias vecinales con presencia constante de productos artesanales, incluidos velas y jabones con diseño propio.',
+    logistica:
+      'Por su cercanía con Montevideo, los envíos nacionales a San José llegan en plazos muy similares a los del área metropolitana.',
+    faq: [
+      {
+        pregunta: '¿Conviene comprar moldes online estando tan cerca de Montevideo?',
+        respuesta:
+          'Sí, porque el catálogo de una tienda especializada online suele ser mucho más amplio que el de cualquier bazar físico, incluso estando cerca de la capital.',
+      },
+      {
+        pregunta: '¿Hay demanda de velas y jabones artesanales en San José?',
+        respuesta:
+          'Sí, sobre todo en ferias vecinales y como producto de regalo en fechas puntuales, con una demanda que acompaña el crecimiento de localidades como Ciudad del Plata.',
+      },
+    ],
+  },
+  {
+    slug: 'soriano',
+    nombre: 'Soriano',
+    contexto:
+      'Soriano, con Mercedes como capital, tiene una economía agropecuaria sólida y un comercio local donde las manualidades conviven con una fuerte tradición de ferias de pueblo y mercados de productores.',
+    comercio:
+      'En Mercedes y Dolores las ferias de fin de semana suelen tener puestos de productos artesanales, con una demanda de velas y jabones que crece especialmente antes de fiestas y fin de año.',
+    logistica:
+      'Los envíos nacionales a Soriano llegan por los circuitos que cubren el litoral oeste, en plazos comparables a los de Río Negro o Colonia.',
+    faq: [
+      {
+        pregunta: '¿Dónde conseguir moldes de silicona en Mercedes o Dolores?',
+        respuesta:
+          'La oferta local de manualidades generales existe, pero para un catálogo amplio y específico de moldes conviene comprar online a una tienda especializada con envío nacional.',
+      },
+      {
+        pregunta: '¿Conviene vender en las ferias de pueblo de Soriano con moldes propios?',
+        respuesta:
+          'Sí, tener diseños propios y no repetidos ayuda a diferenciarse en ferias donde varios puestos venden productos similares.',
+      },
+    ],
+  },
+  {
+    slug: 'tacuarembo',
+    nombre: 'Tacuarembó',
+    contexto:
+      'Tacuarembó, en el centro-norte del país, tiene una identidad cultural fuerte ligada a la tradición gaucha y folclórica, lo que se refleja también en una demanda de artesanía y regalería con identidad local durante eventos como la Patria Gaucha.',
+    comercio:
+      'Durante fiestas tradicionales como la Patria Gaucha, la demanda de productos de regalería artesanal (velas, jabones, piezas decorativas) sube fuerte, con compradores que buscan algo con identidad local más que un producto genérico.',
+    logistica:
+      'Por su ubicación en el centro-norte, los envíos nacionales a Tacuarembó llegan en plazos algo mayores que al área metropolitana, similares a los de Rivera o Salto.',
+    faq: [
+      {
+        pregunta: '¿Conviene anticipar la compra de moldes antes de la Patria Gaucha?',
+        respuesta:
+          'Sí, dado el pico de demanda de regalería artesanal durante la fiesta, conviene tener el stock de piezas terminadas listo con varias semanas de anticipación.',
+      },
+      {
+        pregunta: '¿Hay tiendas especializadas en moldes de silicona en Tacuarembó?',
+        respuesta:
+          'La oferta local específica es limitada; comprar online a una tienda con catálogo amplio y despacho nacional da más variedad de diseños.',
+      },
+    ],
+  },
+  {
+    slug: 'treinta-y-tres',
+    nombre: 'Treinta y Tres',
+    contexto:
+      'Treinta y Tres, en el este del país, tiene una economía de base agropecuaria y forestal, con un comercio de manualidades más chico que el de los departamentos costeros vecinos pero con una comunidad de emprendedoras activa en redes sociales.',
+    comercio:
+      'En la ciudad de Treinta y Tres la venta de velas y jabones artesanales se da sobre todo por encargo directo y redes, más que por local físico dedicado, con picos de demanda en fechas de regalo.',
+    logistica:
+      'Los envíos nacionales a Treinta y Tres llegan por los circuitos que cubren el este del país, en plazos comparables a los de Cerro Largo o Rocha.',
+    faq: [
+      {
+        pregunta: '¿Hay oferta local de moldes de silicona en Treinta y Tres?',
+        respuesta:
+          'La oferta física local es acotada; la mayoría de quienes emprenden en el departamento compran moldes e insumos online a tiendas con despacho a todo el país.',
+      },
+      {
+        pregunta: '¿Cómo se paga una compra online desde Treinta y Tres?',
+        respuesta:
+          'Con los mismos medios de pago que en cualquier otro departamento: un checkout formal no depende de la ubicación del comprador, sólo de la tienda elegida.',
       },
     ],
   },

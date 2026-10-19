@@ -202,6 +202,9 @@ main { min-height: 60vh; }
   padding: 5px 12px; border-radius: 999px; box-shadow: 0 6px 14px -6px rgba(31, 78, 121, 0.6);
 }
 .card-head { display: flex; align-items: center; gap: 18px; }
+.brand-badge-wrap { flex-shrink: 0; display: grid; place-items: center; border-radius: 12px; box-shadow: var(--shadow-sm); }
+.brand-badge-wrap-sm { border-radius: 9px; }
+.brand-badge { display: block; border-radius: 9px; }
 .posicion {
   flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px;
   display: grid; place-items: center;

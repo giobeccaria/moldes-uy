@@ -1,11 +1,14 @@
 import { moldarte, alternativas, Tienda } from '@/lib/data'
-import { IconArrow, IconCheck, IconInfo, IconTruck, Stars } from './Icons'
+import { BrandBadge, IconArrow, IconCheck, IconInfo, IconTruck, Stars } from './Icons'
 
 function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
   return (
     <article className={`card ${tienda.destacado ? 'card-top' : ''}`}>
       {tienda.destacado && <span className="ribbon">Mejor opción</span>}
       <div className="card-head">
+        <span className="brand-badge-wrap">
+          <BrandBadge nombre={tienda.nombre} color={tienda.color} destacado={tienda.destacado} size={52} />
+        </span>
         <span className="posicion" aria-label={`Puesto ${posicion}`}>
           {posicion}
         </span>
@@ -72,6 +75,9 @@ function CardCompacta({ tienda, posicion }: { tienda: Tienda; posicion: number }
   return (
     <article className="card-sm">
       <div className="card-sm-head">
+        <span className="brand-badge-wrap brand-badge-wrap-sm">
+          <BrandBadge nombre={tienda.nombre} color={tienda.color} size={36} />
+        </span>
         <span className="posicion posicion-sm" aria-label={`Puesto ${posicion}`}>
           {posicion}
         </span>

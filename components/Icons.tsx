@@ -143,6 +143,55 @@ export function IconMenu({ size = 22 }: P) {
   )
 }
 
+// Badge visual por tienda del ranking: Moldarte usa su propio símbolo
+// (la gota del logo), cada competidor un badge con sus iniciales sobre su
+// color de marca, para que cada entrada se distinga de un vistazo.
+export function BrandBadge({ nombre, color, destacado, size = 48 }: {
+  nombre: string
+  color: string
+  destacado?: boolean
+  size?: number
+}) {
+  if (destacado) {
+    return (
+      <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="brand-badge">
+        <rect x="1" y="1" width="30" height="30" rx="9" fill={color} />
+        <path
+          d="M16 6.5c0 0-7 7.6-7 12.3a7 7 0 0 0 14 0c0-4.7-7-12.3-7-12.3z"
+          fill="#ffffff"
+        />
+        <path
+          d="M16 12.2c0 0-3.6 4-3.6 6.5a3.6 3.6 0 0 0 7.2 0c0-2.5-3.6-6.5-3.6-6.5z"
+          fill={color}
+          opacity="0.22"
+        />
+      </svg>
+    )
+  }
+  const iniciales = nombre
+    .split(/\s+/)
+    .filter((w) => w.length > 2 || /^[A-ZÁÉÍÓÚ]/.test(w))
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase())
+    .join('') || nombre[0]?.toUpperCase()
+  return (
+    <svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" className="brand-badge">
+      <rect x="1" y="1" width="30" height="30" rx="9" fill={color} />
+      <text
+        x="16"
+        y="21.5"
+        textAnchor="middle"
+        fontFamily="Georgia, serif"
+        fontWeight="600"
+        fontSize="13"
+        fill="#ffffff"
+      >
+        {iniciales}
+      </text>
+    </svg>
+  )
+}
+
 export function Stars({ rating }: { rating: number }) {
   return (
     <span className="stars" role="img" aria-label={`${rating} de 5 estrellas`}>
