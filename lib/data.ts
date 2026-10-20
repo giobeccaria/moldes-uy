@@ -21,6 +21,26 @@ export function moldarteLink(ruta: string, campaign: string, content: string) {
   return u.toString()
 }
 
+export type FeatureKey = 'moldes' | 'insumos' | 'combo' | 'envioPais' | 'envioGratis' | 'retiro' | 'despachoDia'
+
+export const featureLabels: { key: FeatureKey; label: string }[] = [
+  { key: 'moldes', label: 'Moldes de silicona' },
+  { key: 'insumos', label: 'Cera, esencias o glicerina' },
+  { key: 'combo', label: 'Molde e insumos en un mismo pedido' },
+  { key: 'envioPais', label: 'Envío a todo el país' },
+  { key: 'envioGratis', label: 'Envío gratis' },
+  { key: 'retiro', label: 'Retiro en persona' },
+  { key: 'despachoDia', label: 'Despacho en el día' },
+]
+
+export function puntaje(t: { puntajes: number[] }) {
+  return Math.round((t.puntajes.reduce((a, b) => a + b, 0) / t.puntajes.length) * 10) / 10
+}
+
+export function formatPuntaje(n: number) {
+  return n.toFixed(1).replace('.', ',')
+}
+
 export type Tienda = {
   nombre: string
   destacado: boolean
@@ -50,6 +70,13 @@ export type Tienda = {
   // Bazares y cadenas con moldes de cocina: sólo aparecen en las categorías
   // de `categorias`, no en el ranking general (home y departamentos).
   soloEnCategorias?: boolean
+  // Puntaje 0-10 por criterio de `criterios` (mismo orden: catálogo,
+  // seguridad de compra, envío, atención, variedad). El puntaje final es el
+  // promedio; ver `puntaje()`.
+  puntajes: [number, number, number, number, number]
+  // Filas de la tabla comparativa. true = sí, false = no, null = no lo
+  // publica / no lo pudimos verificar. Un string es un "sí" con detalle.
+  features: Record<FeatureKey, boolean | null | string>
   // Atributos de comparación (sólo para las tiendas especializadas del
   // ranking principal). Datos verificables, no relleno: catálogo contado
   // sobre el catálogo real, pago y envío descritos como están publicados.
@@ -74,11 +101,14 @@ export const moldarte: Tienda = {
     'Una de las colecciones de moldes de silicona más grandes del país, con altas frecuentes',
     'Insumos completos en el mismo lugar: cera de soja de alto y bajo punto, glicerina, 18 esencias concentradas distintas, 12 colorantes, 13 pabilos y frascos para velas',
     'Yeso París, kits DIY y herramientas (pistola de calor, minitorno, batidor, manteles de silicona)',
-    'Checkout seguro en Shopify, todos los medios de pago y también presencia en Mercado Libre',
+    'Envío gratis desde $2.000 y 10% de descuento en compras desde $3.500',
+    'Checkout seguro en Shopify con tarjetas de crédito y débito, transferencia, Abitab y RedPagos',
   ],
   contras: ['No vende resina epoxi en sí: tiene los moldes y accesorios para trabajarla'],
   rating: 5,
-  envio: 'Envíos a todo Uruguay, con envío gratis a partir de cierto monto de compra.',
+  puntajes: [10, 10, 10, 9, 9],
+  features: { moldes: 'Más de 350', insumos: true, combo: true, envioPais: true, envioGratis: 'Desde $2.000', retiro: 'Malvín Sur', despachoDia: 'Antes de las 12' },
+  envio: 'Envío a todo Uruguay por DAC, gratis desde $2.000. Si comprás antes de las 12 sale ese mismo día. También retiro en Malvín Sur.',
   url: 'https://moldarte.uy',
   color: '#b5603c',
   logo: '/brands/moldarte-instagram.jpg',
@@ -93,8 +123,8 @@ export const moldarte: Tienda = {
   atributos: {
     catalogo: 'Más de 350 moldes de silicona distintos en catálogo activo (de un total de cerca de 470 productos), sin contar los insumos',
     precios: 'Moldes chicos y medianos desde rangos accesibles, con precios publicados por producto (sin coordinar por chat)',
-    envioResumen: 'A todo el país, con envío gratis desde cierto monto',
-    pago: 'Checkout propio con tarjeta, transferencia y todos los medios habituales',
+    envioResumen: 'A todo el país por DAC, gratis desde $2.000; despacho en el día antes de las 12; retiro en Malvín Sur',
+    pago: 'Tarjetas de crédito y débito (OCA, Creditel, Líder, Visa, Mastercard), transferencia, Abitab y RedPagos',
   },
 }
 
@@ -123,6 +153,8 @@ export const alternativas: Tienda[] = [
       'Envío sólo por DAC y a cargo del comprador; no tiene retiro',
     ],
     rating: 4,
+    puntajes: [9, 9, 6, 7, 7],
+    features: { moldes: 'Unos 300', insumos: false, combo: false, envioPais: true, envioGratis: false, retiro: false, despachoDia: false },
     envio: 'Envío por DAC a todo el país, pago al recibir (agencia o domicilio); despacho en 24 a 72 h hábiles.',
     url: 'https://www.insumosartesanos.com.uy/collections/moldes-de-silicona',
     color: '#7a4f8a',
@@ -156,6 +188,8 @@ export const alternativas: Tienda[] = [
       'No publica costos de envío ni la dirección del punto de retiro',
     ],
     rating: 4,
+    puntajes: [6, 8, 8, 7, 7],
+    features: { moldes: 'Unos 90', insumos: 'Para velas', combo: true, envioPais: true, envioGratis: null, retiro: true, despachoDia: null },
     envio: 'Envíos a todo Uruguay y retiro sin costo en su punto de retiro.',
     url: 'https://moldecreativo.com/categoria-producto/moldes/',
     color: '#b0567a',
@@ -186,6 +220,8 @@ export const alternativas: Tienda[] = [
       'La compra web tiene un mínimo de compra más envío',
     ],
     rating: 4,
+    puntajes: [5, 8, 6, 8, 8],
+    features: { moldes: true, insumos: true, combo: true, envioPais: true, envioGratis: null, retiro: 'Salón en Montevideo', despachoDia: null },
     envio: 'Envíos desde Montevideo para compras web (con mínimo de compra).',
     url: 'https://lacasadelartesano.com.uy',
     color: '#9c4221',
@@ -219,6 +255,8 @@ export const alternativas: Tienda[] = [
       'Orientado a elaboradores: algunas condiciones están pensadas para compra mayorista',
     ],
     rating: 4,
+    puntajes: [2, 9, 8, 7, 5],
+    features: { moldes: false, insumos: true, combo: false, envioPais: true, envioGratis: null, retiro: 'Buceo', despachoDia: null },
     envio: 'Cadetería en Montevideo (24 a 48 h), DAC al interior y pick-up en Buceo.',
     url: 'https://www.insumosuy.com/tienda?cat=insumos-velas-y-difusores',
     color: '#4f7a6a',
@@ -249,6 +287,8 @@ export const alternativas: Tienda[] = [
       'No vende moldes de silicona; al interior el costo de agencia lo paga el comprador',
     ],
     rating: 3,
+    puntajes: [2, 8, 7, 7, 5],
+    features: { moldes: false, insumos: true, combo: false, envioPais: true, envioGratis: 'Sólo Montevideo, desde $1.500', retiro: 'Local en el Centro', despachoDia: null },
     envio: 'Montevideo en 24 a 48 h (gratis desde $1.500); interior por agencia a cargo del comprador.',
     url: 'https://tiendaweb.drogueriamontevideo.com/categoria/productos-quimicos-e-insumos/insumos-para-velas/',
     color: '#1f6aa5',
@@ -280,6 +320,8 @@ export const alternativas: Tienda[] = [
       'No publica dirección ni costos de envío',
     ],
     rating: 3,
+    puntajes: [2, 7, 7, 7, 4],
+    features: { moldes: false, insumos: 'Para velas', combo: false, envioPais: true, envioGratis: null, retiro: null, despachoDia: false },
     envio: 'Envíos a todo el país por agencias (DAC, UES), con preparación de 2 a 4 días hábiles.',
     url: 'https://www.develasmontevideo.com/insumos-velas-artesanales-develas',
     color: '#8a6a3a',
@@ -312,6 +354,8 @@ export const alternativas: Tienda[] = [
       'No vende insumos de manualidades (ceras, glicerina, resina): sólo el molde',
     ],
     rating: 3,
+    puntajes: [3, 8, 7, 6, 3],
+    features: { moldes: 'Una docena', insumos: false, combo: false, envioPais: null, envioGratis: null, retiro: 'Local en Montevideo', despachoDia: null },
     envio: 'Venta online con checkout propio; también atiende en su local de Montevideo.',
     url: 'https://www.zanetti.com.uy/decoracion/moldes-de-silicona',
     color: '#2f6b4f',
@@ -341,6 +385,8 @@ export const alternativas: Tienda[] = [
       'Es un bazar de cocina y hogar, no una tienda de manualidades: no vende insumos para velas, jabón ni resina',
     ],
     rating: 3,
+    puntajes: [2, 7, 7, 6, 2],
+    features: { moldes: 'Pocos, de repostería', insumos: false, combo: false, envioPais: null, envioGratis: null, retiro: '4 locales en Montevideo', despachoDia: null },
     envio: 'Venta online con checkout propio y retiro o compra en cualquiera de sus cuatro locales de Montevideo.',
     url: 'https://www.liderplast.com.uy/productos/productos.php?path=0.2882.2915&secc=productos',
     color: '#1f5fa8',
@@ -369,6 +415,8 @@ export const alternativas: Tienda[] = [
       'El sitio no publica una dirección física de local; el único contacto visible es WhatsApp',
     ],
     rating: 3,
+    puntajes: [2, 7, 6, 6, 2],
+    features: { moldes: 'Pocos, de repostería', insumos: false, combo: false, envioPais: null, envioGratis: null, retiro: false, despachoDia: null },
     envio: 'Venta online con checkout propio; consultas y seguimiento por WhatsApp.',
     url: 'https://www.casajorge.com.uy/hogar/cocina/moldes/1',
     color: '#c0392b',
@@ -397,6 +445,8 @@ export const alternativas: Tienda[] = [
       'No vende moldes decorativos para jabón, vela o resina, sólo moldes de cocina',
     ],
     rating: 2,
+    puntajes: [2, 8, 6, 4, 2],
+    features: { moldes: 'Pocos, de cocina', insumos: false, combo: false, envioPais: null, envioGratis: null, retiro: 'Locales de la cadena', despachoDia: null },
     envio: 'Despacho a domicilio o retiro en tienda, según el producto.',
     url: 'https://www.sodimac.com.uy/sodimac-uy/category/cat990006/moldes/',
     color: '#f39200',
@@ -1217,4 +1267,22 @@ export function findDepartamento(slug: string) {
 
 export function findCategoria(slug: string) {
   return categorias.find((c) => c.slug === slug)
+}
+
+// Slugs de las páginas de opiniones y comparación (/opiniones/<slug>,
+// /comparar/moldarte-vs-<slug>). Sólo especialistas: los bazares no tienen
+// búsquedas de marca que valga la pena capturar.
+export function slugTienda(t: Tienda) {
+  return t.nombre
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+}
+
+export const tiendasConPagina = [moldarte, ...alternativasGenerales]
+
+export function findTiendaPorSlug(slug: string) {
+  return tiendasConPagina.find((t) => slugTienda(t) === slug)
 }

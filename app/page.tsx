@@ -6,17 +6,22 @@ import Faq from '@/components/Faq'
 import TopPick from '@/components/TopPick'
 import MoldartePicks from '@/components/MoldartePicks'
 import StickyCta from '@/components/StickyCta'
-import { IconArrow, IconCategoria, IconPin } from '@/components/Icons'
+import SelectorDepartamento from '@/components/SelectorDepartamento'
+import { Kits } from '@/components/Kit'
+import { IconArrow, IconCategoria } from '@/components/Icons'
 import { categorias, criterios, departamentos, faqGeneral, moldarte, alternativasGenerales, SITE_URL, CONTENT_UPDATED_LABEL } from '@/lib/data'
+import { kits } from '@/lib/kits'
+import { temas } from '@/lib/temas'
 
-// Agrupación regional de los 19 departamentos, para romper la nube de
-// chips idénticos y dar algo de estructura geográfica real.
-const regiones: { nombre: string; deps: string[] }[] = [
-  { nombre: 'Área metropolitana', deps: ['montevideo', 'canelones', 'san-jose'] },
-  { nombre: 'Este', deps: ['maldonado', 'rocha', 'lavalleja', 'treinta-y-tres'] },
-  { nombre: 'Litoral oeste', deps: ['colonia', 'soriano', 'rio-negro', 'paysandu', 'salto'] },
-  { nombre: 'Centro', deps: ['florida', 'durazno', 'flores', 'tacuarembo'] },
-  { nombre: 'Norte', deps: ['rivera', 'artigas', 'cerro-largo'] },
+// Accesos rápidos del hero: resuelven la intención en el primer toque en
+// vez de mandar a leer la metodología.
+const accesos = [
+  { href: '/categorias/moldes-para-velas', label: 'Velas' },
+  { href: '/categorias/moldes-para-jabones', label: 'Jabones' },
+  { href: '/categorias/moldes-de-resina', label: 'Resina' },
+  { href: '/categorias/moldes-de-yeso', label: 'Yeso' },
+  { href: '/categorias/moldes-para-macetas', label: 'Macetas' },
+  { href: '/moldes/moldes-de-navidad', label: 'Navidad' },
 ]
 
 export const metadata: Metadata = {
@@ -64,19 +69,19 @@ export default function Home() {
             <p className="eyebrow">Guía de compra · Actualizada {CONTENT_UPDATED_LABEL}</p>
             <h1>Dónde comprar moldes de silicona en Uruguay</h1>
             <p className="lead">
-              Un molde de silicona bueno desmolda limpio, aguanta decenas de piezas y no te arruina
-              un trabajo por una temperatura mal calculada. Comparamos dónde comprarlos en Uruguay
-              para velas, jabones, resina y chocolate, y sumamos lo que hace falta saber del oficio
-              para que el molde rinda lo que tiene que rendir.
+              Comparamos las tiendas uruguayas de moldes e insumos para velas, jabones, yeso y resina:
+              catálogo, envío y forma de pago, con lo que hace falta saber para usarlos bien.
             </p>
-            <div className="hero-actions">
-              <a href="#ranking" className="btn btn-primary">
-                Ver el ranking <IconArrow />
-              </a>
-              <a href="#como-elegimos" className="btn btn-ghost">
-                Cómo elegimos
-              </a>
-            </div>
+            <nav className="accesos" aria-label="Ir a una categoría">
+              {accesos.map((a) => (
+                <Link key={a.href} href={a.href} className="acceso">
+                  {a.label}
+                </Link>
+              ))}
+            </nav>
+            <a href="#ranking" className="link-arrow hero-ranking">
+              Ver el ranking completo <IconArrow size={14} />
+            </a>
           </div>
           <TopPick campaign="home" />
         </div>
@@ -90,6 +95,8 @@ export default function Home() {
           </div>
           <Ranking campaign="home" />
         </section>
+
+        <Kits kits={kits.filter((k) => ['velas-de-soja-en-molde', 'jabones-de-glicerina'].includes(k.slug))} campaign="home" />
 
         <MoldartePicks coleccion="destacados" campaign="home" titulo="Lo más elegido de la temporada" />
 
@@ -114,17 +121,31 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="block" id="disenos">
+          <div className="section-head">
+            <p className="eyebrow">Por diseño</p>
+            <h2>Buscá por forma</h2>
+          </div>
+          <div className="chips">
+            {temas.map((t) => (
+              <Link key={t.slug} href={`/moldes/${t.slug}`} className={`chip ${t.temporada ? 'chip-temporada' : ''}`}>
+                {t.nombre}
+                {t.temporada && <span className="chip-tag">{t.temporada}</span>}
+              </Link>
+            ))}
+          </div>
+        </section>
+
         <section className="block" id="oficio">
           <div className="section-head">
             <p className="eyebrow">Guías del oficio</p>
             <h2>Comprar el molde es la mitad del trabajo</h2>
             <p>
               La otra mitad es usarlo bien: temperatura de vertido, proporciones y desmolde sin romper el detalle.
-              Guías paso a paso para cada material.
             </p>
           </div>
           <div className="tiles">
-            {guias.map((g) => {
+            {guias.slice(0, 6).map((g) => {
               const c = categorias.find((x) => x.slug === g.categoria)
               return (
                 <Link key={g.slug} href={`/guias/${g.slug}`} className={`tile ${c ? `tile-${c.icono}` : ''}`}>
@@ -141,35 +162,23 @@ export default function Home() {
               )
             })}
           </div>
+          <p className="block-more">
+            <Link href="/guias" className="link-arrow">
+              Ver las {guias.length} guías <IconArrow size={14} />
+            </Link>
+            <Link href="/calculadora" className="link-arrow">
+              Calculadora de materiales <IconArrow size={14} />
+            </Link>
+          </p>
         </section>
 
         <section className="block" id="departamentos">
           <div className="section-head">
             <p className="eyebrow">Departamentos</p>
-            <h2>Buscá por departamento</h2>
-            <p>Cada zona del país tiene su propia dinámica de compra y de emprendimiento con moldes.</p>
+            <h2>Comprar desde tu departamento</h2>
+            <p>Agencias de envío, tiempos y opciones para cada departamento del país.</p>
           </div>
-          <div className="regiones">
-            {regiones.map((r) => (
-              <div className="region" key={r.nombre}>
-                <h3 className="region-title">{r.nombre}</h3>
-                <ul className="region-list">
-                  {r.deps.map((slug) => {
-                    const d = departamentos.find((dep) => dep.slug === slug)
-                    if (!d) return null
-                    return (
-                      <li key={d.slug}>
-                        <Link href={`/comprar-moldes/${d.slug}`}>
-                          <IconPin size={13} />
-                          {d.nombre}
-                        </Link>
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <SelectorDepartamento departamentos={departamentos.map((d) => ({ slug: d.slug, nombre: d.nombre }))} />
         </section>
 
         <section className="block" id="como-elegimos">
@@ -178,9 +187,9 @@ export default function Home() {
             <h2>Cómo elegimos</h2>
             <p>
               Ordenamos el ranking mirando lo que de verdad cambia el resultado de un proyecto con
-              moldes: catálogo real disponible, forma de pago, y si la tienda responde cuando hay
-              una duda de medida o de uso. Nada de reseñas inventadas ni calificaciones de clientes
-              falsas.
+              moldes: catálogo real disponible, forma de pago, envío y si la tienda responde cuando
+              hay una duda de medida o de uso. Cada criterio se puntúa de 0 a 10 y el puntaje final
+              es el promedio. Nada de reseñas inventadas ni calificaciones de clientes falsas.
             </p>
           </div>
           <ol className="criterios">

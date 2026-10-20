@@ -1,3 +1,5 @@
+import { guiasExtra } from './guias-extra'
+
 // Guías del oficio: el contenido informacional ("cómo hacer…") es donde está
 // el volumen de búsqueda y donde Moldarte no compite con su propia tienda.
 // Cada guía resuelve la pregunta completa y deriva a la colección de
@@ -21,7 +23,7 @@ export type Guia = {
   lecturas: { titulo: string; ruta: string }[]
 }
 
-export const guias: Guia[] = [
+const guiasBase: Guia[] = [
   {
     slug: 'como-hacer-velas-de-soja',
     titulo: 'Cómo hacer velas de soja en molde de silicona, paso a paso',
@@ -481,6 +483,8 @@ export const guias: Guia[] = [
     ],
   },
 ]
+
+export const guias: Guia[] = [...guiasBase, ...guiasExtra]
 
 export function findGuia(slug: string) {
   return guias.find((g) => g.slug === slug)

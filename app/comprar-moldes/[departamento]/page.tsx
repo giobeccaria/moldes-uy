@@ -6,8 +6,12 @@ import Faq from '@/components/Faq'
 import TopPick from '@/components/TopPick'
 import MoldartePicks from '@/components/MoldartePicks'
 import StickyCta from '@/components/StickyCta'
+import SelectorDepartamento from '@/components/SelectorDepartamento'
+import { findEnvio } from '@/lib/envios-departamentos'
 import { IconPin, IconTruck } from '@/components/Icons'
 import { departamentos, findDepartamento, SITE_URL } from '@/lib/data'
+
+const POBLACION_MINIMA_INDEX = 60000
 
 export function generateStaticParams() {
   return departamentos.map((d) => ({ departamento: d.slug }))
@@ -21,10 +25,15 @@ export async function generateMetadata({
   const { departamento } = await params
   const d = findDepartamento(departamento)
   if (!d) return {}
+  const e = findEnvio(d.slug)
   return {
     title: `Dónde comprar moldes de silicona en ${d.nombre}`,
-    description: `Guía para comprar moldes de silicona para velas, jabones y resina en ${d.nombre}, Uruguay: opciones, envío y recomendaciones.`,
+    description: `Moldes de silicona e insumos en ${d.nombre}: tiendas que envían, ${e?.agenciasDac.length ? `agencias DAC en ${e.agenciasDac.length} localidades, ` : ''}tiempos de entrega y retiro.`,
     alternates: { canonical: `/comprar-moldes/${d.slug}` },
+    // Los departamentos chicos casi no tienen búsquedas propias: se dejan
+    // fuera del índice (siguen enlazados y rastreables) para que Google no
+    // vea 19 páginas parecidas compitiendo entre sí.
+    ...(e?.poblacion && e.poblacion < POBLACION_MINIMA_INDEX ? { robots: { index: false, follow: true } } : {}),
   }
 }
 
@@ -38,6 +47,7 @@ export default async function DepartamentoPage({
   if (!d) notFound()
 
   const url = `${SITE_URL}/comprar-moldes/${d.slug}`
+  const envio = findEnvio(d.slug)
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -96,6 +106,31 @@ export default async function DepartamentoPage({
           </div>
         </section>
 
+        {envio && envio.agenciasDac.length > 0 && (
+          <section className="block">
+            <div className="section-head">
+              <p className="eyebrow">Envíos a {d.nombre}</p>
+              <h2>Dónde retirar un envío por DAC en {d.nombre}</h2>
+              <p>
+                {envio.poblacion ? `${d.nombre} tiene ${envio.poblacion.toLocaleString('es-UY')} habitantes (censo 2023) y ` : ''}
+                DAC tiene {envio.agenciasTotal ?? envio.agenciasDac.length} {(envio.agenciasTotal ?? envio.agenciasDac.length) === 1 ? 'agencia' : 'agencias'} en el
+                departamento. Moldarte despacha por DAC el mismo día si comprás antes de las 12: a agencia llega en 48 a
+                72 horas y a domicilio en 72 horas a 4 días.
+              </p>
+            </div>
+            <ul className="agencias">
+              {envio.agenciasDac.map((a) => (
+                <li key={a}>
+                  <IconPin size={14} /> {a}
+                </li>
+              ))}
+            </ul>
+            <p className="note">
+              Fuente: <a href={envio.fuente} target="_blank" rel="nofollow noopener">listado de agencias de DAC</a>.
+            </p>
+          </section>
+        )}
+
         <section className="block">
           <div className="section-head">
             <p className="eyebrow">Ranking</p>
@@ -118,16 +153,7 @@ export default async function DepartamentoPage({
           <div className="section-head">
             <h2>Otros departamentos</h2>
           </div>
-          <div className="chips">
-            {departamentos
-              .filter((o) => o.slug !== d.slug)
-              .map((o) => (
-                <Link key={o.slug} href={`/comprar-moldes/${o.slug}`} className="chip">
-                  <IconPin size={16} />
-                  {o.nombre}
-                </Link>
-              ))}
-          </div>
+          <SelectorDepartamento departamentos={departamentos.map((o) => ({ slug: o.slug, nombre: o.nombre }))} actual={d.slug} />
         </section>
       </div>
 

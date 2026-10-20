@@ -8,7 +8,7 @@ const display = Fraunces({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  style: ['normal', 'italic'],
+  style: ['normal'],
   weight: ['400', '500', '600', '700'],
 })
 const sans = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' })

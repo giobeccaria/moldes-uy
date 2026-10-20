@@ -4,6 +4,9 @@ import Link from 'next/link'
 import Faq from '@/components/Faq'
 import MoldartePicks from '@/components/MoldartePicks'
 import StickyCta from '@/components/StickyCta'
+import { Kits } from '@/components/Kit'
+import { kitsPara } from '@/lib/kits'
+import { getProductos } from '@/lib/shopify'
 import { IconArrow, IconCheck } from '@/components/Icons'
 import { guias, findGuia } from '@/lib/guias'
 import { findCategoria, moldarteLink, CONTENT_UPDATED, CONTENT_UPDATED_LABEL, SITE_NAME, SITE_URL } from '@/lib/data'
@@ -30,6 +33,9 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
   if (!g) notFound()
   const categoria = findCategoria(g.categoria)
   const campaign = `guia-${g.slug}`
+  // Fotos reales de la colección para ilustrar la guía (con alt descriptivo:
+  // suma tráfico de Google Imágenes).
+  const fotos = (await getProductos(g.coleccion, 3)).slice(0, 3)
   const url = `${SITE_URL}/guias/${g.slug}`
 
   const jsonLd = {
@@ -82,6 +88,14 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
       </section>
 
       <div className="wrap guia">
+        {fotos.length === 3 && (
+          <div className="guia-fotos">
+            {fotos.map((f) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={f.handle} src={f.imagen} alt={`${f.titulo}: ejemplo para ${g.metaTitulo.toLowerCase()}`} width={360} height={360} />
+            ))}
+          </div>
+        )}
         <aside className="panel guia-materiales">
           <h2>Lo que vas a necesitar</h2>
           <ul className="list">
@@ -118,7 +132,9 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
           ))}
         </article>
 
-        <MoldartePicks coleccion={g.coleccion} campaign={campaign} titulo="Moldes para empezar hoy" />
+        <Kits kits={kitsPara(g.slug)} campaign={campaign} />
+
+        <MoldartePicks coleccion={g.coleccion} campaign={campaign} titulo="Para empezar hoy" />
 
         {g.lecturas.length > 0 && (
           <section className="block block-narrow">

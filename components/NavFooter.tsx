@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { categorias, departamentos, SITE_NAME } from '@/lib/data'
+import { categorias, departamentos, slugTienda, tiendasConPagina, SITE_NAME } from '@/lib/data'
+import { temas } from '@/lib/temas'
 import { guias } from '@/lib/guias'
 import { Logo } from './Logo'
 import { IconCategoria } from './Icons'
@@ -7,9 +8,9 @@ import MobileMenu from './MobileMenu'
 
 const links = [
   { href: '/#ranking', label: 'Ranking' },
-  { href: '/#departamentos', label: 'Por departamento' },
   { href: '/#categorias', label: 'Por categoría' },
   { href: '/guias', label: 'Guías' },
+  { href: '/calculadora', label: 'Calculadora' },
   { href: '/#como-elegimos', label: 'Cómo elegimos' },
 ]
 
@@ -56,21 +57,35 @@ export function Footer() {
             </p>
           </div>
           <div>
-            <p className="footer-title">Departamentos</p>
+            <p className="footer-title">Guías</p>
             <ul>
-              {departamentos.map((d) => (
-                <li key={d.slug}>
-                  <Link href={`/comprar-moldes/${d.slug}`}>{d.nombre}</Link>
+              {guias.slice(0, 6).map((g) => (
+                <li key={g.slug}>
+                  <Link href={`/guias/${g.slug}`}>{g.metaTitulo}</Link>
                 </li>
               ))}
+              <li>
+                <Link href="/guias">Todas las guías</Link>
+              </li>
+              <li>
+                <Link href="/calculadora">Calculadora de materiales</Link>
+              </li>
             </ul>
           </div>
           <div>
-            <p className="footer-title">Guías</p>
+            <p className="footer-title">Por diseño</p>
             <ul>
-              {guias.map((g) => (
-                <li key={g.slug}>
-                  <Link href={`/guias/${g.slug}`}>{g.metaTitulo}</Link>
+              {temas.map((t) => (
+                <li key={t.slug}>
+                  <Link href={`/moldes/${t.slug}`}>{t.nombre}</Link>
+                </li>
+              ))}
+            </ul>
+            <p className="footer-title footer-title-2">Tiendas</p>
+            <ul>
+              {tiendasConPagina.map((t) => (
+                <li key={t.nombre}>
+                  <Link href={`/opiniones/${slugTienda(t)}`}>{t.nombre} opiniones</Link>
                 </li>
               ))}
             </ul>
@@ -89,6 +104,16 @@ export function Footer() {
             </ul>
           </div>
         </div>
+        <details className="footer-deps">
+          <summary>Comprar moldes por departamento</summary>
+          <ul>
+            {departamentos.map((d) => (
+              <li key={d.slug}>
+                <Link href={`/comprar-moldes/${d.slug}`}>{d.nombre}</Link>
+              </li>
+            ))}
+          </ul>
+        </details>
         <p className="copy">
           © {new Date().getFullYear()} {SITE_NAME}
         </p>

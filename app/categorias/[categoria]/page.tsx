@@ -5,6 +5,9 @@ import Ranking from '@/components/Ranking'
 import TopPick from '@/components/TopPick'
 import MoldartePicks from '@/components/MoldartePicks'
 import StickyCta from '@/components/StickyCta'
+import { Kits } from '@/components/Kit'
+import { kitsPara } from '@/lib/kits'
+import { guias } from '@/lib/guias'
 import { IconArrow, IconCategoria, IconCheck } from '@/components/Icons'
 import { categorias, findCategoria, SITE_URL, CONTENT_UPDATED_LABEL } from '@/lib/data'
 
@@ -130,6 +133,30 @@ export default async function CategoriaPage({
           <Ranking campaign={campaign} categoria={c} />
         </section>
 
+        <Kits kits={kitsPara(c.slug)} campaign={campaign} />
+
+        {guias.some((g) => g.categoria === c.slug) && (
+          <section className="block">
+            <div className="section-head">
+              <p className="eyebrow">Guías</p>
+              <h2>Cómo usarlos</h2>
+            </div>
+            <div className="tiles">
+              {guias
+                .filter((g) => g.categoria === c.slug)
+                .map((g) => (
+                  <Link key={g.slug} href={`/guias/${g.slug}`} className={`tile tile-${c.icono}`}>
+                    <span className="tile-title">{g.metaTitulo}</span>
+                    <span className="tile-text">Guía paso a paso</span>
+                    <span className="tile-arrow">
+                      <IconArrow />
+                    </span>
+                  </Link>
+                ))}
+            </div>
+          </section>
+        )}
+
         <section className="block">
           <div className="section-head">
             <h2>Otras categorías</h2>
@@ -153,7 +180,7 @@ export default async function CategoriaPage({
         </section>
       </div>
 
-      <StickyCta coleccion={c.coleccion} campaign={campaign} />
+      <StickyCta coleccion={c.coleccion} campaign={campaign} etiqueta={`Ver ${c.nombre.toLowerCase().replace(/^moldes /, '')}`} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   )
