@@ -33,6 +33,26 @@ export const viewport: Viewport = {
   themeColor: '#b5603c',
 }
 
+// JSON-LD de sitio: Organization (identidad del medio que compara) y
+// WebSite (habilita el buscador/sitelinks de Google), en todas las páginas.
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/opengraph-image`,
+    },
+    {
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: SITE_URL,
+      inLanguage: 'es-UY',
+    },
+  ],
+}
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es-UY" className={`${display.variable} ${sans.variable}`}>
@@ -40,6 +60,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main>{children}</main>
         <Footer />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd) }} />
       </body>
     </html>
   )

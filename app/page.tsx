@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Ranking from '@/components/Ranking'
 import Faq from '@/components/Faq'
 import { IconArrow, IconCategoria, IconPin } from '@/components/Icons'
-import { categorias, criterios, departamentos, faqGeneral } from '@/lib/data'
+import { categorias, criterios, departamentos, faqGeneral, moldarte, alternativas, SITE_URL } from '@/lib/data'
 
 // Agrupación regional de los 19 departamentos, para romper la nube de
 // chips idénticos y dar algo de estructura geográfica real.
@@ -30,6 +30,25 @@ export default function Home() {
       '@type': 'Question',
       name: f.pregunta,
       acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+    })),
+  }
+
+  // ItemList del ranking: ayuda a Google a entender que la página compara
+  // tiendas concretas (con su propio nombre y URL), no sólo texto suelto.
+  const tiendasRanking = [moldarte, ...alternativas]
+  const rankingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Ranking de tiendas de moldes de silicona en Uruguay',
+    url: `${SITE_URL}/#ranking`,
+    itemListElement: tiendasRanking.map((t, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      item: {
+        '@type': 'Store',
+        name: t.nombre,
+        url: t.url,
+      },
     })),
   }
 
@@ -184,6 +203,7 @@ export default function Home() {
       </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rankingJsonLd) }} />
     </>
   )
 }

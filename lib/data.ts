@@ -20,6 +20,9 @@ export type Tienda = {
   // nunca inventadas). Un marketplace como Mercado Libre no tiene cuenta
   // propia por "tienda" en este sentido, así que queda sin este campo.
   redes?: { instagram?: string; facebook?: string }
+  // Link interno a la categoría más relevante de app/categorias, sólo para
+  // el Top 3 (de verdad es lo que más vende cada una, no un link genérico).
+  categoriaLink?: { slug: string; etiqueta: string }
   // Atributos de comparación (sólo para las tiendas especializadas del
   // ranking principal). Datos verificables, no relleno: catálogo contado
   // sobre el catálogo real, pago y envío descritos como están publicados.
@@ -56,8 +59,9 @@ export const moldarte: Tienda = {
     instagram: 'https://www.instagram.com/moldarte.uy',
     facebook: 'https://www.facebook.com/moldarte.uy/',
   },
+  categoriaLink: { slug: 'moldes-para-velas', etiqueta: 'Ver moldes para velas' },
   atributos: {
-    catalogo: 'Más de 375 moldes de silicona distintos en catálogo activo (de un total de 488 productos), sin contar los insumos',
+    catalogo: 'Más de 350 moldes de silicona distintos en catálogo activo (de un total de cerca de 470 productos), sin contar los insumos',
     precios: 'Moldes chicos y medianos desde rangos accesibles, con precios publicados por producto (sin coordinar por chat)',
     envioResumen: 'A todo el país, con envío gratis desde cierto monto',
     pago: 'Checkout propio con tarjeta, transferencia y todos los medios habituales',
@@ -99,6 +103,7 @@ export const alternativas: Tienda[] = [
       instagram: 'https://www.instagram.com/lacasadelartesanouy/',
       facebook: 'https://www.facebook.com/lacasadelartesanouruguay/',
     },
+    categoriaLink: { slug: 'moldes-de-resina', etiqueta: 'Ver moldes de resina' },
     atributos: {
       catalogo: 'Moldes de silicona como una sección dentro de un catálogo multi-rubro (pintura, bijouterie, mercería, resinas)',
       precios: 'Precios por producto en el sitio, sujetos a un mínimo de compra para envío',
@@ -124,6 +129,8 @@ export const alternativas: Tienda[] = [
     envio: 'Venta online con checkout propio; también atiende en su local de Montevideo.',
     url: 'https://www.zanetti.com.uy/decoracion/moldes-de-silicona',
     color: '#2f6b4f',
+    logo: '/brands/zanetti.svg',
+    categoriaLink: { slug: 'moldes-para-jabones', etiqueta: 'Ver moldes para jabones' },
     atributos: {
       catalogo: 'Alrededor de una docena de moldes de silicona decorativos (flores, mariposas, corazones, lazos), sin insumos de manualidades',
       precios: 'Precios por producto publicados en el sitio, entre $270 y $390 aproximadamente',
@@ -149,6 +156,7 @@ export const alternativas: Tienda[] = [
     envio: 'Venta online con checkout propio y retiro o compra en cualquiera de sus cuatro locales de Montevideo.',
     url: 'https://www.liderplast.com.uy/productos/productos.php?path=0.2882.2915&secc=productos',
     color: '#1f5fa8',
+    logo: '/brands/liderplast.png',
     atributos: {
       catalogo: 'Un puñado de moldes de silicona para repostería (bombones con forma de corazón, almeja) dentro de un catálogo de más de 100 moldes de cocina',
       precios: 'Precios publicados por producto, desde $27 hasta rangos similares a otras tiendas de bazar',
@@ -160,7 +168,7 @@ export const alternativas: Tienda[] = [
     nombre: 'Casa Jorge',
     destacado: false,
     resumen:
-      'Tienda de artículos de cocina y bazar con venta online y atención por WhatsApp. En su categoría de moldes (84 productos en total) tiene varios modelos de silicona: molde genérico, mini torta, esfera, corazones y una placa de silicona para repostería; el resto del catálogo son moldes de aluminio para torta, budín y empanada.',
+      'Tienda de artículos de cocina y bazar con venta online y atención por WhatsApp. En su categoría de moldes (86 productos en total) tiene varios modelos de silicona: molde genérico, mini torta, esfera, corazones y una placa de silicona para repostería; el resto del catálogo son moldes de aluminio para torta, budín y empanada.',
     pros: [
       'Varios modelos de silicona distintos (mini torta, esfera, corazones, placa) dentro de su categoría de moldes',
       'Checkout online con carrito de compra propio',
@@ -174,8 +182,9 @@ export const alternativas: Tienda[] = [
     envio: 'Venta online con checkout propio; consultas y seguimiento por WhatsApp.',
     url: 'https://www.casajorge.com.uy/hogar/cocina/moldes/1',
     color: '#c0392b',
+    logo: '/brands/casajorge.png',
     atributos: {
-      catalogo: 'Cinco modelos de molde de silicona para repostería dentro de una categoría de 84 moldes, mayormente de aluminio',
+      catalogo: 'Cinco modelos de molde de silicona para repostería dentro de una categoría de 86 moldes, mayormente de aluminio',
       precios: 'Precios publicados por producto, entre $45,90 y $239,90 en los modelos de silicona',
       envioResumen: 'Venta online con carrito y checkout; no publica retiro en local',
       pago: 'Checkout propio online; consultas por WhatsApp',
@@ -199,6 +208,7 @@ export const alternativas: Tienda[] = [
     envio: 'Despacho a domicilio o retiro en tienda, según el producto.',
     url: 'https://www.sodimac.com.uy/sodimac-uy/category/cat990006/moldes/',
     color: '#f39200',
+    logo: '/brands/sodimac.webp',
     atributos: {
       catalogo: 'Catálogo de moldes de cocina (muffins, budín, pan, helado), con pocos modelos de silicona entre moldes de aluminio',
       precios: 'Precios publicados por producto, entre $49 y $959 según el artículo',

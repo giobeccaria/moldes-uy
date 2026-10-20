@@ -230,6 +230,8 @@ main { min-height: 60vh; }
 .contras .pc-icon { background: #fff; color: var(--muted); }
 
 .card-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; padding-top: 20px; border-top: 1px solid var(--border); }
+.card-foot-info { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.card-categoria-link { color: var(--accent); }
 .envio { display: flex; gap: 10px; margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
 .envio svg { flex-shrink: 0; margin-top: 1px; color: var(--accent); }
 .card-foot-actions { display: flex; align-items: center; gap: 14px; }

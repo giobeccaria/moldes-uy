@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { moldarte, alternativas, mercadoLibre, Tienda } from '@/lib/data'
 import { BrandBadge, IconArrow, IconCheck, IconFacebook, IconInfo, IconInstagram, IconPin, IconTruck, Stars } from './Icons'
 
@@ -80,10 +81,17 @@ function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
         </div>
       </div>
       <div className="card-foot">
-        <p className="envio">
-          <IconTruck />
-          <span>{tienda.envio}</span>
-        </p>
+        <div className="card-foot-info">
+          <p className="envio">
+            <IconTruck />
+            <span>{tienda.envio}</span>
+          </p>
+          {tienda.categoriaLink && (
+            <Link className="link-arrow card-categoria-link" href={`/categorias/${tienda.categoriaLink.slug}`}>
+              {tienda.categoriaLink.etiqueta} <IconArrow size={14} />
+            </Link>
+          )}
+        </div>
         <span className="card-foot-actions">
           <RedesSociales tienda={tienda} />
           {tienda.url && (

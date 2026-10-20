@@ -180,6 +180,11 @@ export function BrandBadge({ nombre, color, destacado, logo, size = 48 }: {
     // blanco que sí necesitan los logos de otras marcas sobre fondo
     // transparente.
     const esFotoRecortada = logo.includes('-instagram')
+    // El logo oficial de Zanetti sólo existe en blanco (pensado para su
+    // propia barra de checkout oscura): sobre el fondo blanco del badge
+    // queda invisible, así que ahí el badge usa el verde de marca en vez
+    // de blanco como fondo.
+    const esLogoBlanco = logo.includes('zanetti')
     // Tamaño de imagen en píxeles explícitos: algunos de los SVG de marca no
     // traen width/height propios (sólo viewBox), y un width/height en % sobre
     // un contenedor grid puede resolver a 0 en Chromium por la referencia
@@ -188,7 +193,7 @@ export function BrandBadge({ nombre, color, destacado, logo, size = 48 }: {
     return (
       <span
         className={`brand-badge brand-badge-logo ${esFotoRecortada ? 'brand-badge-photo' : ''}`}
-        style={{ width: size, height: size }}
+        style={{ width: size, height: size, background: esLogoBlanco ? color : undefined }}
       >
         {/* Logos de terceros, cada uno con pocas unidades de uso: una
            etiqueta <img> simple evita el loader/optimizador remoto de
