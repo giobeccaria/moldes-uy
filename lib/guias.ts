@@ -15,6 +15,10 @@ export type Guia = {
   materiales: string[]
   secciones: { titulo: string; parrafos: string[] }[]
   faq: { pregunta: string; respuesta: string }[]
+  // Notas del blog de moldarte.uy sobre el mismo tema. Se enlazan desde la
+  // guía (link seguido, con UTM) para que los dos sitios se refuercen en vez
+  // de competir por la misma búsqueda.
+  lecturas: { titulo: string; ruta: string }[]
 }
 
 export const guias: Guia[] = [
@@ -100,6 +104,11 @@ export const guias: Guia[] = [
           'Entre el 6 y el 10 % del peso de la cera, es decir 60 a 100 g de esencia por kilo. Para empezar, 8 % es un buen punto. Pasarse puede hacer que la vela suelte aceite o humo.',
       },
     ],
+    lecturas: [
+      { titulo: 'Cómo hacer velas perfectas con moldes de silicona', ruta: '/blogs/blog/como-hacer-velas-perfectas-con-moldes-de-silicona' },
+      { titulo: '¿Qué se puede usar para desmoldar velas?', ruta: '/blogs/blog/que-se-puede-usar-para-desmoldar-velas-descubre-las-mejores-opciones' },
+      { titulo: 'Cómo limpiar los moldes de silicona para velas', ruta: '/blogs/blog/como-limpiar-los-moldes-de-silicona-la-manera-correcta-de-hacerlo' },
+    ],
   },
   {
     slug: 'temperatura-cera-de-soja',
@@ -166,6 +175,10 @@ export const guias: Guia[] = [
         respuesta:
           'Sí, si querés resultados repetibles. Es barato y es la diferencia entre adivinar y saber por qué una tanda salió bien o mal.',
       },
+    ],
+    lecturas: [
+      { titulo: '¿Tus velas no quedan perfectas? El secreto está en la temperatura de vertido', ruta: '/blogs/blog/tus-velas-no-quedan-perfectas-el-secreto-esta-en-la-temperatura-de-vertido' },
+      { titulo: 'Cómo elegir la cera ideal para tus velas', ruta: '/blogs/blog/guia-de-materiales-como-elegir-la-cera-ideal-para-tus-velas' },
     ],
   },
   {
@@ -240,6 +253,10 @@ export const guias: Guia[] = [
           'No. El colorante de velas no está pensado para estar en contacto con la piel. Usá colorantes específicos para jabón o cosmética.',
       },
     ],
+    lecturas: [
+      { titulo: '¿Cómo elegir el molde ideal para tus creaciones?', ruta: '/blogs/blog/como-elegir-el-molde-ideal-para-tus-creaciones-descubri-sus-diferencias' },
+      { titulo: 'Cómo mantener tus moldes de silicona como nuevos', ruta: '/blogs/blog/guia-de-limpieza-como-mantener-tus-moldes-de-silicona-como-nuevos' },
+    ],
   },
   {
     slug: 'como-hacer-piezas-de-yeso',
@@ -311,6 +328,12 @@ export const guias: Guia[] = [
           'No, la silicona aguanta muy bien el yeso. Lo que acorta la vida del molde es forzar el desmolde con la pieza todavía blanda o dejar restos de yeso secos en los detalles.',
       },
     ],
+    lecturas: [
+      { titulo: 'Adiós a las burbujas: piezas de yeso impecables', ruta: '/blogs/blog/adios-a-las-burbujas-el-secreto-para-lograr-piezas-de-yeso-impecables' },
+      { titulo: '¿Burbujas en tus piezas de yeso? Así podés arreglarlas', ruta: '/blogs/blog/burbujas-en-tus-piezas-de-yeso-no-las-tires-asi-podes-arreglarlas' },
+      { titulo: '¿Cuánto rinde una bolsa de 500 g de yeso artístico?', ruta: '/blogs/blog/cuanto-rinde-una-bolsa-de-500g-de-yeso-artistico-descubrilo-aca' },
+      { titulo: 'Cómo crear tus propios portavelas de yeso', ruta: '/blogs/blog/guia-paso-a-paso-como-crear-tus-propios-portavelas-de-yeso' },
+    ],
   },
   {
     slug: 'como-hacer-macetas-de-cemento',
@@ -376,6 +399,9 @@ export const guias: Guia[] = [
         respuesta:
           'Son burbujas de aire atrapadas contra el molde. Se evitan vibrando el molde varios minutos después de llenarlo; las que queden se tapan con pasta de cemento fino.',
       },
+    ],
+    lecturas: [
+      { titulo: 'Cómo crear tus propias macetas de cemento con moldes de silicona', ruta: '/blogs/blog/como-crear-tus-propias-macetas-de-cemento-con-moldes-de-silicona' },
     ],
   },
   {
@@ -448,6 +474,10 @@ export const guias: Guia[] = [
         respuesta:
           'Depende del tipo de resina: las de recubrimiento admiten capas de pocos milímetros y las de colada varios centímetros. El dato está en la ficha del producto.',
       },
+    ],
+    lecturas: [
+      { titulo: 'Cómo calcular la cantidad de A y B en la resina epoxy', ruta: '/blogs/blog/cantidad-a-b-resina-epoxi' },
+      { titulo: 'Consejos para evitar burbujas con resina epoxy y moldes de silicona', ruta: '/blogs/blog/consejos-para-evitar-burbujas-en-tus-proyectos-con-resina-epoxy-y-moldes-de-silicona' },
     ],
   },
 ]

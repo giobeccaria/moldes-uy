@@ -555,3 +555,4 @@ main { min-height: 60vh; }
 .guia-cuerpo p { color: var(--ink-2); margin: 0 0 14px; max-width: 72ch; }
 .guia-paso { flex: none; width: 32px; height: 32px; border-radius: 10px; display: inline-grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-size: 1rem; font-family: var(--font-sans), sans-serif; font-weight: 700; transform: translateY(-3px); }
 .guia-materiales .btn, .toppick-cta { white-space: normal; text-align: center; }
+.lecturas { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }

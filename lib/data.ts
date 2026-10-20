@@ -47,6 +47,9 @@ export type Tienda = {
   // aparece en todas; un bazar de cocina no tiene nada que hacer en el
   // ranking de moldes para velas.
   categorias?: string[]
+  // Bazares y cadenas con moldes de cocina: sólo aparecen en las categorías
+  // de `categorias`, no en el ranking general (home y departamentos).
+  soloEnCategorias?: boolean
   // Atributos de comparación (sólo para las tiendas especializadas del
   // ranking principal). Datos verificables, no relleno: catálogo contado
   // sobre el catálogo real, pago y envío descritos como están publicados.
@@ -96,17 +99,75 @@ export const moldarte: Tienda = {
 }
 
 // Competidores reales del rubro en Uruguay, verificados en sus propios sitios
-// (octubre 2026). La Casa del Artesano sigue siendo la única tienda local
-// especializada en manualidades que también vende moldes de silicona. Las
-// otras cuatro (Liderplast, Zanetti, Casa Jorge, Sodimac) son bazares o
-// cadenas de artículos para el hogar que tienen moldes de silicona en su
-// catálogo de cocina, verificados visitando cada categoría y viendo
-// productos concretos listados (no sólo el título de la sección). No son
-// especialistas en manualidades: su fuerte es repostería, chocolate o
-// hielo, no necesariamente velas, jabón o resina con la profundidad de
-// Moldarte o La Casa del Artesano, y así se los describe. Mercado Libre no
-// es una tienda comparable y se trata aparte, ver `mercadoLibre`.
+// (20-oct-2026: catálogo, envío, pagos y redes vistos en cada sitio; los
+// conteos de moldes salen de sus APIs públicas de Shopify/WooCommerce). El
+// orden del array es el orden del ranking: primero las especialistas en
+// moldes, después las de insumos, al final los bazares (soloEnCategorias).
+// Descartadas: Iluminarás (bazar general, sin insumos) y Tía Robertina
+// (argentina). Mercado Libre no es una tienda comparable y se trata aparte,
+// ver `mercadoLibre`.
 export const alternativas: Tienda[] = [
+  {
+    nombre: 'Insumos Artesanos',
+    destacado: false,
+    categorias: ['moldes-para-velas', 'moldes-para-jabones', 'moldes-de-resina', 'moldes-de-yeso', 'moldes-para-macetas'],
+    resumen:
+      'Tienda online uruguaya de insumos para manualidades, con fuerte foco en bijou y papelería y una colección de más de 300 moldes de silicona para velas, jabón, resina, yeso y macetas. Vende el molde y accesorios, pero no las materias primas.',
+    pros: [
+      'Colección grande de moldes de silicona (alrededor de 300 con stock), con modelos para velas, jabón, resina, yeso y macetas',
+      'Hasta 12 cuotas sin recargo, además de transferencia, Abitab y RedPagos',
+      'Accesorios para resina: pipetas, flores secas, papel oro y biseles',
+    ],
+    contras: [
+      'No vende cera, esencias, glicerina, resina ni yeso: el material hay que comprarlo en otro lado',
+      'Envío sólo por DAC y a cargo del comprador; no tiene retiro',
+    ],
+    rating: 4,
+    envio: 'Envío por DAC a todo el país, pago al recibir (agencia o domicilio); despacho en 24 a 72 h hábiles.',
+    url: 'https://www.insumosartesanos.com.uy/collections/moldes-de-silicona',
+    color: '#7a4f8a',
+    redes: {
+      instagram: 'https://www.instagram.com/insumosartesanosuruguay/',
+      facebook: 'https://www.facebook.com/insumosartesanosuruguay',
+      tiktok: 'https://www.tiktok.com/@insumosartesanos',
+      youtube: 'https://www.youtube.com/channel/UCG_Ug-la2Z67NT_HpxWvlQw',
+    },
+    atributos: {
+      catalogo: 'Alrededor de 300 moldes de silicona con stock, dentro de un catálogo de bijou, papelería y manualidades; sin materias primas',
+      precios: 'Moldes entre $79 y $2.700 aproximadamente, con precio publicado por producto',
+      envioResumen: 'Sólo DAC, costo a cargo del comprador; sin retiro',
+      pago: 'Hasta 12 cuotas sin recargo, transferencia, Abitab y RedPagos',
+    },
+  },
+  {
+    nombre: 'Molde Creativo',
+    destacado: false,
+    categorias: ['moldes-para-velas', 'moldes-de-yeso', 'moldes-de-resina', 'moldes-para-jabones', 'insumos-para-velas'],
+    resumen:
+      'Tienda online uruguaya especializada en moldes de silicona, ordenados por uso (velas, jabones, yeso, cemento y resina), con algunos insumos para velas: cera de soja de alto punto, esencias, pabilos y colorante.',
+    pros: [
+      'Especialista en moldes, bien categorizados por uso',
+      'Molde e insumos básicos de velas en la misma compra',
+      'Retiro sin costo en su punto de retiro, además de envío a todo el país',
+    ],
+    contras: [
+      'Catálogo más chico (menos de 100 moldes) y pocos insumos: una sola cera y unas pocas esencias',
+      'No publica costos de envío ni la dirección del punto de retiro',
+    ],
+    rating: 4,
+    envio: 'Envíos a todo Uruguay y retiro sin costo en su punto de retiro.',
+    url: 'https://moldecreativo.com/categoria-producto/moldes/',
+    color: '#b0567a',
+    redes: {
+      instagram: 'https://instagram.com/moldesdesiliconauy',
+    },
+    atributos: {
+      catalogo: 'Alrededor de 90 moldes de silicona (sobre todo para velas y yeso) y unos 15 insumos para velas',
+      precios: 'Moldes entre $80 y $1.280 aproximadamente',
+      envioResumen: 'A todo el país, o retiro gratis en su punto de retiro',
+      pago: 'Tarjeta de crédito o débito, transferencia y efectivo',
+    },
+  },
   {
     nombre: 'La Casa del Artesano',
     destacado: false,
@@ -141,8 +202,98 @@ export const alternativas: Tienda[] = [
     },
   },
   {
+    nombre: 'Insumos Uy',
+    destacado: false,
+    categorias: ['insumos-para-velas'],
+    resumen:
+      'Proveedor uruguayo de materias primas para cosmética y velas. En velas tiene la variedad de ceras más amplia del rubro (soja, parafina, abeja, carnauba, estearina), pabilos, esencias y colorantes. No vende moldes.',
+    pros: [
+      'La mayor variedad de ceras: soja, parafina, abeja, carnauba y estearina',
+      'Medios de pago muy completos, con Mercado Pago hasta 12 cuotas',
+      'Cuenta mayorista web con condiciones publicadas',
+    ],
+    contras: [
+      'No vende moldes de silicona: el molde hay que comprarlo aparte',
+      'Orientado a elaboradores: algunas condiciones están pensadas para compra mayorista',
+    ],
+    rating: 4,
+    envio: 'Cadetería en Montevideo (24 a 48 h), DAC al interior y pick-up en Buceo.',
+    url: 'https://www.insumosuy.com/tienda?cat=insumos-velas-y-difusores',
+    color: '#4f7a6a',
+    redes: {
+      instagram: 'https://instagram.com/insumos_uy',
+    },
+    atributos: {
+      catalogo: 'Unos 20 insumos para velas (ceras, pabilos, esencias, colorantes) dentro de un catálogo de materias primas cosméticas; sin moldes',
+      precios: 'Cera de soja desde $299 y parafina en bloque de 1 kg a $350, con precio publicado',
+      envioResumen: 'Cadetería en Montevideo, DAC al interior, pick-up en Buceo',
+      pago: 'Mercado Pago hasta 12 cuotas, Visa, Master, OCA, Abitab, RedPagos y transferencia',
+    },
+  },
+  {
+    nombre: 'Droguería Montevideo',
+    destacado: false,
+    categorias: ['insumos-para-velas', 'insumos-para-jabones'],
+    resumen:
+      'Droguería de Montevideo con local en Paysandú 1057 y tienda online. Tiene secciones de insumos para velas (ceras, pabilos, esencias, colorantes) y para jabones, donde es de las pocas que vende glicerina en bloque y soda cáustica.',
+    pros: [
+      'Glicerina en bloque (blanca, perlada y transparente) y soda cáustica para jabonería',
+      'Local físico en el Centro de Montevideo',
+      'Envío gratis en Montevideo en compras desde $1.500',
+    ],
+    contras: [
+      'Es una droguería general, no una tienda de manualidades',
+      'No vende moldes de silicona; al interior el costo de agencia lo paga el comprador',
+    ],
+    rating: 3,
+    envio: 'Montevideo en 24 a 48 h (gratis desde $1.500); interior por agencia a cargo del comprador.',
+    url: 'https://tiendaweb.drogueriamontevideo.com/categoria/productos-quimicos-e-insumos/insumos-para-velas/',
+    color: '#1f6aa5',
+    redes: {
+      instagram: 'https://www.instagram.com/drogueriamontevideo/',
+      facebook: 'https://www.facebook.com/DrogueriaMontevideo/',
+    },
+    atributos: {
+      catalogo: 'Unos 14 insumos para velas y 4 para jabones (glicerina, soda), dentro del catálogo de una droguería; sin moldes',
+      precios: 'Glicerina en bloque de 1 kg alrededor de $372, cera de soja 1 kg $560',
+      envioResumen: 'Montevideo 24 a 48 h, gratis desde $1.500; interior por agencia',
+      pago: 'Más de 20 tarjetas y Mercado Pago',
+    },
+  },
+  {
+    nombre: 'De Velas Montevideo',
+    destacado: false,
+    categorias: ['insumos-para-velas'],
+    resumen:
+      'Marca uruguaya de velas de soja que además vende insumos: cera, pabilos, aceite aromático, frascos y latas, y un kit inicial. También da talleres y tiene programa mayorista. No vende moldes de silicona.',
+    pros: [
+      'Especialista en velas de soja, con kit inicial para arrancar',
+      'Talleres y programa mayorista con lista de precios',
+      'Mercado Pago, transferencia y efectivo por redes de cobranza',
+    ],
+    contras: [
+      'No vende moldes de silicona: está pensado para velas en frasco o lata',
+      'No publica dirección ni costos de envío',
+    ],
+    rating: 3,
+    envio: 'Envíos a todo el país por agencias (DAC, UES), con preparación de 2 a 4 días hábiles.',
+    url: 'https://www.develasmontevideo.com/insumos-velas-artesanales-develas',
+    color: '#8a6a3a',
+    redes: {
+      instagram: 'https://www.instagram.com/develas_montevideo/',
+      facebook: 'https://www.facebook.com/develasmontevideo',
+    },
+    atributos: {
+      catalogo: 'Unos 20 insumos para velas (cera, pabilos, aceite aromático, frascos, kit inicial); sin moldes',
+      precios: 'Kit inicial a $2.900, cera de 1 kg a $820, con precio publicado',
+      envioResumen: 'A todo el país por DAC o UES, preparación de 2 a 4 días hábiles',
+      pago: 'Mercado Pago, transferencia y efectivo por redes de cobranza',
+    },
+  },
+  {
     nombre: 'Zanetti',
     destacado: false,
+    soloEnCategorias: true,
     categorias: ['moldes-para-jabones', 'moldes-de-resina', 'moldes-para-chocolate'],
     resumen:
       'Tienda de decoración y bazar de Montevideo, con local en Colonia 917 y venta online con checkout propio. Tiene una docena de moldes de silicona con formas decorativas (flores, mariposas, corazones, lazos, rosas, pétalos) dentro de su sección de decoración.',
@@ -171,6 +322,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'Liderplast',
     destacado: false,
+    soloEnCategorias: true,
     categorias: ['moldes-para-chocolate'],
     resumen:
       'Bazar uruguayo con cuatro locales en Montevideo (Centro, Cordón, Goes y Paso Molino). Dentro de un catálogo grande de moldes de cocina (más de 100 entre aluminio y silicona), tiene algunos moldes de silicona para repostería, como bombones con forma de corazón o almeja.',
@@ -198,6 +350,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'Casa Jorge',
     destacado: false,
+    soloEnCategorias: true,
     categorias: ['moldes-para-chocolate'],
     resumen:
       'Tienda de artículos de cocina y bazar con venta online y atención por WhatsApp. En su categoría de moldes (86 productos en total) tiene varios modelos de silicona: molde genérico, mini torta, esfera, corazones y una placa de silicona para repostería; el resto del catálogo son moldes de aluminio para torta, budín y empanada.',
@@ -225,6 +378,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'Sodimac',
     destacado: false,
+    soloEnCategorias: true,
     categorias: ['moldes-para-chocolate'],
     resumen:
       'Cadena grande de mejoras para el hogar con locales en Uruguay y venta online con despacho a domicilio o retiro en tienda. En su sección de moldes tiene sobre todo piezas de cocina (muffins, budín, pan, helado), con algunos modelos de silicona entre ellas.',
@@ -258,6 +412,9 @@ export const alternativas: Tienda[] = [
 // particulares. Se trata en una sección aparte de la página, no dentro del
 // ranking de tiendas, para no mezclar un catálogo curado con publicaciones
 // sueltas de terceros sin continuidad garantizada.
+// Ranking general (home y departamentos): todas menos los bazares.
+export const alternativasGenerales = alternativas.filter((t) => !t.soloEnCategorias)
+
 export const mercadoLibre = {
   nombre: 'Mercado Libre Uruguay',
   resumen:

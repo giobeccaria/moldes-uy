@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { moldarte, alternativas, mercadoLibre, moldarteLink, Tienda, Categoria } from '@/lib/data'
+import { moldarte, alternativas, alternativasGenerales, mercadoLibre, moldarteLink, Tienda, Categoria } from '@/lib/data'
 import {
   BrandBadge,
   IconArrow,
@@ -228,7 +228,7 @@ function MercadoLibreSection() {
 export default function Ranking({ campaign, categoria }: { campaign: string; categoria?: Categoria }) {
   const otras = categoria
     ? alternativas.filter((t) => !t.categorias || t.categorias.includes(categoria.slug))
-    : alternativas
+    : alternativasGenerales
   const tiendas = [moldarte, ...otras]
   const moldarteHref = moldarteLink(`/collections/${categoria?.coleccion ?? 'catalogo'}`, campaign, 'ranking-card')
   return (

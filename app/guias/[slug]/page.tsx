@@ -120,6 +120,24 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
         <MoldartePicks coleccion={g.coleccion} campaign={campaign} titulo="Moldes para empezar hoy" />
 
+        {g.lecturas.length > 0 && (
+          <section className="block block-narrow">
+            <div className="section-head">
+              <p className="eyebrow">Para profundizar</p>
+              <h2>Más sobre el tema en el blog de Moldarte</h2>
+            </div>
+            <ul className="lecturas">
+              {g.lecturas.map((l) => (
+                <li key={l.ruta}>
+                  <a className="link-arrow" href={moldarteLink(l.ruta, campaign, 'blog')} target="_blank" rel="noopener">
+                    {l.titulo} <IconArrow size={14} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section className="block block-narrow">
           <div className="section-head">
             <p className="eyebrow">Preguntas frecuentes</p>

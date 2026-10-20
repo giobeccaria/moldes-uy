@@ -7,7 +7,7 @@ import TopPick from '@/components/TopPick'
 import MoldartePicks from '@/components/MoldartePicks'
 import StickyCta from '@/components/StickyCta'
 import { IconArrow, IconCategoria, IconPin } from '@/components/Icons'
-import { categorias, criterios, departamentos, faqGeneral, moldarte, alternativas, SITE_URL, CONTENT_UPDATED_LABEL } from '@/lib/data'
+import { categorias, criterios, departamentos, faqGeneral, moldarte, alternativasGenerales, SITE_URL, CONTENT_UPDATED_LABEL } from '@/lib/data'
 
 // Agrupación regional de los 19 departamentos, para romper la nube de
 // chips idénticos y dar algo de estructura geográfica real.
@@ -39,7 +39,7 @@ export default function Home() {
 
   // ItemList del ranking: ayuda a Google a entender que la página compara
   // tiendas concretas (con su propio nombre y URL), no sólo texto suelto.
-  const tiendasRanking = [moldarte, ...alternativas]
+  const tiendasRanking = [moldarte, ...alternativasGenerales]
   const rankingJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
