@@ -225,11 +225,11 @@ export function BrandBadge({ nombre, color, destacado, logo, size = 48 }: {
   size?: number
 }) {
   if (logo) {
-    // La foto de perfil real de Instagram de Moldarte ya llena el cuadro
-    // (sin margen blanco alrededor), así que va sin el padding ni el fondo
-    // blanco que sí necesitan los logos de otras marcas sobre fondo
-    // transparente.
-    const esFotoRecortada = logo.includes('-instagram')
+    // La foto de perfil de Instagram de Moldarte y los íconos cuadrados de
+    // marca (archivos `-icono`, sacados del favicon/apple-touch-icon de cada
+    // sitio) ya llenan el cuadro, así que van sin el padding ni el fondo
+    // blanco que sí necesitan los logos apaisados sobre fondo transparente.
+    const esFotoRecortada = logo.includes('-instagram') || logo.includes('-icono')
     // El logo oficial de Zanetti sólo existe en blanco (pensado para su
     // propia barra de checkout oscura): sobre el fondo blanco del badge
     // queda invisible, así que ahí el badge usa el verde de marca en vez

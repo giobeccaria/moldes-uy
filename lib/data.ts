@@ -126,6 +126,7 @@ export const alternativas: Tienda[] = [
     envio: 'Envío por DAC a todo el país, pago al recibir (agencia o domicilio); despacho en 24 a 72 h hábiles.',
     url: 'https://www.insumosartesanos.com.uy/collections/moldes-de-silicona',
     color: '#7a4f8a',
+    logo: '/brands/insumosartesanos-icono.png',
     redes: {
       instagram: 'https://www.instagram.com/insumosartesanosuruguay/',
       facebook: 'https://www.facebook.com/insumosartesanosuruguay',
@@ -158,6 +159,7 @@ export const alternativas: Tienda[] = [
     envio: 'Envíos a todo Uruguay y retiro sin costo en su punto de retiro.',
     url: 'https://moldecreativo.com/categoria-producto/moldes/',
     color: '#b0567a',
+    logo: '/brands/moldecreativo-icono.png',
     redes: {
       instagram: 'https://instagram.com/moldesdesiliconauy',
     },
@@ -220,6 +222,7 @@ export const alternativas: Tienda[] = [
     envio: 'Cadetería en Montevideo (24 a 48 h), DAC al interior y pick-up en Buceo.',
     url: 'https://www.insumosuy.com/tienda?cat=insumos-velas-y-difusores',
     color: '#4f7a6a',
+    logo: '/brands/insumosuy-icono.png',
     redes: {
       instagram: 'https://instagram.com/insumos_uy',
     },
@@ -249,6 +252,7 @@ export const alternativas: Tienda[] = [
     envio: 'Montevideo en 24 a 48 h (gratis desde $1.500); interior por agencia a cargo del comprador.',
     url: 'https://tiendaweb.drogueriamontevideo.com/categoria/productos-quimicos-e-insumos/insumos-para-velas/',
     color: '#1f6aa5',
+    logo: '/brands/drogueriamontevideo.svg',
     redes: {
       instagram: 'https://www.instagram.com/drogueriamontevideo/',
       facebook: 'https://www.facebook.com/DrogueriaMontevideo/',
@@ -279,6 +283,7 @@ export const alternativas: Tienda[] = [
     envio: 'Envíos a todo el país por agencias (DAC, UES), con preparación de 2 a 4 días hábiles.',
     url: 'https://www.develasmontevideo.com/insumos-velas-artesanales-develas',
     color: '#8a6a3a',
+    logo: '/brands/develasmontevideo-icono.jpg',
     redes: {
       instagram: 'https://www.instagram.com/develas_montevideo/',
       facebook: 'https://www.facebook.com/develasmontevideo',
