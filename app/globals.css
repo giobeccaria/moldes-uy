@@ -234,8 +234,8 @@ main { min-height: 60vh; }
 .card-categoria-link { color: var(--accent); }
 .envio { display: flex; gap: 10px; margin: 0; font-size: 0.9rem; color: var(--muted); line-height: 1.5; }
 .envio svg { flex-shrink: 0; margin-top: 1px; color: var(--accent); }
-.card-foot-actions { display: flex; align-items: center; gap: 14px; }
-.redes-sociales { display: flex; align-items: center; gap: 8px; }
+.card-foot-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; }
+.redes-sociales { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
 .redes-sociales a { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: var(--muted); background: var(--surface); border: 1px solid var(--border); transition: color 0.2s var(--ease), border-color 0.2s var(--ease); }
 .redes-sociales a:hover { color: var(--accent); border-color: var(--accent); }
 .card-sm .redes-sociales a { width: 24px; height: 24px; }

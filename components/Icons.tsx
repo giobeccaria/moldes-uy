@@ -147,6 +147,32 @@ export function IconFacebook({ size = 16 }: P) {
   )
 }
 
+export function IconTikTok({ size = 16 }: P) {
+  return (
+    <svg {...base(size)} strokeWidth={1.7}>
+      <path d="M13.5 3v11.2a3.1 3.1 0 1 1-2.2-3V13a5 5 0 1 0 4.3 4.9V8.9a6.2 6.2 0 0 0 4.1 1.6V8.3a4.2 4.2 0 0 1-3.1-1.4A4.2 4.2 0 0 1 15.4 3z" />
+    </svg>
+  )
+}
+
+export function IconPinterest({ size = 16 }: P) {
+  return (
+    <svg {...base(size)} strokeWidth={1.7}>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.5 20c.8-2.6 1.6-5.6 2.1-7.7M12 12a2.6 2.6 0 1 1 4.8-1.4c.3 1.6-.5 4.4-2.5 4.4-1.1 0-1.7-.7-1.7-.7" />
+    </svg>
+  )
+}
+
+export function IconYouTube({ size = 16 }: P) {
+  return (
+    <svg {...base(size)} strokeWidth={1.7}>
+      <rect x="2.5" y="5.5" width="19" height="13" rx="4" />
+      <path d="M10.7 9.3v5.4l4.6-2.7z" fill="currentColor" stroke="none" />
+    </svg>
+  )
+}
+
 export function IconPin({ size = 20 }: P) {
   return (
     <svg {...base(size)}>

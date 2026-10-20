@@ -19,7 +19,7 @@ export type Tienda = {
   // Redes sociales reales de la tienda (sólo cuentas propias verificadas,
   // nunca inventadas). Un marketplace como Mercado Libre no tiene cuenta
   // propia por "tienda" en este sentido, así que queda sin este campo.
-  redes?: { instagram?: string; facebook?: string }
+  redes?: { instagram?: string; facebook?: string; tiktok?: string; pinterest?: string; youtube?: string }
   // Link interno a la categoría más relevante de app/categorias, sólo para
   // el Top 3 (de verdad es lo que más vende cada una, no un link genérico).
   categoriaLink?: { slug: string; etiqueta: string }
@@ -58,6 +58,9 @@ export const moldarte: Tienda = {
   redes: {
     instagram: 'https://www.instagram.com/moldarte.uy',
     facebook: 'https://www.facebook.com/moldarte.uy/',
+    tiktok: 'https://www.tiktok.com/@moldarte',
+    pinterest: 'https://www.pinterest.com/moldarteuy',
+    youtube: 'https://www.youtube.com/@moldarteuy',
   },
   categoriaLink: { slug: 'moldes-para-velas', etiqueta: 'Ver moldes para velas' },
   atributos: {
@@ -102,6 +105,7 @@ export const alternativas: Tienda[] = [
     redes: {
       instagram: 'https://www.instagram.com/lacasadelartesanouy/',
       facebook: 'https://www.facebook.com/lacasadelartesanouruguay/',
+      youtube: 'https://www.youtube.com/channel/UC-LLkO-vWnR4f0V94bOlhuA/',
     },
     categoriaLink: { slug: 'moldes-de-resina', etiqueta: 'Ver moldes de resina' },
     atributos: {
@@ -209,6 +213,9 @@ export const alternativas: Tienda[] = [
     url: 'https://www.sodimac.com.uy/sodimac-uy/category/cat990006/moldes/',
     color: '#f39200',
     logo: '/brands/sodimac.webp',
+    redes: {
+      youtube: 'https://www.youtube.com/user/SodimacUY/videos',
+    },
     atributos: {
       catalogo: 'Catálogo de moldes de cocina (muffins, budín, pan, helado), con pocos modelos de silicona entre moldes de aluminio',
       precios: 'Precios publicados por producto, entre $49 y $959 según el artículo',

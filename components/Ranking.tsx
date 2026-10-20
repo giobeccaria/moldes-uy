@@ -1,6 +1,19 @@
 import Link from 'next/link'
 import { moldarte, alternativas, mercadoLibre, Tienda } from '@/lib/data'
-import { BrandBadge, IconArrow, IconCheck, IconFacebook, IconInfo, IconInstagram, IconPin, IconTruck, Stars } from './Icons'
+import {
+  BrandBadge,
+  IconArrow,
+  IconCheck,
+  IconFacebook,
+  IconInfo,
+  IconInstagram,
+  IconPin,
+  IconPinterest,
+  IconTikTok,
+  IconTruck,
+  IconYouTube,
+  Stars,
+} from './Icons'
 
 function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number }) {
   if (!tienda.redes) return null
@@ -26,6 +39,39 @@ function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number })
           title="Facebook"
         >
           <IconFacebook size={size} />
+        </a>
+      )}
+      {tienda.redes.tiktok && (
+        <a
+          href={tienda.redes.tiktok}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${tienda.nombre} en TikTok`}
+          title="TikTok"
+        >
+          <IconTikTok size={size} />
+        </a>
+      )}
+      {tienda.redes.pinterest && (
+        <a
+          href={tienda.redes.pinterest}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${tienda.nombre} en Pinterest`}
+          title="Pinterest"
+        >
+          <IconPinterest size={size} />
+        </a>
+      )}
+      {tienda.redes.youtube && (
+        <a
+          href={tienda.redes.youtube}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${tienda.nombre} en YouTube`}
+          title="YouTube"
+        >
+          <IconYouTube size={size} />
         </a>
       )}
     </span>
