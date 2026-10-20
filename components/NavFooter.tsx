@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { categorias, departamentos, SITE_NAME } from '@/lib/data'
+import { guias } from '@/lib/guias'
 import { Logo } from './Logo'
 import { IconCategoria } from './Icons'
 import MobileMenu from './MobileMenu'
@@ -8,6 +9,7 @@ const links = [
   { href: '/#ranking', label: 'Ranking' },
   { href: '/#departamentos', label: 'Por departamento' },
   { href: '/#categorias', label: 'Por categoría' },
+  { href: '/guias', label: 'Guías' },
   { href: '/#como-elegimos', label: 'Cómo elegimos' },
 ]
 
@@ -59,6 +61,16 @@ export function Footer() {
               {departamentos.map((d) => (
                 <li key={d.slug}>
                   <Link href={`/comprar-moldes/${d.slug}`}>{d.nombre}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="footer-title">Guías</p>
+            <ul>
+              {guias.map((g) => (
+                <li key={g.slug}>
+                  <Link href={`/guias/${g.slug}`}>{g.metaTitulo}</Link>
                 </li>
               ))}
             </ul>

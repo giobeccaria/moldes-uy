@@ -3,8 +3,11 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Ranking from '@/components/Ranking'
 import Faq from '@/components/Faq'
+import TopPick from '@/components/TopPick'
+import MoldartePicks from '@/components/MoldartePicks'
+import StickyCta from '@/components/StickyCta'
 import { IconPin, IconTruck } from '@/components/Icons'
-import { departamentos, findDepartamento } from '@/lib/data'
+import { departamentos, findDepartamento, SITE_URL } from '@/lib/data'
 
 export function generateStaticParams() {
   return departamentos.map((d) => ({ departamento: d.slug }))
@@ -34,15 +37,28 @@ export default async function DepartamentoPage({
   const d = findDepartamento(departamento)
   if (!d) notFound()
 
+  const url = `${SITE_URL}/comprar-moldes/${d.slug}`
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: d.faq.map((f) => ({
-      '@type': 'Question',
-      name: f.pregunta,
-      acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
-    })),
+    '@graph': [
+      {
+        '@type': 'FAQPage',
+        mainEntity: d.faq.map((f) => ({
+          '@type': 'Question',
+          name: f.pregunta,
+          acceptedAnswer: { '@type': 'Answer', text: f.respuesta },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: d.nombre, item: url },
+        ],
+      },
+    ],
   }
+  const campaign = `departamento-${d.slug}`
 
   return (
     <>
@@ -58,6 +74,7 @@ export default async function DepartamentoPage({
           <p className="eyebrow">Departamento</p>
           <h1>Dónde comprar moldes de silicona en {d.nombre}</h1>
           <p className="lead">{d.contexto}</p>
+          <TopPick campaign={campaign} />
         </div>
       </section>
 
@@ -84,8 +101,10 @@ export default async function DepartamentoPage({
             <p className="eyebrow">Ranking</p>
             <h2>Las opciones para comprar desde {d.nombre}</h2>
           </div>
-          <Ranking />
+          <Ranking campaign={campaign} />
         </section>
+
+        <MoldartePicks coleccion="destacados" campaign={campaign} titulo="Para arrancar: los moldes más elegidos" cantidad={4} />
 
         <section className="block block-narrow">
           <div className="section-head">
@@ -112,6 +131,7 @@ export default async function DepartamentoPage({
         </section>
       </div>
 
+      <StickyCta campaign={campaign} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   )

@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next'
-import { categorias, departamentos, SITE_URL } from '@/lib/data'
+import { categorias, departamentos, SITE_URL, CONTENT_UPDATED } from '@/lib/data'
+import { guias } from '@/lib/guias'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date()
+  const now = new Date(CONTENT_UPDATED)
   const base = [
     { url: SITE_URL, lastModified: now, changeFrequency: 'weekly' as const, priority: 1 },
   ]
@@ -18,5 +19,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: 'monthly' as const,
     priority: 0.7,
   }))
-  return [...base, ...deps, ...cats]
+  const guiasUrls = [
+    { url: `${SITE_URL}/guias`, lastModified: now, changeFrequency: 'monthly' as const, priority: 0.8 },
+    ...guias.map((g) => ({
+      url: `${SITE_URL}/guias/${g.slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    })),
+  ]
+  return [...base, ...cats, ...guiasUrls, ...deps]
 }

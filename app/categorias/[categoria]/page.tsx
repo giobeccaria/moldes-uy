@@ -2,8 +2,11 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Ranking from '@/components/Ranking'
+import TopPick from '@/components/TopPick'
+import MoldartePicks from '@/components/MoldartePicks'
+import StickyCta from '@/components/StickyCta'
 import { IconArrow, IconCategoria, IconCheck } from '@/components/Icons'
-import { categorias, findCategoria } from '@/lib/data'
+import { categorias, findCategoria, SITE_URL, CONTENT_UPDATED_LABEL } from '@/lib/data'
 
 export function generateStaticParams() {
   return categorias.map((c) => ({ categoria: c.slug }))
@@ -19,7 +22,7 @@ export async function generateMetadata({
   if (!c) return {}
   return {
     title: c.titulo,
-    description: `${c.intro.slice(0, 140)}...`,
+    description: `${c.titulo} en Uruguay: dónde comprarlos, qué mirar antes de elegir y cómo usarlos. Comparativa actualizada ${CONTENT_UPDATED_LABEL}.`,
     alternates: { canonical: `/categorias/${c.slug}` },
   }
 }
@@ -33,13 +36,24 @@ export default async function CategoriaPage({
   const c = findCategoria(categoria)
   if (!c) notFound()
 
+  // CollectionPage + migas. Antes era un Product sin offers ni reviews, que
+  // Google marca como inválido para resultados enriquecidos.
+  const url = `${SITE_URL}/categorias/${c.slug}`
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: c.titulo,
-    description: c.intro,
-    category: c.nombre,
+    '@graph': [
+      { '@type': 'CollectionPage', name: c.titulo, description: c.intro, url, inLanguage: 'es-UY' },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Inicio', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: c.nombre, item: url },
+        ],
+      },
+    ],
   }
+  const campaign = `categoria-${c.slug}`
+  const que = c.nombre.toLowerCase()
 
   return (
     <>
@@ -57,13 +71,13 @@ export default async function CategoriaPage({
             <h1>{c.titulo}</h1>
             <p className="lead">{c.intro}</p>
           </div>
-          <span className="hero-cat-icon" aria-hidden="true">
-            <IconCategoria icono={c.icono} size={56} />
-          </span>
+          <TopPick coleccion={c.coleccion} campaign={campaign} que={que} />
         </div>
       </section>
 
       <div className="wrap">
+        <MoldartePicks coleccion={c.coleccion} campaign={campaign} titulo={`${c.nombre} disponibles hoy`} />
+
         <section className="block duo">
           <div className="panel">
             <h2>¿Para qué se usan?</h2>
@@ -113,7 +127,7 @@ export default async function CategoriaPage({
             <p className="eyebrow">Ranking</p>
             <h2>Dónde comprar {c.nombre.toLowerCase()} en Uruguay</h2>
           </div>
-          <Ranking />
+          <Ranking campaign={campaign} categoria={c} />
         </section>
 
         <section className="block">
@@ -139,6 +153,7 @@ export default async function CategoriaPage({
         </section>
       </div>
 
+      <StickyCta coleccion={c.coleccion} campaign={campaign} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
   )

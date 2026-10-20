@@ -1,9 +1,13 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import Ranking from '@/components/Ranking'
+import { guias } from '@/lib/guias'
 import Faq from '@/components/Faq'
+import TopPick from '@/components/TopPick'
+import MoldartePicks from '@/components/MoldartePicks'
+import StickyCta from '@/components/StickyCta'
 import { IconArrow, IconCategoria, IconPin } from '@/components/Icons'
-import { categorias, criterios, departamentos, faqGeneral, moldarte, alternativas, SITE_URL } from '@/lib/data'
+import { categorias, criterios, departamentos, faqGeneral, moldarte, alternativas, SITE_URL, CONTENT_UPDATED_LABEL } from '@/lib/data'
 
 // Agrupación regional de los 19 departamentos, para romper la nube de
 // chips idénticos y dar algo de estructura geográfica real.
@@ -57,7 +61,7 @@ export default function Home() {
       <section className="hero hero-home">
         <div className="wrap hero-grid">
           <div>
-            <p className="eyebrow">Guía de compra · 2026</p>
+            <p className="eyebrow">Guía de compra · Actualizada {CONTENT_UPDATED_LABEL}</p>
             <h1>Dónde comprar moldes de silicona en Uruguay</h1>
             <p className="lead">
               Un molde de silicona bueno desmolda limpio, aguanta decenas de piezas y no te arruina
@@ -74,6 +78,7 @@ export default function Home() {
               </a>
             </div>
           </div>
+          <TopPick campaign="home" />
         </div>
       </section>
 
@@ -83,8 +88,10 @@ export default function Home() {
             <p className="eyebrow">Ranking</p>
             <h2>Las opciones, una por una</h2>
           </div>
-          <Ranking />
+          <Ranking campaign="home" />
         </section>
+
+        <MoldartePicks coleccion="destacados" campaign="home" titulo="Lo más elegido de la temporada" />
 
         <section className="block" id="categorias">
           <div className="section-head">
@@ -107,31 +114,32 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="block block-narrow" id="oficio">
+        <section className="block" id="oficio">
           <div className="section-head">
-            <p className="eyebrow">Del oficio</p>
+            <p className="eyebrow">Guías del oficio</p>
             <h2>Comprar el molde es la mitad del trabajo</h2>
             <p>
-              La otra mitad es usarlo bien: temperatura de vertido, desmolde sin romper el detalle
-              y saber cuándo un molde ya cumplió su vida útil. En cada categoría sumamos lo que hace
-              falta saber del oficio, no sólo dónde comprar.
+              La otra mitad es usarlo bien: temperatura de vertido, proporciones y desmolde sin romper el detalle.
+              Guías paso a paso para cada material.
             </p>
           </div>
           <div className="tiles">
-            {categorias
-              .filter((c) => c.oficio.length > 0)
-              .map((c) => (
-                <Link key={c.slug} href={`/categorias/${c.slug}#oficio`} className={`tile tile-${c.icono}`}>
-                  <span className="tile-icon">
-                    <IconCategoria icono={c.icono} size={34} />
-                  </span>
-                  <span className="tile-title">{c.oficio[0].titulo}</span>
-                  <span className="tile-text">{c.nombre}</span>
+            {guias.map((g) => {
+              const c = categorias.find((x) => x.slug === g.categoria)
+              return (
+                <Link key={g.slug} href={`/guias/${g.slug}`} className={`tile ${c ? `tile-${c.icono}` : ''}`}>
+                  {c && (
+                    <span className="tile-icon">
+                      <IconCategoria icono={c.icono} size={34} />
+                    </span>
+                  )}
+                  <span className="tile-title">{g.metaTitulo}</span>
                   <span className="tile-arrow">
                     <IconArrow />
                   </span>
                 </Link>
-              ))}
+              )
+            })}
           </div>
         </section>
 
@@ -202,6 +210,7 @@ export default function Home() {
         </section>
       </div>
 
+      <StickyCta campaign="home" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(rankingJsonLd) }} />
     </>

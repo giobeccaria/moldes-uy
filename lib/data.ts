@@ -1,6 +1,26 @@
 export const SITE_NAME = 'moldes.uy'
 export const SITE_URL = 'https://moldes.uy'
 
+// Fecha de la última revisión del contenido. Va al sitemap (lastmod) y se
+// muestra en las páginas: no usar la fecha del build, que cambia con cada
+// deploy aunque el contenido no cambie.
+export const CONTENT_UPDATED = '2026-10-20'
+export const CONTENT_UPDATED_LABEL = 'octubre 2026'
+
+const MOLDARTE_URL = 'https://moldarte.uy'
+
+// Todo link hacia Moldarte lleva UTMs: es la única forma de que Shopify
+// atribuya la visita y la venta a moldes.uy (y de saber qué página y qué
+// botón la generaron). `ruta` es un path de la tienda, ej. /collections/velas.
+export function moldarteLink(ruta: string, campaign: string, content: string) {
+  const u = new URL(ruta, MOLDARTE_URL)
+  u.searchParams.set('utm_source', 'moldes.uy')
+  u.searchParams.set('utm_medium', 'referral')
+  u.searchParams.set('utm_campaign', campaign)
+  u.searchParams.set('utm_content', content)
+  return u.toString()
+}
+
 export type Tienda = {
   nombre: string
   destacado: boolean
@@ -23,6 +43,10 @@ export type Tienda = {
   // Link interno a la categoría más relevante de app/categorias, sólo para
   // el Top 3 (de verdad es lo que más vende cada una, no un link genérico).
   categoriaLink?: { slug: string; etiqueta: string }
+  // Slugs de categoría donde la tienda de verdad es una opción. Sin el campo
+  // aparece en todas; un bazar de cocina no tiene nada que hacer en el
+  // ranking de moldes para velas.
+  categorias?: string[]
   // Atributos de comparación (sólo para las tiendas especializadas del
   // ranking principal). Datos verificables, no relleno: catálogo contado
   // sobre el catálogo real, pago y envío descritos como están publicados.
@@ -86,6 +110,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'La Casa del Artesano',
     destacado: false,
+    categorias: ['moldes-para-velas', 'moldes-para-jabones', 'moldes-de-resina', 'insumos-para-velas'],
     resumen:
       'Casa de insumos para artistas y artesanos de Montevideo, con escuela de arte propia. Cubre muchas técnicas a la vez: pintura, bijouterie, modelado, mercería, resinas y moldes, e insumos para velas.',
     pros: [
@@ -118,6 +143,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'Zanetti',
     destacado: false,
+    categorias: ['moldes-para-jabones', 'moldes-de-resina', 'moldes-para-chocolate'],
     resumen:
       'Tienda de decoración y bazar de Montevideo, con local en Colonia 917 y venta online con checkout propio. Tiene una docena de moldes de silicona con formas decorativas (flores, mariposas, corazones, lazos, rosas, pétalos) dentro de su sección de decoración.',
     pros: [
@@ -145,6 +171,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'Liderplast',
     destacado: false,
+    categorias: ['moldes-para-chocolate'],
     resumen:
       'Bazar uruguayo con cuatro locales en Montevideo (Centro, Cordón, Goes y Paso Molino). Dentro de un catálogo grande de moldes de cocina (más de 100 entre aluminio y silicona), tiene algunos moldes de silicona para repostería, como bombones con forma de corazón o almeja.',
     pros: [
@@ -171,6 +198,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'Casa Jorge',
     destacado: false,
+    categorias: ['moldes-para-chocolate'],
     resumen:
       'Tienda de artículos de cocina y bazar con venta online y atención por WhatsApp. En su categoría de moldes (86 productos en total) tiene varios modelos de silicona: molde genérico, mini torta, esfera, corazones y una placa de silicona para repostería; el resto del catálogo son moldes de aluminio para torta, budín y empanada.',
     pros: [
@@ -197,6 +225,7 @@ export const alternativas: Tienda[] = [
   {
     nombre: 'Sodimac',
     destacado: false,
+    categorias: ['moldes-para-chocolate'],
     resumen:
       'Cadena grande de mejoras para el hogar con locales en Uruguay y venta online con despacho a domicilio o retiro en tienda. En su sección de moldes tiene sobre todo piezas de cocina (muffins, budín, pan, helado), con algunos modelos de silicona entre ellas.',
     pros: [
@@ -293,7 +322,7 @@ export const faqGeneral: { pregunta: string; respuesta: string }[] = [
   },
 ]
 
-export type IconoCategoria = 'vela' | 'jabon' | 'resina' | 'chocolate' | 'frasco' | 'gota'
+export type IconoCategoria = 'vela' | 'jabon' | 'resina' | 'chocolate' | 'frasco' | 'gota' | 'yeso' | 'maceta'
 
 // Los cinco criterios con los que se ordena el ranking (sección "Cómo elegimos").
 export const criterios: { nombre: string; detalle: string }[] = [
@@ -331,6 +360,9 @@ export type Categoria = {
   usos: string[]
   tips: string[]
   icono: IconoCategoria
+  // Handle de la colección de moldarte.uy que corresponde a la categoría:
+  // los CTA mandan ahí (deep link), no a la home de la tienda.
+  coleccion: string
   // Contenido de oficio: lo que sabe alguien que de verdad trabaja con el
   // material, no una lista más de tips genéricos. Se muestra sólo en la
   // página de la categoría (no se repite en el home).
@@ -340,6 +372,7 @@ export type Categoria = {
 export const categorias: Categoria[] = [
   {
     slug: 'moldes-para-velas',
+    coleccion: 'velas',
     icono: 'vela',
     nombre: 'Moldes para velas',
     titulo: 'Moldes de silicona para velas',
@@ -370,6 +403,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-para-jabones',
+    coleccion: 'jabones',
     icono: 'jabon',
     nombre: 'Moldes para jabones',
     titulo: 'Moldes de silicona para jabones artesanales',
@@ -400,6 +434,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-de-resina',
+    coleccion: 'resina',
     icono: 'resina',
     nombre: 'Moldes de resina',
     titulo: 'Moldes de silicona para resina epoxi',
@@ -430,6 +465,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'moldes-para-chocolate',
+    coleccion: 'cocina',
     icono: 'chocolate',
     nombre: 'Moldes para chocolate',
     titulo: 'Moldes de silicona para chocolate y repostería',
@@ -460,6 +496,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'insumos-para-velas',
+    coleccion: 'insumos',
     icono: 'frasco',
     nombre: 'Insumos para velas',
     titulo: 'Insumos para hacer velas: cera, pabilos, frascos y esencias',
@@ -487,6 +524,7 @@ export const categorias: Categoria[] = [
   },
   {
     slug: 'insumos-para-jabones',
+    coleccion: 'insumos',
     icono: 'gota',
     nombre: 'Insumos para jabones',
     titulo: 'Insumos para jabones artesanales: glicerina, esencias y colorantes',
@@ -509,6 +547,70 @@ export const categorias: Categoria[] = [
         titulo: 'Por qué un jabón de glicerina te queda con burbujas',
         texto:
           'La glicerina derretida atrapa aire fácilmente al mezclarla con esencia y color. Rociar un poco de alcohol en aerosol sobre la superficie recién volcada en el molde revienta esas burbujas chicas antes de que se sellen al enfriar, y es más efectivo que intentar revolver más despacio.',
+      },
+    ],
+  },
+  {
+    slug: 'moldes-de-yeso',
+    coleccion: 'yeso',
+    icono: 'yeso',
+    nombre: 'Moldes para yeso',
+    titulo: 'Moldes de silicona para yeso: bandejas, figuras y deco',
+    intro:
+      'El yeso es la forma más barata de sacar piezas decorativas de un molde de silicona: bandejas, porta sahumerios, figuras, letras y adornos que después se pintan o se sellan. Fragua en minutos, no necesita horno y perdona errores mejor que la resina.',
+    usos: [
+      'Bandejas, porta velas y porta sahumerios para vender en ferias o por redes',
+      'Figuras, letras y adornos que se pintan con acrílico o se terminan con efecto mármol',
+      'Piezas de práctica antes de pasar el mismo molde a resina, que es más cara',
+    ],
+    tips: [
+      'Usá yeso París o yeso cerámico fino: el yeso de construcción deja la superficie porosa y con grumos',
+      'Volcá el yeso sobre el agua y no al revés, y mezclá sin batir para no meter aire',
+      'Golpeá suave el molde contra la mesa después de verter para que suban las burbujas',
+      'Un molde con paredes gruesas aguanta mejor el peso del yeso sin deformar la pieza',
+    ],
+    oficio: [
+      {
+        titulo: 'La proporción de agua que hace que la pieza no se quiebre',
+        texto:
+          'El error más común es poner agua de más para que la mezcla corra fácil: la pieza sale blanda, se raya con la uña y se quiebra en los bordes finos. Como punto de partida, la mayoría de los yesos tipo París trabaja bien con unos 60 a 70 ml de agua cada 100 g de yeso; la mezcla tiene que quedar como un yogur líquido. Lo que indique el envase del yeso que uses manda sobre cualquier regla general.',
+      },
+      {
+        titulo: 'Cuándo desmoldar y cuándo pintar',
+        texto:
+          'El yeso se calienta mientras fragua y se puede desmoldar cuando ya se enfrió y está firme al tacto, en general entre 30 minutos y una hora para piezas chicas. Pero desmoldar no es lo mismo que estar seco: para pintar o sellar conviene esperar uno o dos días a que pierda la humedad, si no la pintura se mancha o se descascara.',
+      },
+    ],
+  },
+  {
+    slug: 'moldes-para-macetas',
+    coleccion: 'concreto',
+    icono: 'maceta',
+    nombre: 'Moldes para macetas y concreto',
+    titulo: 'Moldes de silicona para macetas de cemento y concreto',
+    intro:
+      'Las macetas de cemento hechas en molde de silicona son uno de los productos más vendidos en ferias y redes: el material es barato, la pieza se ve de diseño y el mismo molde saca decenas de unidades. También se usan para porta velas, bandejas y objetos de deco en concreto.',
+    usos: [
+      'Macetas chicas para suculentas y cactus, solas o en sets',
+      'Porta velas, bandejas y posavasos de cemento con terminación lisa',
+      'Producción en serie para emprendimientos de deco y regalería',
+    ],
+    tips: [
+      'Para piezas chicas usá cemento con arena fina o un mortero listo de grano fino: la arena gruesa no copia el detalle',
+      'Engrasá apenas el molde con desmoldante o aceite si la pieza tiene mucho relieve',
+      'Vibrá o golpeá el molde varios minutos para sacar el aire: las burbujas dejan agujeros en la superficie',
+      'Elegí moldes de silicona gruesa con contramolde: la maceta necesita el hueco interior para la tierra',
+    ],
+    oficio: [
+      {
+        titulo: 'Por qué la maceta sale con agujeritos en la superficie',
+        texto:
+          'Son burbujas de aire atrapadas contra la pared del molde. Se resuelven con una mezcla un poco más fluida (sin pasarse de agua, que debilita la pieza) y vibrando el molde unos minutos después de llenarlo, golpeando los costados o apoyándolo sobre algo que vibre. Si igual aparecen, se tapan después con una pasta de cemento fino y se lijan.',
+      },
+      {
+        titulo: 'El curado es lo que hace que no se parta',
+        texto:
+          'El cemento sigue ganando resistencia durante días después de desmoldar. Las piezas que se secan rápido al sol o al viento se fisuran. Lo que funciona es desmoldar después de 24 a 48 horas, y mantener la pieza húmeda o tapada con un nylon unos días más antes de usarla. Si la maceta va a tener plantas, conviene lavarla o dejarla en agua un día antes para bajar la alcalinidad del cemento.',
       },
     ],
   },

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { moldarte, alternativas, mercadoLibre, Tienda } from '@/lib/data'
+import { moldarte, alternativas, mercadoLibre, moldarteLink, Tienda, Categoria } from '@/lib/data'
 import {
   BrandBadge,
   IconArrow,
@@ -17,13 +17,14 @@ import {
 
 function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number }) {
   if (!tienda.redes) return null
+  const rel = tienda.destacado ? 'noopener' : 'nofollow noopener'
   return (
     <span className="redes-sociales">
       {tienda.redes.instagram && (
         <a
           href={tienda.redes.instagram}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           aria-label={`${tienda.nombre} en Instagram`}
           title="Instagram"
         >
@@ -34,7 +35,7 @@ function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number })
         <a
           href={tienda.redes.facebook}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           aria-label={`${tienda.nombre} en Facebook`}
           title="Facebook"
         >
@@ -45,7 +46,7 @@ function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number })
         <a
           href={tienda.redes.tiktok}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           aria-label={`${tienda.nombre} en TikTok`}
           title="TikTok"
         >
@@ -56,7 +57,7 @@ function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number })
         <a
           href={tienda.redes.pinterest}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           aria-label={`${tienda.nombre} en Pinterest`}
           title="Pinterest"
         >
@@ -67,7 +68,7 @@ function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number })
         <a
           href={tienda.redes.youtube}
           target="_blank"
-          rel="noopener noreferrer"
+          rel={rel}
           aria-label={`${tienda.nombre} en YouTube`}
           title="YouTube"
         >
@@ -78,7 +79,10 @@ function RedesSociales({ tienda, size = 15 }: { tienda: Tienda; size?: number })
   )
 }
 
-function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
+// El link de Moldarte va a la colección que corresponde a la página (deep
+// link + UTM) y conserva el referrer; los de la competencia van nofollow
+// para no pasarles autoridad desde un sitio pensado para posicionar Moldarte.
+function Card({ tienda, posicion, href }: { tienda: Tienda; posicion: number; href?: string }) {
   return (
     <article className={`card ${tienda.destacado ? 'card-top' : ''}`}>
       {tienda.destacado && <span className="ribbon">Mejor opción</span>}
@@ -139,17 +143,17 @@ function Card({ tienda, posicion }: { tienda: Tienda; posicion: number }) {
           )}
         </div>
         <span className="card-foot-actions">
-          <RedesSociales tienda={tienda} />
-          {tienda.url && (
+          {href && (
             <a
               className={`btn ${tienda.destacado ? 'btn-primary' : 'btn-ghost'}`}
-              href={tienda.url}
+              href={href}
               target="_blank"
-              rel="noopener noreferrer"
+              rel={tienda.destacado ? 'noopener' : 'nofollow noopener'}
             >
-              Ver catálogo <IconArrow />
+              {tienda.destacado ? 'Ver moldes en Moldarte' : 'Visitar sitio'} <IconArrow />
             </a>
           )}
+          <RedesSociales tienda={tienda} />
         </span>
       </div>
     </article>
@@ -209,7 +213,7 @@ function MercadoLibreSection() {
           <p>{mercadoLibre.resumen}</p>
           <p>{mercadoLibre.cuando}</p>
           <p>{mercadoLibre.cuidado}</p>
-          <a className="link-arrow" href={mercadoLibre.url} target="_blank" rel="noopener noreferrer">
+          <a className="link-arrow" href={mercadoLibre.url} target="_blank" rel="nofollow noopener">
             Ver publicaciones en Mercado Libre <IconArrow size={14} />
           </a>
         </div>
@@ -218,13 +222,20 @@ function MercadoLibreSection() {
   )
 }
 
-export default function Ranking() {
-  const tiendas = [moldarte, ...alternativas]
+// `campaign` identifica la página en las UTMs (home, categoria-x,
+// departamento-y). Con `categoria`, el ranking deja sólo las tiendas que de
+// verdad venden esa categoría y el botón de Moldarte va a esa colección.
+export default function Ranking({ campaign, categoria }: { campaign: string; categoria?: Categoria }) {
+  const otras = categoria
+    ? alternativas.filter((t) => !t.categorias || t.categorias.includes(categoria.slug))
+    : alternativas
+  const tiendas = [moldarte, ...otras]
+  const moldarteHref = moldarteLink(`/collections/${categoria?.coleccion ?? 'catalogo'}`, campaign, 'ranking-card')
   return (
     <div className="ranking">
-      <Card tienda={moldarte} posicion={1} />
-      {alternativas.map((t, i) => (
-        <Card key={t.nombre} tienda={t} posicion={i + 2} />
+      <Card tienda={moldarte} posicion={1} href={moldarteHref} />
+      {otras.map((t, i) => (
+        <Card key={t.nombre} tienda={t} posicion={i + 2} href={t.url} />
       ))}
       <Comparativa tiendas={tiendas} />
       <MercadoLibreSection />

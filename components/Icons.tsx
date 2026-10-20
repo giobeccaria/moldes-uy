@@ -74,6 +74,26 @@ export function IconGota({ size = 24 }: P) {
   )
 }
 
+export function IconYeso({ size = 24 }: P) {
+  return (
+    <svg {...base(size)}>
+      <path d="M4 14.5h16l-1.6 4.2a1.5 1.5 0 0 1-1.4 1H7a1.5 1.5 0 0 1-1.4-1z" />
+      <path d="M8.5 14.5c0-2 1.6-3.5 3.5-3.5s3.5 1.5 3.5 3.5" />
+      <path d="M12 4v3.5M9 5.5l1 2M15 5.5l-1 2" />
+    </svg>
+  )
+}
+
+export function IconMaceta({ size = 24 }: P) {
+  return (
+    <svg {...base(size)}>
+      <path d="M5 12h14l-1.8 7.6a1.5 1.5 0 0 1-1.5 1.1H8.3a1.5 1.5 0 0 1-1.5-1.1z" />
+      <path d="M12 12V7.5" />
+      <path d="M12 9c-.4-2.4-2.3-3.8-4.8-3.6.2 2.5 2.2 3.9 4.8 3.6zM12 7.5c.3-2.2 2-3.5 4.3-3.3-.2 2.3-2 3.6-4.3 3.3z" />
+    </svg>
+  )
+}
+
 export function IconCategoria({ icono, size }: { icono: IconoCategoria } & P) {
   switch (icono) {
     case 'vela':
@@ -88,6 +108,10 @@ export function IconCategoria({ icono, size }: { icono: IconoCategoria } & P) {
       return <IconFrasco size={size} />
     case 'gota':
       return <IconGota size={size} />
+    case 'yeso':
+      return <IconYeso size={size} />
+    case 'maceta':
+      return <IconMaceta size={size} />
   }
 }
 
